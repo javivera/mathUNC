@@ -1,0 +1,163 @@
+
+\documentclass[10pt]{extarticle}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{mathpazo}
+\usepackage{tcolorbox}
+\usepackage[margin=0.8in]{geometry}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{tcolorbox}
+\usepackage[shortlabels]{enumitem}
+
+\newtheoremstyle{break}
+{\topsep}{\topsep}%
+{\itshape}{}%
+{\bfseries}{}%
+{\newline}{}%
+\theoremstyle{break}
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{corollary}{Corolario}[theorem]
+\newtheorem{lemma}[theorem]{Lema}
+\newtheorem{proposition}{Proposición}
+\newtheorem*{remark}{Observación}
+\newtheorem{definition}{Definición}[section]
+\theoremstyle{definition}
+\newtheorem{example}{Ejemplo}[section]
+\newcommand\quotient[2]{{^{\displaystyle #1}}/{_{\displaystyle #2}}}
+\synctex=1
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}}
+\renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}}
+\renewcommand{\labelenumiv}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.\arabic{enumiv}}
+
+\begin{document}
+
+\title{Teorico Estructuras Algebraicas}
+\author{Javier Vera}
+\maketitle
+
+\section{Clase 11}
+\begin{definition}
+	Sean $G$ grupo y $X\neq\emptyset$ conjunto. Una accion de $G$ en $X$ es una funcion
+	\begin{align} 
+	& G\times X\longrightarrow X \nonumber\\
+	& (g,x)\longmapsto g.x \nonumber
+	\end{align}
+	Que cumple:
+
+	\begin{enumerate}
+		\item $gh.x=g.(h.x)$
+		\item $e.x=x\quad\forall x\in X$
+	\end{enumerate}
+En este caso se dice que $G$ actua (opera) en $X$ mediante $G\times X\longrightarrow X$
+\end{definition}
+
+\begin{example}
+	\begin{enumerate}
+		\item $G,X\neq\emptyset$ cualesquiera la accion trivial de $G$ en $X$ es aquella tal que $g.x=x\quad\forall x\in X\quad\forall g\in G$
+	  	\item $\mathbb{S}(x)$ actua en $X$ en la forma $\mathbb{S}\times X\longrightarrow X$ $\sigma.x=\sigma(x)\quad\forall \sigma\in \mathbb{S}(x)\quad\forall x\in X$. En particular $\mathbb{S}$ actua en $I_{n}=\{ 1,\ldots n \}$
+		\item Sea $G$ grupo actua en si mismo de distintas formas, en este caso mediante el producto $G\times G \longrightarrow G$ es decir $g.x=gx$ esto se llama *accion regular*
+		\item $H\trianglelefteq G$ entonces $G$ actua por conjugacion $G\times H \longrightarrow H$ dada por $g\in G\quad x\in H$
+		\item $\mathcal{S}(G)=\{ \text{subgrupos de } G \}$. entonces $G$ actua en $\mathcal{S}$ por conjugacion $g\in G\quad H\trianglelefteq G$
+		\item  $H\leq G$ entonces $G$ actua en las coclases $G\diagup H$
+	\end{enumerate}
+	Ejercicio probar que satisfacen (A1) y (A2)
+\end{example}
+
+\begin{proposition}
+	Sea $G$ grupo $X\neq\emptyset$ conjunto. Son equivalentes:
+	\begin{enumerate}
+		\item Una accion $G\times X \longrightarrow X$
+		\item Un homomorfismo $\alpha : G\rightarrow \mathcal{S} (x)$
+	\end{enumerate}\end{proposition}\begin{proof}
+pendiente
+\end{proof}
+
+\begin{example}
+	\begin{enumerate}
+		\item La accion trivial $G\times X\rightarrow X$ corresponde a
+			\begin{align} 
+				&G\longrightarrow \mathcal{S} (x)\nonumber\\
+				&g\longmapsto Id_{x}\nonumber
+			\end{align}
+		\item La accion regular $G\times G\longrightarrow G$ corresponde al homomorfismo de Cayley $G$
+	\end{enumerate}
+\end{example}
+
+\begin{definition}
+	Sea $G\times X \longrightarrow X$ una accion de un grupo $G$ en $X\neq\emptyset$. Dos elementos $x,y\in X $ se dicen $G$-conjugados mediante esta accion si $\exists g\in G $ tal que $g.x=y$ (notacion $x\sim y$)
+
+	Esto define una relacion de equivalencia en $X$ (Ejercici). Asi, tal relacion particiona a $X$ en clases de equivalencia
+
+	Sea $x\in X $ entonces $G.x$ o $\mathcal{O}_{G}(x)$ es la clase de equivalencia de $x$ que se llamara $G$-Orbita de $x$ $$X=\bigcup_{x\in X }G.x $$
+\end{definition}
+
+\begin{remark}
+	Si $G\times X \longrightarrow X$ es accion entonces cualquier subgrupo de $G$ actua en $X$ por restriccion. De este modo $G=\mathcal{S}_{n}$ actua naturalmente en $I_{n}$ 
+	$$<\sigma>.j=\mathcal{O}_{\sigma}=\{\sigma^{k}:k\geq 0\}\quad \forall\sigma \in\mathcal{S}_{n} $$ 
+\end{remark}
+
+\begin{definition}
+	Una accion se dice transitiva si posee una unica orbita es decir si $\exists x\in X $ tal que $X=G.x$
+\end{definition}
+
+\begin{definition}
+	Sea $G\times X\longrightarrow X$ accion. Dado $x\in X$ el $G$-estabilizador de $x$es $$G_{x}=\{g\in G: g.x=x\}$$
+	$G_{x}$ es un subgrupo de $G$ , $\forall x\in X\quad\forall g,h\in G_{x}$ (No necesariamente normal)
+
+	Si $\alpha :G\longrightarrow \mathcal{S}$ homomorfismo correspondiente a la accion dada entonces: $$Ker(\alpha)=\bigcap_{x_{i} X}G_{x}$$
+\end{definition}
+
+\begin{example}
+	\begin{enumerate}
+		\item $G\times X\longrightarrow G$ accion trivial $g.x=\{x\}$ entonces $G_{x}=G$
+		\item $G\times G \longrightarrow G$ accion regular $g.x=gx$
+			
+			$G.x=G$ pues $y=(yx^{-1} )x=yx^{-1}.x$ ( Entonces es transitiva )
+
+			$G_{x}=\{e\}$ pues $gx=x\iff g=e$
+		\item $H\trianglelefteq G$, $G\times H \longrightarrow H$ por conjugacion $g.x=gxg^{-1} $
+
+			$$G.x=\{gxg^{-1} : g\in G \}=Cl(X)$$
+			$$G_{x}=\{g\in G: gxg^{-1} =x\}=C_{G}(x)$$
+
+			(ejercicios calcular estabilizador y centralizador de traslaciones para alfguna coclase)
+		\item Sea $H\leq G$ con 
+			$$G\times \quotient{G}{H}\longrightarrow \quotient{G}{H}$$ 
+			dada por $g.aH=ga.H$ con $\quotient{G}{H}=\{aH: a\in G \}$
+
+			Es accion transitiva porque $G.\quotient{G}{H}=\quotient{G}{H}$
+
+			$G_{H}=\{g\in G : g.eH=ge.H=H\}=H$ ( DUDA )
+	\end{enumerate}
+\end{example}
+
+\begin{proposition}
+	Sea $G\times X\longrightarrow X$ una accion de $G$ en $X$, se tienen:
+	\begin{enumerate} 
+		\item $\forall x\in X,G_{g.x}=gG_{x}g^{-1} \quad\forall g\in G$
+		\item $ \lvert G.x\rvert =[G:G_{x}] $ 
+	\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+	Pendiente
+\end{proof}
+
+\begin{theorem}[Ecuacion de Clase]
+	Sean $G$ grupo y $ G\times X\longrightarrow X $ una accion de $G$ en $ X\neq \emptyset$ $ \exists  $ famlia $ \{G_{i}\}_{i\in I } $ de sugrupos propios de $G$ tales que:
+	$$\lvert X \rvert =\lvert X^{G} \rvert + \sum_{n=1}^{\mathbb{N}} $$
+	donde $ X^{G} = \{x\in X: g.x=x\quad\forall g\in G \} $ (B$ G $-invariante)
+\end{theorem}
+\begin{proof}
+	pendiente	
+\end{proof}
+
+\begin{theorem}[Teorema de Cauchy]
+	Sea $G$ grupo de orden $ n $ y sea $ p>0 $ primo tal que $ p|n $ entonces $G$ tiene un elemento de orden $ p $
+\end{theorem}
+\begin{proof}
+	Pendiente
+\end{proof}
+
+\end{document}
