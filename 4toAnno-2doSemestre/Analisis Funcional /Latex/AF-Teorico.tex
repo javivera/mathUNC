@@ -1,0 +1,661 @@
+\documentclass[10pt]{extarticle}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{mathpazo}
+\usepackage{tcolorbox}
+\usepackage[margin=0.8in]{geometry}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{tcolorbox}
+\usepackage[shortlabels]{enumitem}
+
+\newtheoremstyle{break}
+{\topsep}{\topsep}%
+{\itshape}{}%
+{\bfseries}{}%
+{\newline}{}%
+\theoremstyle{break}
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{corollary}{Corolario}[theorem]
+\newtheorem{lemma}[theorem]{Lema}
+\newtheorem{proposition}{Proposición}
+\newtheorem*{remark}{Observación}
+\newtheorem{definition}{Definición}[section]
+\theoremstyle{definition}
+\newtheorem{example}{Ejemplo}[section]
+\newcommand\quotient[2]{{^{\displaystyle #1}}/{_{\displaystyle #2}}}
+\synctex=1
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}}
+\renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}}
+\renewcommand{\labelenumiv}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.\arabic{enumiv}}
+
+\begin{document}
+
+\title{Teorico Estructuras Algebraicas}
+\author{Javier Vera}
+\maketitle
+
+\section{Clase 1}
+\section{Clase 2}
+\section{Clase 3}
+\section{Clase 4}
+\section{Clase 5}
+\section{Clase 6}
+\section{Clase 7}
+\section{Clase 8}
+\section{Clase 9}
+\section{Clase 10}
+
+\begin{corollary}\label{10.0}
+	Sea $X\neq \emptyset$ normado, $x\in X$ fijo $x\neq 0$ entonces 
+	\begin{enumerate}[(a.)]
+		\item $\exists f\in X'$ tal que $\lVert f \rVert =1 \quad f(x)=\lVert x \rVert$
+		\item $\lVert x \rVert=\sup \{ \lvert f(x) \rvert : f\in X',\lVert f \rVert=1\} =\sup A$
+		\item Si $y\in X$ con $x\neq y$, $\exists f\in X'$ tal que $f(x)\neq f(y)$
+	\end{enumerate}	(En particular, $X$ normado, $x\neq 0$ entonces $X'\neq \emptyset$)
+\end{corollary}
+
+\begin{proof}
+	\begin{enumerate}[(a.)]
+		\item Por [[Teórico 10 3a0090]] usando $W=\{ 0 \}$
+		\item Veamos
+			\begin{enumerate}
+				\item a. $\sup A \geq \lVert x \rVert$
+				\item $\lvert f(x) \rvert\leq \lVert f \rVert\lVert x \rVert$ (Vale siempre truco de $\frac{x}{\lVert x \rVert}$) entonces $\sup \{\lvert f(x) \rvert:\lVert f \rVert=1\}\leq \lVert x \rVert$
+			\end{enumerate} 
+		\item  \begin{enumerate}
+				\item (Ejercicio) $W=Sp\{ y \}$ y usando [[3a0090]] $\delta >0$ por que $\lVert -x+y \rVert\neq 0$ por que son distintos (suponiendo que $x \not\in Sp\{ y \}$)
+				\item Si no supusiera eso es trivial $f(x)\neq \alpha f(x) = f(\alpha x)$
+				\item Entonces$f(-x)=\delta$ osea $f(x)=\delta\neq 0$ pero $f|_{W}\equiv 0$ entonces como $y\in W$ sucede $f(y)=0$\end{enumerate}
+	\end{enumerate}
+
+\end{proof}\section{Clase 11}
+
+\begin{corollary}
+Si $x_{1},\ldots,x_{n} \in X$ son linealmente independientes entonces existe $f_{1},\ldots,f_{n}\in X'$ tal que $$f_{j}(x_{k})=\delta_{k_{j}} \quad 1\leq j,k\leq n$$
+\end{corollary}
+
+\begin{proof}
+	\begin{enumerate}
+		\item Si $W=Sp\{ x_{1},\ldots,x_{n} \}$ por [[Teórico 10 3a0090]] conseguimos $f_{1,W},\ldots,f_{n,W}\in W'$ que cumplen lo que queremos. No deberiamos usar $Sp\{ x_{2},\ldots,x_{n} \}$ y aplicar teo para conseguir $f_{1,W}$ esta cunpliria segun el teo $f_{1,W}(x_{i})=0$ si $i=2,\ldots n$.. no me queda claro porque $\delta$ seria $1$. Pero asi hacemos lo mismo y conseguimos todas las funciones que necesitamos
+		\item Entonces por [[Teórico 10 8c080d]] existen $f_{i,X} = f_{i}\in X'$ extensiones
+	\end{enumerate}
+\end{proof}
+
+\begin{theorem} DUDA
+$X'$ separable entonces $X$ separable
+\end{theorem}
+
+\begin{proof}
+	\begin{enumerate}
+		\item Sea $B=\{ f\in X':\lVert f \rVert=1 \}\subseteq X'$
+		\item Como $X'$ es separable $\exists F=\{ f_{j} \}\subseteq B$ tal que $F$ es denso en $B$ ($B$ separable porque $X'$ separable)
+		\item Para $n\in \mathbb{N}$ sea $w_{n}$ con $\lVert w_{n} \rVert=1$ y $f_{n}(w_{n})\geq \frac{1}{2}$ (Existe por def de $\lVert f \rVert$ supremo)
+		\item Sea $W=\overline{Sp}\{ w_{j} \}$ si $W\subsetneq X$ usando Teórico tenemos $f\in B$ tal que $f(w)=0\quad\forall w\in W$
+		\item $\frac{1}{2}\leq \lvert f_{n}(w_{n}) \rvert=\lvert f_{n}(w_{n})-f(w_{n}) \rvert\leq \lVert f_{n}-f \rVert\lVert w_{n} \rVert=\lVert f_{n}-f \rVert\quad\forall n\in \mathbb{N}$ (Por que $f(w_{n})=0$)
+		\item Esto contradice la densidad de $F$ en $B$. Entonces $W=X$.
+		\item Ahora razonando como en Teórico Parte 2, la vuelta.
+		\item Tomamo un $x\in \overline{Sp}\{ w_{j} \}$ como es clausura existe $Sp\{ w_{j} \}$ tal que $x$
+		\item Entonces $\exists n_{0}\in \mathbb{N}$ tal que $\lVert \rVert<\frac{\epsilon}{2}$
+		\item Como $Sp\{ w_{j} \}$ entonces $c_{n}w_{n}$ y a esta si la podemos aproximar por con coeficientes racionales
+		\item Se puede ver que las combinaciones lineales finitas con coeficientes racionales son densas (y claramente son numerables). 
+			Por ende $X$ es separable
+	\end{enumerate}
+\end{proof}
+
+\begin{remark} $X$ separable no implica $X'$ separable
+\begin{enumerate}
+\item no es separable por que vimos que si $p \in [1,\infty),q \in (1,\infty]$ hay un isomorfismo de en con $\frac{1}{p}+\frac{1}{q}$ entonces si fuese separable entonces seria separable
+\item separable pero es isomorfo isometricamente a que no es separable. Por lo tanto no puede haber isomorfismo entre y pues es separable y no es separable
+\end{enumerate}
+\end{remark}
+
+\begin{theorem} [ Hahn-Banach sobre $\mathbb{R}$ ]
+$X$ espacio vectorial $p : X\rightarrow \mathbb{R}$ Teórico Supongamos $\exists W\subseteq X$ subespacio y $f_{W}:W\rightarrow\mathbb{R}$ lineal tal que $f_{W}(w)\leq p(w)\quad\forall w\in W$
+Entonces $\exists f_{X}:X\rightarrow\mathbb{R}$ extension de $f_{W}$ tal que $f_{X}(x)\leq p(x)\quad\forall x\in X$
+\end{theorem}
+
+\begin{proof}
+$X$ espacio vectorial real, sea $E$ el conjunto de funciones lineal $f$ en $X$ tales que:
+\begin{itemize}
+	\item $f$ esta definida en un subespacio $D_{f}$ con $W\subseteq D_{f}\subseteq X$
+	\item $f=f_{W}$ en $W$
+	\item $f\leq p$ en $D_{f}$
+\end{itemize}
+\begin{enumerate}
+\item Notar que $E$ es el conjunto de todas las extensiones de $f_{W}$ a subespacios $D_{f}\subseteq X$ tales que safistacen el teorema de Hahn-Banach en reales, pero con $X=D_{f}$ ($E\neq 0$ por que $f_{W}\in E$)
+\item Definimos un orden $f<g \iff D_{f}\subseteq D_{g}$ y $f=g$ en $D_{f}$. Es facil ver que es orden parcial
+\item Sea $\tilde{E} \subseteq E$ con $\tilde{E}$ totalmente ordenado, osea una cadena de $E$. Entonces $\forall f,g\in \tilde{E}$ sucede que $g$ es extension de $f$ y $D_{f}\subseteq D_{g}$ o viceversa)
+\item Sea $Z_{\tilde{E}}=\bigcup_{f\in \tilde{E}}D_{f}$. Es directo ver que $Z_{\tilde{E}}$ es subespacio.
+\item Sea $x,y\in Z_{\tilde{E}}$ y $\alpha ,\beta\in \mathbb{R}$ entonces $x\in D_{f}$ e $y\in D_{g}$
+\item Por ser $\tilde{E}$ totalmente ordenado (o cadena) sin perdida de generalidades $f\leq g$ por lo tanto $D_{f}\subseteq D_{g}$ entonces $x,y\in D_{g}$ como $D_{g}$ subespacio $\alpha x+\beta y\in D_{g}$
+\item Definimos $f_{\tilde{E}}:Z_{\tilde{E}}\rightarrow\mathbb{R}$ de la siguiente manera.
+\item Dado $z\in Z_{\tilde{E}}$ sabemos $\exists \delta \in \tilde{E}$ tal que $z\in D_{\delta}$ entonces $f_{\tilde{E}}(z)=\delta(z)$
+\item La definicion es buena ya que si $z\in D_{\mu}$ como $\tilde{E}$ es orden total $D_{\mu}\subseteq D_{\delta}$ entonces $\delta = \mu$ coinciden en $D_{\mu}$ o viceversa entonces $\delta(z)=\mu(z)$
+\item Usando el orden total de $\tilde{E}$ y razonando como arriba es facil ver que $f_{\tilde{E}}$ es lineal.
+\item Mas aun $f_{\tilde{E}}\in E$ (Osea cumple las hipotesis) y ademas $f\leq f_{\tilde{E}}$ en el sentido de la relacion de orden. Entonces $f_{\tilde{E}}$ es cota superior de $\tilde{E}$ por \emph{Lema de Zorn} $E$ tiene un elemento maximal $f_{max}$
+\item Suponemos $D_{f_{max}}\neq X$. Por Teórico sucede que $f_{max}$ tiene una extension que esta claramente en $E$ (osea cumple las hipotesis) contradiciendo que $f_{max}$ fuera maximal.
+\end{enumerate}
+\end{proof}
+
+
+
+
+\begin{definition} Funcional de Minkowski
+$C\subseteq X$ normado real, con $0\in C$ y $C$ abierto. El \emph{funcional de Minkowski} $p_{C}$ de $C$ esta dado por 
+$$p_{C}(x)=\inf \{ \alpha 0:\alpha x\in C \}\quad \forall x\in X$$
+Como $0\in C$ y $C$ abierto $p_{C}$ esta bien definido.
+\end{definition}
+
+
+\begin{remark} DUDA
+Notar que si $C=B_{1}(0)$ entonces $p_{c}(x)=\lVert x \rVert$ y si $C=B_{r}(0)$ entonces $p_{C}(x)=\frac{\lVert x \rVert}{r}$
+\end{remark}
+
+
+\begin{proof}
+\begin{enumerate}
+\item
+Sea $\alpha$ tal que $\lVert x \rVert < \alpha$ entonces $\left\lVert \frac{x}{\alpha } \right\rVert<\left\lVert \frac{x}{\lVert x \rVert} \right\rVert=1$ entonces $C=B_{1}(0)$
+\item
+Entonces $p_{C}(x)\leq \lVert x \rVert$ (en todo caso menor que $\alpha$)
+\item
+Si fuera $p_{C}(x)<\lVert x \rVert$ por def de infimo $\exists \alpha \in (p_{C}(x),\lVert x \rVert)$ intervalo, tal que $\frac{x}{\alpha }\in C$
+\item
+Entonces $\left\lVert \frac{x}{\alpha } \right\rVert1$ que es absurdo
+\end{enumerate}
+\end{proof}
+
+\begin{lemma}
+Sean $\emptyset \neq C\subseteq X$ normado real, $C$ abierto y convexo con $0\in C$. Entonces el Teórico nombrado $p_{C}$ es sublineal y
+	\begin{enumerate}
+		\item $(a) \quad C=\{ x:x\in X, \ p_{C}(x)<1 \}$
+		\item $(b)\quad 0\leq p_{C}(x)\leq c\lVert x \rVert \quad\forall x\in X$
+	\end{enumerate}
+\end{lemma}
+
+\begin{proof} DUDA
+Sublineal
+\begin{enumerate}
+\item
+Para $x,y\in X$ sean $\alpha p_{C}(x)$ con $\beta p_{C}(y)$.
+\item
+Sea $r=\alpha +\beta$ entonces $r\alpha$ y $r\beta$ (DUDA no tengo que pedir que ademas sean mayores que 0. Si no en 4. $\frac{\alpha }{r}$ podria ser negativo)
+\item
+Entonces como $p_{C}$ es funcional lineal, multiplico $\alpha$ y llego a que $\alpha C$. Analogo $C$.
+\item
+Luego como $C$ convexo $\frac{1}{r}(x+y)=\frac{\alpha }{r}\alpha C$
+(Notar que $\frac{\alpha }{r}+ \frac{\beta}{r}=1$ con $\frac{\alpha }{r}, \frac{\beta}{r}<1$ por 2. por eso esta en $C$ recordar por convexidad $(1-t)x + ty \in C$)
+\item
+entonces $p_{C}\left( \frac{1}{r} (x+y)\right) < 1$ por lo tanto $p_{C}(x+y)<r=\alpha +\beta$
+\item
+Como $\alpha ,\beta$ son arbitrarios se sigue que $p_{C}(x+y)\leq p_{C}(x)+p_{C}(y)$ (DUDA) (Osea $p_{C}$ cumple desigualdad triangular)
+\item
+Y es claro que $p_{C}(\alpha x)=\alpha p_{C}(x)\quad\forall \alpha \geq 0$. Mostrando que $p_{C}$ es Teórico
+\end{enumerate}
+\end{proof}
+
+(b)
+\begin{enumerate}
+\item
+Por otro lado $0\in C$ abierto entonces $\exists \delta0$ tal que $\lVert z \rVert\leq \delta$ implica $z\in C$ (Definicion de abierto). Entonces para tales $z$ sucede $p_{C}(z)\leq 1$.
+\item
+Si elegimos ahora $z=\frac{\delta}{2}.\frac{x}{\lVert x \rVert}$ vale $\lVert z \rVert<\delta$ y $\frac{\delta}{2}.\frac{1}{\lVert x \rVert}p_{C}(x)=p_{C}(z)\leq 1$. (Por sublinealidad)
+\item
+Por lo tanto $p_{C}(x)\leq \frac{2}{\delta}\lVert x \rVert$ entonces vale $(b)$
+\item
+$p_{C}(x)0$ por definicion de Teórico
+\end{enumerate}
+
+(a)
+\begin{enumerate}
+\item $(\subseteq)$ Si $x\in C$ entonces $C$ para algun $\alpha<1$ por que $\lVert \alpha \rVert=\alpha x \rVert$ y agrando el $\alpha$ hasta que este metido en una bola centrada en $0$ adentro de $C$ que existe por que $C$ es abierto ( DUDA pero si $\lVert x \rVert$ es muy grane $\alpha$ tiene que ser muy grande quizas mas que 1)
+\item Entonces $p_{C}(x)\leq \alpha <1$
+\item
+$(\supseteq)$ Si tomamos $x$ tal que $p_{C}(x)<1$ entonces $\exists \alpha0$ tal que $p_{C}(x)<\alpha <p_{C}(x)+\epsilon<1$ tal que $\alpha C$ (Por def de infimo) por lo tanto $\alpha <1$
+\item
+Luego como $0\in C$ convexo, $x=\alpha \alpha )0\in C$ entonces $x\in C$
+\end{enumerate}
+
+\begin{theorem} [ Teorema de Separacion (DUDA) ] 
+\label{teo-sep}
+	$X$ normado real o complejo. Sean $A,B\subseteq X$ conjuntos disjuntos no vacios y convexos
+	\begin{itemize}
+		\item $(a)$ Si $A$ abierto $\exists f\in X'$ con $\gamma \in R$ tal que 
+$$Re(f(a))<\gamma\leq Re(f(b))\quad\forall a\in A\quad \forall b\in B$$
+	\end{itemize}
+\end{theorem}
+
+
+\begin{itemize}
+\item
+$(b)$ Si $A$ compacto y $B$ cerrado entonces $\exists f\in X'$ con $\delta,\gamma0$ tales que
+$$Re(f(a))\leq \gamma-\delta<\gamma+\delta\leq Re(f(b))\quad\forall a\in A\quad\forall b\in B$$
+\end{itemize}
+
+\begin{proof}
+$(a)$
+\begin{enumerate}
+\item
+Supongo $X$ es real. Sean $a_{0}\in A$, $b_{0}\in B$ y $w_{0}=b_{0}-a_{0}$ con $C=w_{0}+A-B$
+\item
+Entonces $0\in C=\bigcup_{b\in B}(w_{0}+A-b)$ abierto (union de abiertos por que $A$ es abierto y trasladar abiertos es abierto) (DUDA esto no es en espacio vectorial topologico?? )
+\item
+$C$ convexo veamoslo, sean $a_{1}-b_{1}+w_{0}\in C$ y $a_{2}-b_{2}+w_{0}\in C$
+\end{enumerate}
+\end{proof}
+
+
+
+\begin{align}&\alpha (a_{1}-b_{1}+w_{0})+(1-\alpha )(a_{2}-b_{2}+w_{0}) \\
+&=\alpha a_{1}+(1-\alpha )a_{2} - (\alpha b_{1}+(1-\alpha )b_{2})+w_{0}& \\
+&=a_{3}-b_{3}+w_{0}\in C\end{align}
+
+para ciertos $a_{3}\in A,b_{3}\in B$ que existen pues $A$ y $B$ son abiertos
+
+
+\begin{enumerate}
+\item
+Como $A$ y $B$ son disjuntos y $C$ conexo $w_{0}\not\in C$ entonces por Teórico (negandolo) $p_{C}(w_{0})\geq 1$
+\item
+Sea $W=Sp\{ w_{0} \}$ y $f_{W} : W\rightarrow \mathbb{R}$ lineal dada por $f_{W}(\alpha w_{0})=\alpha$
+\item
+Si $\alpha \geq0$. $f_{W}(\alpha w_{0})=\alpha \leq \alpha p_{C}(w_{0})=p_{C}(\alpha w_{0})$
+\item
+Si $\alpha <0$ tenemos $f_{W}(\alpha w_{0})\leq 0\leq p_{C}(\alpha w_{0})$
+\item
+Entonces $f_{W}\leq p_{C}$ en $W$ por Teórico (dado que estamos en el caso real) $\exists f_{X}$ extension lineal tal que $f_{X}(x)\leq p_{C}(x)\quad\forall x\in X$.
+\item
+Por Teórico sucede $f_{X}(x)\leq p_{C}(x)\leq c\lVert x \rVert\quad\forall x\in X$
+\item
+Por otro lado $-f_{X}(x)=f_{X}(-x)\leq p_{C}(-x)\leq c\lVert -x \rVert=c\lVert x \rVert$ entonces $f_{X}(x)\geq-c\lVert x \rVert$
+\item
+Entonces $\lvert f_{X}(x) \rvert\leq c\lVert x \rVert$ por lo tanto $f_{X}$ continua
+\item Ahora $\forall a\in A$ y $b\in B$ 
+$$1+f_{X}(a)-f_{X}(b)=f_{X}(w_{0})+f_{X}(a)-f_{X}(b)=f(w_{0}+a-b)\leq p_{C}(w_{0}+a-b)<1$$
+La ultima desigualdad vale por que $w_{0}+a-b\in C$
+\item Entonces $f_{X}(a)<f_{X}(b)\quad \forall a\in A\quad\forall b\in B$
+\item Ahora tomo $\gamma=\inf \{ f(b):b\in B \}$ y tenemos $f_{X}(a)\leq \gamma\leq f_{X}(b$
+\item Supongamos existe $a\in A$ tal que $f_{X}(a)=\gamma$.
+\item Como $A$ es abierto, $\exists \delta0$ tal que $a+\delta w_{0}\in A$
+\item $f_{X}(a+\delta w_{0})=f_{X}(a)+\delta f_{W}(w_{0})=\gamma+\delta\gamma$ (Por def de $f_{W}(w_{0})$) que es absurdo por $11.$
+\item Entonce vale $(a)$
+\end{enumerate}
+
+(b)
+\begin{enumerate}
+	\item Como $A$ compacto y $B$ cerrado. Entonces $\epsilon= \frac{1}{4}\inf \{ \lVert a-b \rVert:a\in A,b\in B \}0$
+	\item Sean $A_{\epsilon}=A+B_{\epsilon}(0)$ y $B_{\epsilon}=B+B_{\epsilon}(0)$ (Son bolas las $B_{\epsilon}$)
+\item Es facil ver que $A_{\epsilon}\cap B_{\epsilon}=\emptyset$ (usando desigualdad triangular)
+\item Ademas $A_{\epsilon}$ y $B_{\epsilon}$ son abiertos por que son union de abiertos $A_{\epsilon}=\bigcup_{a\in A}a+B_{\epsilon}(0)$
+\item Y son convexos (Sale similas a convexidad de $C$)
+\item Luego vale $(a)$ con $A_{\epsilon}$ y $B_{\epsilon}$ en lugar de $A$ y $B$.
+\item Sea $\delta= \frac{\epsilon}{2\lVert w_{0} \rVert}$ entonces $a+\delta w_{0}\in A_{\epsilon}$. Pues $\delta w_{0}\in B_{ \frac{\epsilon}{2}}(0)$
+\item Entonces $f_{X}(a)=f(_{X}a+\delta w_{0})-\delta f_{W}(w_{0})\leq \gamma-\delta$ (Recordar $f_{W}(w_{0})=1$)
+\item Analogamente $\gamma+\delta\leq f(b)\quad\forall b\in B$ entonces vale $(b)$
+\end{enumerate}
+
+\section{Clase 12}
+
+\begin{definition}
+$H\subseteq X$ normado es \emph{hiperplano} si $$H=\{ x\in X:f(x) =\gamma \}$$ con $f : X\rightarrow \mathbb{F}$ lineal no necesariamente continuo. $f\not\equiv 0$ y $\gamma\in Im(f)$. Dados $A,B\subseteq X$ decimos que $H$ separa $A$ y $B$ sii
+
+$$f(x)\leq \gamma\quad\forall x\in A \quad\text{y}\quad f(x)\geq\gamma\quad\forall x\in B$$
+Y que separa estrictamente sii
+
+$$f(x)\leq \gamma-\epsilon\quad\forall x\in A\quad\text{y}\quad f(x)\geq\gamma+\epsilon\quad\forall x\in B$$
+
+\end{definition}
+
+\begin{remark}
+\begin{itemize}
+\item
+	El \hyperref[teo-sep]{Teorema de Separacion} dice que bajo las condiciones de $(a)$ existe \emph{hiperplano} que separa $A$ y $B$ y bajo las condiciones $(b)$ separa estrictamente
+\item
+Si $A$ o $B$ no es convexo $(a)$ del teo no es cierto
+\item
+Si $A$ no es comacto $(b)$ en general no es cierto
+\end{itemize}
+\end{remark}
+
+
+
+\begin{remark}
+Es equivalente llamar \emph{hiperplano} a $\tilde{H}=x_{0}+Ker(f)$ (y en este caso decimos que pasa por $x_{0}$) para cierto $f : X\rightarrow \mathbb{F}$ lineal tal que $f\not\equiv 0$ pues sea $x_{0}\in H$ fijo con $\gamma=f(x_{0})$.
+Entonces si $x\in H$ tenemos
+$$x=x-x_{0}+x_{0}\quad\text{y}\quad f(x-x_{0})=f(x)-f(x_{0})=0$$
+
+osea $x-x_{0}\in Ker(f)$ luego $x\in \tilde{H}$.
+
+Reciprocamente si $x\in \tilde{H}$ entonces $x=x_{0}+z$ con $f(z)=0$ entonces $f(x)=f(x_{0})=\gamma$ osea $x\in H$
+
+\end{remark}
+
+\begin{theorem}
+$W\subseteq X$ subespacio. Entonces $W$ es hiperplano que pasa por 0 sii $W\neq X$ y $X=W\bigoplus Sp\{ y \}$ para cualquier $y\in X\setminus W$
+\end{theorem}
+
+
+\begin{proof}
+$(\Rightarrow)$
+\begin{enumerate}
+\item
+Supongamos $W$ hiperplano que pasa por $0$ $(W=Ker(f))$. Como $f \not\equiv 0$ existe $z\in X$ con $f(z)\neq 0$
+Osea existe $z\in X\setminus W$ entonces $X\neq W$
+\item
+Sea $y\in X\setminus W$ arbitrario entonces $f(y)\neq 0$
+\item
+Para $x\in X$ escribo $x=x-\beta y+\beta y$ con $\beta= \frac{f(x)}{f(y)}$
+\item
+Como $f(x-\beta y)=0$ entonces $x-\beta y\in Ker(f)=W$
+\item
+Entonces $x\in Sp\{ y \}+Ker(f)$ y ademas $W\cap Sp\{ y \}=\{ 0 \}$
+\item
+Entonces $X=W\bigoplus Sp\{ y \}$
+\end{enumerate}
+\end{proof}
+
+$(\Leftarrow)$
+\begin{enumerate}
+\item
+Si $X=W\bigoplus Sp\{ y \}$ dado $x\in X$ entonces $x=w+\alpha y$.
+\item
+Definimos $f : X\rightarrow \mathbb{F}$ dada por $f(x)=\alpha$ es claro que es lineal y que $f\not\equiv 0$ y $Ker(f)=W$
+\end{enumerate}
+
+
+\subsection{El segundo dual, espacios reflexivos, opradores duales}
+\begin{remark}
+Sea $X$ normado entonces sabemos que $X'$ es Banach y tambien $X''$ es Banach
+\end{remark}
+
+
+
+[!proposition]
+Para cualquier $x\in X$ la aplicacion $F_{x}:X'\rightarrow\mathbb{F}$ dada por $F_{x}(f)=f(x)$ satisface que $F_{x}\in X''$ y $\lVert F_{x} \rVert=\lVert x \rVert$
+
+
+\begin{proof}
+
+
+\begin{enumerate}
+\item
+Sean $\alpha ,\beta\in \mathbb{F}$ y $f,g\in X'$ entonces $F_{x}(\alpha f+\beta g)=(\alpha f+\beta g)(x)=\alpha f(x)+\beta g(x)=\alpha F_{x}(f)+\beta F_{x}(g)$ entonces $F_{x}$ es lineal
+\item
+Ademas $\lvert F_{x}(x) \rvert=\lvert f(x) \rvert\leq \lVert x \rVert\lVert f \rVert=k\lVert x \rVert$ entonces $F_{x}$ es continua por lo tanto $F_{x}\in B(X',\mathbb{F})=X''$
+\item
+$\lVert x \rVert=\sup \{ \lvert f(x) \rvert:\lVert f \rVert=1 \}=\sup \{ \lvert F_{x}(f) \rvert:\lVert f \rVert=1 \}=\lVert F_{x} \rVert$ (El ultimo igual de definicion de norma en $B(X',\mathbb{F})$) (El primer igual es por ($2.$) Teórico
+\end{enumerate}
+\end{proof}
+
+
+
+
+\begin{definition}
+Para $X$ normado definimos $J_{X}:X\rightarrow X''$ por $J_{X}x=J_{X}(x)=F_{X}$ osea $F_{X}(f)=J_{X}(x)(f)=f(x)\quad\forall x\in X\quad\forall f\in X'$. (Es claro que $J_{X}$ es lineal)
+\end{definition}
+
+
+
+\begin{corollary}
+$J_{X}:X\rightarrow X''$ es una isometria. En particular:
+\begin{enumerate}
+\item
+$X$ es isometricamente isomorfo a un subconjunto de $X''$ (de hecho a $J_{X}(X)$)
+\item
+$X$ es isometricamente isomorfo a un suconjunto denso de un Banach
+\end{enumerate}
+\end{corollary}
+
+
+\begin{proof} DUDA
+\begin{enumerate}
+\item
+Inyectiva es por ser una isometria. Sobreyectiva es por que $J_{X}(X)=Im(J_{X})$
+\item
+Como $X''$ es Banach entonces $\overline{J_{X}(X)}$ es Banach (por ser cerrado en un Banach)
+\end{enumerate}
+\end{proof}
+
+
+
+
+\begin{remark}
+Si $X$ no es Banach entonces $J_{X}(X)$ no es Banach por que son isometricamente isomorfos por lo tanto $J_{X}X\neq X''$. Pues $X''$ es Banach
+\end{remark}
+
+
+
+\begin{definition} Reflexivo
+Si $J_{X}(X)=X''$ decimos que $X$ es reflexivo (Luego normado y reflexivo entonces Banach).
+Osea $X$ reflexivo sii $\forall \psi\in X''\quad\exists x_{\psi}\in X$ tal que $\psi = J_{X}(x_{\psi})$. (Osea $\psi (f)=J_{X}(x_{\psi})(f)=f(x_{\psi})\quad\forall f\in X'$)
+(DUDA Osea si $J_{X}$ es sobre??)
+\end{definition}
+
+
+
+\begin{theorem}
+\begin{enumerate}
+\item
+Si $X$ es normado con $\dim X=n<\infty$ entonces $X$ es reflexivo
+\item
+Si $H$ es Hilbert entonces $H$ es reflexivo
+\end{enumerate}
+\end{theorem}
+
+
+\begin{proof} DUDA
+\begin{enumerate}
+\item
+Como dimension de $X$ es finita sabemos que $\dim X=\dim X'=\dim X''$ (DUDA Por teorema pasado cual?? ) y como $J_{X}:X\rightarrow X''$ lineal e inyectiva (por ser isometria) entonces es sobre
+\item Por Teórico tenemos que $T_{\mathcal{H}}:\mathcal{H}\rightarrow \mathcal{H}'$ dada por $T_{\mathcal{H}}(y)=f_{y}$ con $f_{y}(x)=(x,y)$ es biyeccion. Y $\mathcal{H}'$ es Hilbert con
+$$(T_{\mathcal{H}}(z),T_{\mathcal{H}}(y))_{\mathcal{H}'}=(y,z)_{\mathcal{H}}\quad(I)$$
+
+\item Ahora como $\mathcal{H}'$ es Hilbert entonces re aplicando teorema $T_{\mathcal{H}'}:\mathcal{H}'\rightarrow\mathcal{H}''$ dada por $T_{H'}(g)=\psi_{g}$ con
+$$T_{\mathcal{H}'}(g)(f)=\psi_{g}(f)=(f,g)_{\mathcal{H}'}\quad (II)$$
+es biyeccion (y $\mathcal{H}''$ es Hilbert)
+\item En particular si $f\in \mathcal{H}'$ y $\psi \in \mathcal{H}''$ entonces $\exists !x,y\in H$ tales que $f=T_{\mathcal{H}}x$ y $\psi=T_{\mathcal{H}'}(T_{\mathcal{H}}y)$ (Unicos por que [[Teórico nos dice que son biyectivas, para la parte de $\psi$ seria usar dos veces biyectividad)
+\item Ahora dado $\psi \in \mathcal{H}''$ y $f\in \mathcal{H}'$ tenemos
+
+\begin{align*} 
+	J_{\mathcal{H}}(y)(f)= f(y)&=(y,x)_{\mathcal{H}} & \text{(Por Riesz-Frechet)}\\
+	&=(T_{\mathcal{H}}(x),T_{\mathcal{H}}(y))_{\mathcal{H}'} &(\text{Por } (I))\\ 
+	&=(f,T_{\mathcal{H}(y)})_{\mathcal{H}'} & (\text{Por def de }f)\\
+	& =T_{\mathcal{H}'}(T_{\mathcal{H}}(y))(f) &(\text{Por } (II)) \\
+	&=\psi (f)&\forall f\in \mathcal{H}' \quad(\text{Por def de }\psi)
+\end{align*}
+
+
+\item Osea $\psi = J_{\mathcal{H}}(y)$. Luego $J_{\mathcal{H}}$ es sobreyectiva (DUDA Por?? si y=0 no es sobre) entonces $\mathcal{H}$ es [[Teórico
+\end{enumerate}
+\end{proof}
+
+\begin{theorem}
+$X$ Banach entonces $X$ reflexivo sii $X'$ reflexivo ($\iff J_{X'}:X'\rightarrow X'''$ es sobre)
+\end{theorem}
+
+\begin{proof} DUDA
+$(\Rightarrow)$
+\begin{enumerate}
+	\item Sea $\rho\in X'''$ como $\rho :X''\rightarrow\mathbb{F}$ y $J_{X}:X\rightarrow X''$. Entonces $f=\rho \circ J_{X}\in X'$ pues ambos son lineales y continuas.
+	\item Sea $\psi \in X''$ como $X$ reflexivo $\exists x\in X$ tal que $\psi=J_{X}(x)$ osea $\psi(f)=(J_{X}x)(f)=f(x)\quad\forall f\in X'$
+	\item $(J_{X'}(f))(\psi)=\psi(f)=f(x)=\rho\circ J_{X}(x)=\rho(\psi)$ (Recordar $J_{X'}(f)$ es el funcional evaluar en $f$)
+	\item Osea $\rho = J_{X'}(f)$ y $J_{X'}$ es sobre entonces $X'$ es reflexivo
+\end{enumerate}
+$(\Leftarrow)$
+\begin{enumerate}
+	\item Supongamos $X'$ reflexivo pero $\exists \tilde{x}\in X''\setminus J_{X}(X)$. (Osea negar que $X$ sea refelxivo)
+	\item $X$ es Banach y entonces $J_{X}(X)$ tambien (pues son isomorfos [[Teórico y $J_{X}(X)\subseteq X''$ que es Banach y por lo tanto es $J_{X}(X)$ es cerrado (El $X''$ es metrico? )
+	\item Por [[Teórico ($W=J_{X}(X)$ y tenemos $\tilde{x}\in X''\setminus J_{X}(X)$ pero cumple? $\delta 0$) (DUDA) Existe $k\in X'''$ tal que $k(\tilde{x})\neq 0$ y $k(J_{X}(x))=k|_{J_{X}(X)}=0 \quad\forall x\in X$
+	\item Ademas como $X'$ es reflexivo $J_{X'}:X'\rightarrow X'''$ es sobre en particular $\exists g\in X'$ tal que $k=J_{X'}(g)$ osea $k(\psi)=(J_{X'}(g))(\psi)=\psi(g)\quad\forall \psi\in X''$ (Recordar $J_{X'}(f)$ es el funcional evaluar en $f$)
+	\item Luego $g(x)=(J_{X}(x))(g)=k(J_{X}(x))=0\quad\forall x\in X$. osea $g\equiv 0$.
+	\item Pero como $\tilde{x}\in X''$ por $4.$ tenemos $\tilde{x}(g)=k(\tilde{x})\neq 0$ (esto ultimos por $3.$). Absurdo por que $g\equiv 0$ y $\tilde{x}$ es funcional lineal
+\end{enumerate}
+\end{proof}
+
+\begin{theorem}\label{12.4}
+$X$ reflexiva, $Y\subseteq X$ subespacio vectorial cerrado entonces $Y$ reflexivo
+\end{theorem}
+\begin{proof}
+	\begin{enumerate}
+		\item $Y$ reflexiva $\iff \forall \psi\in Y''$ existe $y_{\psi}\in Y$ tal que $J_{Y}(y_{\psi})=\psi$ osea
+			$$\psi(g)=J_{Y}(y_{\psi})(g)= g(y_{\psi})\quad\forall g\in Y' \quad (a)$$
+
+		\item Como [[Teórico dice que $g=f|_{Y}$ para algun $f\in X'$. (osea para toda $g\in Y'$ existe extension $f\in X'$ por ser extension $f|_{Y}=g$)
+		\item Entonces $(a)$ es equivalente a ver que dado un $\psi \in Y''$ existe $y_{\psi}\in Y$ tal que
+			$$(I)\quad f|\emph{{Y}(y}{\psi})=\psi(f|_{Y})\quad\forall f\in X'$$
+		\item Definimos $\phi:X'\rightarrow\mathbb{F}$ dada por
+
+	$$(II)\quad\phi (f)=\psi(f|_{Y})$$
+
+		\item Resulta que $\lvert \phi(f) \rvert\leq \lVert \psi \rVert\lVert f|_{Y} \rVert\leq \lVert \psi \rVert\lVert f \rVert=k\lVert f \rVert$ osea es continua ergo $\phi\in X''$
+		\item Como $X$ reflexiva $\exists x_{\phi}\in X$ tal que $J_{X}(x_{\phi})=\phi$ osea
+	$$(III)\quad f(x_{\phi})=\phi(f)\quad\forall f\in X'$$
+		\item Veamos que $x_{\phi}\in Y$. Supongamos que no. Como $Y$ cerrado por [[Teórico existe $h\in X'$ tal que $h\equiv 0$ en $Y$ y $h(x_{\phi})\neq 0$ pero $0\neq h(x_{\phi})=\phi(h)=\phi(h|_{Y})=0$ (la igualdad del medio vale por $(II),(III)$ y la ultima por ser $\phi$ lineal y $h|_{Y}\equiv 0$)
+		\item Pero entonces dicho $x_{\phi}\in Y$ que estabamos buscando. Por que usando $(II),(III)$
+			$$f|_{Y}(x)(\phi)=f(x_{\phi})=\phi(f)=\psi(f|_{Y})\quad\forall f\in X'$$
+	\end{enumerate}
+	\end{proof}
+
+\begin{definition} Anuladores
+$X$ normado $\emptyset \neq W\subseteq X$ y $\emptyset\neq Z\subseteq X'$ defino los anuladores de $W$ y $Z$ como
+
+	$$W^{\circ} =\{f\in X':f(x) =0\quad\forall x\in W \}$$
+
+	$$^{\circ}Z= \{x \in X : f(x)=0\quad\forall f\in Z \}$$
+\end{definition}
+
+\begin{lemma}
+$X$ normado $\emptyset\neq W_{1}\subseteq W_{2}\subseteq X$ y $\emptyset\neq Z_{1}\subseteq Z_{2}\subseteq X'$ entonces
+\begin{enumerate}
+	\item $W_{2}^{\circ}\subseteq W_{1}^{\circ}\quad ^{\circ}Z_{2}\subseteq \ ^{\circ}Z_{1}$
+	\item $W_{1}\subseteq ^{\circ}(W_{1}^{\circ})\quad Z_{1}\subseteq (^{\circ}Z_{1})^{\circ}$
+	\item $W_{1}^{\circ},\ ^{\circ}Z_{1}$ son subespacios cerrados
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+ ejercicio
+\end{proof}
+
+\begin{theorem}\label{12.6}
+$X$ normado $W\subseteq X$ subespacio cerrado $Z\subseteq X'$ subespacio cerrado entonces
+	\begin{enumerate}[(a.)] 
+	\item $W=\ ^{\circ}(W^{\circ})$
+	\item Si $X$ reflexivo $Z=(^{\circ}Z)^{\circ}$
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	\begin{enumerate}[(a.)] 
+		\item\begin{enumerate}[1.] 
+				\item  Sabemos que $W\subseteq \ ^{\circ}(W^{\circ} )$
+				\item Supongamos $p \in \ W$ 
+				\item Como $W$ cerrado por [[Teórico 103a0090]] existe $f\in X'$ tal que $f(p)\neq 0$ y $f\equiv 0$ en $W$ osea $f\in W^{\circ}$
+				\item Entonces $p \not\in \ ^{\circ}(W^{\circ})$. Absurdo
+		\end{enumerate}
+	\item \begin{enumerate}[1.] 
+			\item Sabemos $Z\subseteq (^\circ Z)^{\circ}$. Supongamos que $\exists g\in (^{\circ}Z)^{\circ}\setminus Z$
+				\item Como en parte $1.$ sabemos $\exists \psi \in X''$ tal que $(I) \ \psi(g)\neq 0$ y $\psi(f)=0\quad\forall f\in Z$
+				\item Como $X$ reflexivo $\exists q\in X$ tal que $\psi=J_{X}(q)$ osea $(II)\ \psi(f)=f(q)\quad\forall f\in X'$
+				\item Luego $f(q)=\psi(f)=0\quad\forall f\in Z$ osea que $q\in\ ^{\circ}Z$
+				\item  Pero $g(q)=\psi(g)\neq 0$ por $(I),(II)$ entonces $q\not\in (^{\circ}Z)^{\circ}$. Absurdo
+		\end{enumerate}	\end{enumerate}
+\end{proof}
+
+\begin{lemma}\label{12.7}
+Sea $V=\left\{  a=\{ a_{n} \}\in \ell^{1} : \sum^{\infty}_{n=1}(-1)^{n}a_{n}=0 \right\}$ y $c_{0}$ subsucesiones de $\ell^{\infty}$ que convergen a $0$. Sea $$T_{c_{0}}:\ell^{1}\rightarrow c_{0}'$$ dada por $T_{c_{0}}(a)=f_{a}$. Donde para $x=\{ x_{n} \}\in c_{0}$ sucede $f_{a}(x)=\sum^{\infty}_{n=1}a_{n}x_{n}$.
+>Sea $Z=T_{c_{0}}(V)$ entonces $V$ y $Z$ son subespacios propios y cerrados de $\ell^{1}$ y $c_{0}'$ respectivamente y ademas $(^{\circ}Z)^{\circ}=c_{0}'(\supsetneq Z)$ y $T_{c_{0}}$ es isomorfismo
+\end{lemma}
+\begin{proof}
+queda pendiente $\mathbb{F}$
+\end{proof}
+
+\section{Clase 13}
+\begin{corollary}
+	Los espacios $c_{0}$ y $\ell^{\infty}$ no son reflexivos
+\end{corollary}
+\begin{proof}
+	\begin{enumerate}
+		\item Vimos en \hyperref[12.7]{Lema 12.7}  que $ ( ^{\circ}Z  ) ^{\circ} =c_{0}'\neq Z $ 
+		\item Luego $ c_{0} $ no puede ser reflexivo por \hyperref[12.6]{Teorema 12.6} $ b) $ 
+		\item Ademas como $ c_{0} $ cerrado en $ \ell^{\infty}  $ y no es reflexivo tampoco puede serlo $ \ell^{\infty}  $ por \hyperref[12.4]{Teorema 12.4} 
+	\end{enumerate}
+\end{proof}
+
+\begin{theorem}[] \label{13.1} 
+	$ X,Y $ normados , $ T \in B( X,Y ) $ entonces $ \exists !T'\in B( Y',X' )$ tal que $$ T'( f ) ( x ) =f( Tx ) \quad\forall f\in Y'\quad\forall x\in X$$ 
+\end{theorem}
+\begin{proof}
+	\begin{enumerate}
+		\item Para $ f\in Y' $ definimos $ T'f=f\circ T $. 
+		\item Como $ T,f $ son lineales y continuas $ T'f $ lo es entonces  $ T'( f)\in X'  $ 
+		\item Ademas $ T':Y'\longrightarrow X  $ cumple que 
+			$$T'( f)( x)=f( Tx)\quad\forall x\in X ,\forall f\in Y'$$ 
+		\item Si hubiera otra $ S_{i} B( Y',X' )  $ tal que $ S( f)( x)=f( Tx) \quad\forall x\in X \forall y\in Y' $ entonces $ S( f)=T'( f)\quad\forall f\in Y'  $ osea $ S=T' $ 
+		\item Veamos que es lineal y continua. Sean $ f,g_{i} Y',\alpha, \beta\in\mathbb{F} $ entonces $$  ( \alpha f+\beta g)\circ T=\alpha ( f\circ T)+\gamma( g\circ T)$$
+			Osea $ T'( \alpha f+\beta g)=\alpha T'( f)+\beta( T')g $ 
+		\item Ademas $ \lVert T( f) \rVert =\lVert f\circ T \rVert =\lVert f \rVert \lVert T \rVert  $. Por lo tanto $T $ es continua ( mas aun $ \lVert T' \rVert \leq \lVert T \rVert  $\label{des} )
+	\end{enumerate}
+\end{proof}
+
+\begin{proposition}
+	$X,Y$ normados $T\in B( X,Y )$ entonces
+	\begin{enumerate}
+		\item $ \lvert T' \rvert =\lVert T \rVert  $ 
+		\item $ Ker( T')=( Im T)^{\circ}  $ 
+		\item $ Ker( T)=^{\circ}( Im T)  $  
+	\end{enumerate}
+\end{proposition}
+\begin{proof} 
+	\begin{enumerate}
+		\item 
+			\begin{enumerate}
+				\item Por Corolario Hahn Banach \hyperref[10.0]{Corolario}  $ \exists f\in Y' $ tal que $ f( Tx)=\lVert Tx \rVert  $ y $ \lVert f \rVert =1$ 
+				\item Entonces $ \lVert Tx \rVert =f( Tx)=T( f)( x)\leq \lVert T' \rVert \lVert f \rVert \lVert x \rVert$ y sabemos $ \lVert f \rVert =1 $. Por lo tanto $ \lVert T \rVert \leq \lVert T' \rVert  $ 
+
+					( La otra desigualdad vale por \hyperref[des]{Desigualdad} )    
+			\end{enumerate}
+		\item \begin{enumerate}
+				\item $ ( \subseteq ) $  Sea $ f\in Ker T'  $ y $ z\in Im T  $ entonces $ \exists x\in X  $ tal que $ z=Tx$   
+			\item Luego $ f( z)=f( Tx)=T'( f)( x) =0$
+			\item $ ( \supseteq) $ Sea $ f\in ( ImT)^{\circ}   $ entonces $ \forall x\in X  $ sucede $ T( f)( x)=f( Tx)=0 $ pues $ Tx\in ImT  $ 
+			\item Osea $ T( f)=0 $ por lo tanto $ f\in KerT'$ 
+		\end{enumerate}  
+	\item ( Ejercicio )
+	\end{enumerate} 
+	
+\end{proof}
+
+\begin{theorem}[]
+	$ X,Y $ normados $ T\in B( X,Y )   $ 
+	\begin{enumerate}
+		\item Si $ T $ es isomorfismo entonces $ T' $ es isomorfismo con $ ( T')^{-1} =( T^{-1} )'  $. 
+
+			( En particular si son isomorfos $ X $ e $ Y $ tambien lo son $ X' $ e $ Y' $ )  
+		\item Si $ T $ isomorfismo isometrico entonces $ T' $ isomorfismo isometrico
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	\begin{enumerate}
+		\item 
+		\begin{enumerate}
+			\item Sea $S=T^{-1} $ entonces $ S\in B( Y,X )   $ y ademas esta bien definida $S'\in B( X',Y')$ por \hyperref[13.1]{Teorema 13.1} 
+			\item Ahora $ \forall x\in X ,f\in X'  $ tenemos
+			$$T'( S'(f))(x)=S'( f)( Tx)=f( S( Tx))=f( x)$$       
+			Osea $T( S'( f))=f$ por lo tanto $T'\circ S'=Id_{X'}$  
+			\item Analogamente vemos $S'\circ T'=Id$ 
+		\end{enumerate}
+	\item
+		\begin{enumerate}\item por $(1.)$ basta ver que $T'$ es isometria. 
+				\item Por una parte $\lVert T'(f)(x) \rVert =\lVert f(Tx) \rVert \leq \lVert f \rVert \lVert T \rVert \lVert x \rVert $ ( Con $\lVert T \rVert =1$ por ser isometria ) 
+			\item Entonces $\lVert T'(f) \rVert \leq \lVert f \rVert $ 
+			\item Por otro lado $\forall \epsilon>0\ \exists y\in Y$ con $\lVert y \rVert =1$ tal que $\lvert f(y) \rvert \geq \lVert f \rVert -\epsilon$ (Por def de supremo)
+			\item Sea $x=T^{-1} y$ entonces $\lVert x \rVert =1$ (Pues $1= \lVert y \rVert =\lVert T(T^{-1} y) \rVert =\lVert T x \rVert =\lVert x \rVert $ ) 
+			\item Por lo tanto $\lVert T'(f) \rVert \geq \lvert T'(f)(x) \rvert =\lvert f(Tx) \rvert= \lvert f(y) \rvert \geq \lVert f \rVert -\epsilon $ 
+			\item Mostrando que $\lVert T'(f) \rVert =\lVert f \rVert $ 
+		\end{enumerate}	
+	\end{enumerate}
+\end{proof}
+
+
+\end{document}
