@@ -8,6 +8,8 @@
 \usepackage[colorlinks=true]{hyperref}
 \usepackage{tcolorbox}
 \usepackage[shortlabels]{enumitem}
+\usepackage{fancyhdr}
+\usepackage{mdframed}
 
 \newtheoremstyle{break}
 {\topsep}{\topsep}%
@@ -16,6 +18,8 @@
 {\newline}{}%
 \theoremstyle{break}
 \newtheorem{theorem}{Teorema}[section]
+%\newmdtheoremenv{theorem}{Theorem}
+
 \newtheorem{corollary}{Corolario}[theorem]
 \newtheorem{lemma}[theorem]{Lema}
 \newtheorem{proposition}{Proposición}
@@ -25,6 +29,10 @@
 \newtheorem{example}{Ejemplo}[section]
 \newcommand\quotient[2]{{^{\displaystyle #1}}/{_{\displaystyle #2}}}
 \synctex=1
+
+\pagestyle{fancy}
+\fancyhead[L]{\textbf{Analisis Funcional}}
+
 \renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}}
 \renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}}
 \renewcommand{\labelenumiv}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.\arabic{enumiv}}
@@ -568,14 +576,18 @@ $X$ normado $W\subseteq X$ subespacio cerrado $Z\subseteq X'$ subespacio cerrado
 \end{proof}
 
 \begin{lemma}\label{12.7}
-Sea $V=\left\{  a=\{ a_{n} \}\in \ell^{1} : \sum^{\infty}_{n=1}(-1)^{n}a_{n}=0 \right\}$ y $c_{0}$ subsucesiones de $\ell^{\infty}$ que convergen a $0$. Sea $$T_{c_{0}}:\ell^{1}\rightarrow c_{0}'$$ dada por $T_{c_{0}}(a)=f_{a}$. Donde para $x=\{ x_{n} \}\in c_{0}$ sucede $f_{a}(x)=\sum^{\infty}_{n=1}a_{n}x_{n}$.
->Sea $Z=T_{c_{0}}(V)$ entonces $V$ y $Z$ son subespacios propios y cerrados de $\ell^{1}$ y $c_{0}'$ respectivamente y ademas $(^{\circ}Z)^{\circ}=c_{0}'(\supsetneq Z)$ y $T_{c_{0}}$ es isomorfismo
+	Sea $V=\left\{  a=\{ a_{n} \}\in \ell^{1} : \sum^{\infty}_{n=1}(-1)^{n}a_{n}=0 \right\}$ y $c_{0}$ subsucesiones de $\ell^{\infty}$ que convergen a $0$. Sea 
+	$$T_{c_{0}}:\ell^{1}\rightarrow c_{0}'$$ dada por $T_{c_{0}}(a)=f_{a}$. 
+	Donde para $x=\{ x_{n} \}\in c_{0}$ sucede $f_{a}(x)=\sum^{\infty}_{n=1}a_{n}x_{n}$
+
+	Sea $Z=T_{c_{0}}(V)$ entonces $V$ y $Z$ son subespacios propios y cerrados de $\ell^{1}$ y $c_{0}'$ respectivamente, ademas $(^{\circ}Z)^{\circ}=c_{0}'(\supsetneq Z)$ y $T_{c_{0}}$ es isomorfismo
 \end{lemma}
 \begin{proof}
 queda pendiente $\mathbb{F}$
 \end{proof}
 
 \section{Clase 13}
+
 \begin{corollary}
 	Los espacios $c_{0}$ y $\ell^{\infty}$ no son reflexivos
 \end{corollary}
@@ -620,15 +632,15 @@ queda pendiente $\mathbb{F}$
 
 					( La otra desigualdad vale por \hyperref[des]{Desigualdad} )    
 			\end{enumerate}
-		\item \begin{enumerate}
+		\item 
+			\begin{enumerate}
 				\item $ ( \subseteq ) $  Sea $ f\in Ker T'  $ y $ z\in Im T  $ entonces $ \exists x\in X  $ tal que $ z=Tx$   
-			\item Luego $ f( z)=f( Tx)=T'( f)( x) =0$
-			\item $ ( \supseteq) $ Sea $ f\in ( ImT)^{\circ}   $ entonces $ \forall x\in X  $ sucede $ T( f)( x)=f( Tx)=0 $ pues $ Tx\in ImT  $ 
-			\item Osea $ T( f)=0 $ por lo tanto $ f\in KerT'$ 
-		\end{enumerate}  
+				\item Luego $ f( z)=f( Tx)=T'( f)( x) =0$
+				\item $ ( \supseteq) $ Sea $ f\in ( ImT)^{\circ}   $ entonces $ \forall x\in X  $ sucede $ T( f)( x)=f( Tx)=0 $ pues $ Tx\in ImT  $ 
+				\item Osea $ T( f)=0 $ por lo tanto $ f\in KerT'$ 
+			\end{enumerate}  
 	\item ( Ejercicio )
 	\end{enumerate} 
-	
 \end{proof}
 
 \begin{theorem} \label{13.2}
@@ -666,7 +678,6 @@ queda pendiente $\mathbb{F}$
 	Recordar que si $1\leq p<\infty, \ x\in \ell^p, \ a\in \ell^{q} $ con $\frac{1}{p}+\frac{1}{q}=1$. 
 
 	Tomando $f_{a}(x)=\sum_{n=1}^{\infty} a_{n} x_{n} $ entonces $T_{p}:\ell^{q} \longrightarrow (\ell^{p} )' $ dada por $T_{p}(a)=f_{a}$  es isomorfismo isometrico
-
 \end{remark}
 
 \begin{corollary}
@@ -674,7 +685,6 @@ queda pendiente $\mathbb{F}$
 \end{corollary}
 
 \begin{proof}
-	
 	\begin{enumerate}	
 		\item Sean $x\in\ell^{p} \quad y\in \ell^{q}$. Entonces 
 			$$T_{p}'(J_{\ell^{p}}(x))=(J_{\ell^{p} }(x))T_{p}(y)=T_{p}(y)(x)=\sum_{n=1}^{\infty} x_{n} y_{n} =T_{q}(x)(y)$$ 
@@ -690,8 +700,109 @@ queda pendiente $\mathbb{F}$
 	$X,Y$ normados, $T\in B(X,Y)$. Entonces 
 	\begin{equation}J_{Y}\circ T=T'' \circ J_{X}\label{1}\tag{1}\end{equation}
 \end{theorem}
+
 \begin{proof}
-	1
+	$$X\xrightarrow[]{T}Y\xrightarrow[]{J_{Y}}Y''\quad X\xrightarrow[]{J_{Y}}X''\xrightarrow[]{T''}Y''$$ 
+	Ahora tenemos $T'':X''\longrightarrow Y''$ dada por $\psi\longrightarrow T''(\psi)$ con $T''(\psi)(g)=\psi(T'(g))$ con $g\in Y' $   
+
+	Luego dado $x\in X\quad q\in Y'$ tenemos $$J_{Y}(Tx)(g)=g(Tx)=T'(g)(x)=(J_{x}x)(T'(g))=T''(J_{x}x)(g)$$  
+	Luego $$J_{Y}(Tx)=T''(J_{X}x)\quad \forall x\in X $$  
+\end{proof}
+
+\begin{corollary} \label{13.3}
+	Si $X,Y$ son isomorfos entonces $X$ reflexivo sii $Y$ reflexivo 
+\end{corollary}
+\begin{proof}
+	\begin{enumerate}	
+		\item Como $X,Y$ son isomorfos existe $T:X\longrightarrow Y $ isomorfismo. Entonces por \hyperref[13.2]{Teorema 13.2}  $T'$ y $T''$ son isomorfos. 
+		\item Luego usando la igualdad en \hyperref[13.3]{Teorema 13.3} queda probado
+	\end{enumerate}
+\end{proof}
+
+\begin{corollary}
+	$\ell^{1} $ no es reflexivo
+\end{corollary}
+\begin{proof}
+	Sabemos que $c_{0}$ no es reflexivo y $\ell^{1} $ es isomorfo a $c_{0}'$ 
+\end{proof}
+
+\subsection{Proyeciones y subespacios complementarios}
+\begin{remark}
+	En esta seccion $X$ es espacio vectorial 
+\end{remark}
+
+\begin{definition}
+	$U,V \subseteq X$ subespacios, se dicen complementarios si $X=U\bigoplus V$
+	Osea $\forall x\in X \quad \exists !u_{X}\in U\quad v_{X}\in V$ tal que $X=u_{x}+v_{x}$ 
+
+	Si $X$ normado y $x\mapsto u_{x}\quad x\mapsto v_{x}$ son continuas decimos que son complementarios topologicos 
+\end{definition}
+
+\begin{definition}
+	$p:X\longrightarrow X $ lineal se dice proyeccion si $p^{2}=p $ 
+\end{definition}
+
+\begin{lemma}
+	Sea $p$ proyeccion en $X$. Entonces $x\in Im(p)\iff p(x)=x$. Ademas $I-p$ es proyeccion y $Im(p)=Ker(I-p)\quad Ker(p)=Im(I-p)$   
+\end{lemma}
+\begin{proof}
+	Ejercicio
+\end{proof}
+
+\begin{lemma}
+	\begin{enumerate}
+		\item $U,V\subseteq X$ y sean $p_{U}:X\longrightarrow U \quad p_{V}:X\longrightarrow V$ dadas por $x\mapsto u_{x}$ $x\mapsto v_{x}$
+
+			Entonces $p_{U},p_{V}$ son proyecciones en $X$ y $p_{U}+p_{V}=Id$. ($p_{U}$ se dice proyeccion sobre $U$ de $V$, analogo para $p_{V}$ )
+		\item si $p$ es proyeccion en $X$ entonces los subespacios $Im(p),Im(I-p)$ son complementarios
+	\end{enumerate}
+\end{lemma}
+\begin{proof}
+	(ejercicio)
+\end{proof}
+
+\begin{proposition}
+	a $U,V\subseteq X$ son complementarios entonces:
+	\begin{enumerate}
+		\item $U$ y $V$ complementarios topologicos sii $P_{U}$ y $P_{V}$ son continuas
+		\item Si $U,V$ son complementarios topologicos entonces $U,V$ son cerrados
+		\item $X$ es Banach. Si $U$ y $V$ son cerrados y complementarios entonces son complementarios topologicos 
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	\begin{enumerate}
+		\item a
+		\item $U=Im(P_{U})=Ker(I-P_{U})$
+		\item 
+			\begin{enumerate}
+				\item Como $ P_{U}+P_{V}=Id $ basta ver que $ P_{U} $ es continua. Por TGC basta ver que $ gr(P_{U}) $ es cerrado. 
+
+				\item Sea $ \{( x_{n},P_{U}x_{n} ) \} \subseteq gr(P_{U})$ tal que $ (x_{n} ,P_{U}x_{n} )\longrightarrow (x,y)\in X\times X $ queremos $ y=P_{U}x $ 
+				\item Como $ \{P_{U}x_{n} \}\subseteq U$ con $ U $ cerrado e entonces $ y\in U $. 
+				\item Analogamente $ \{(I-P_{U})x_{n} \}\subseteq V $ entonces $ x-y=\lim x_{n} -P_{U}x_{n} \in V $  
+				\item Como $ P_{U}(x)=x\quad \forall x\in U  $ y $ P_{U}x=0\quad \forall x\in V  $ tenemos $ 0=P_{U}(x-y)=P_{U}x-P_{U}y=P_{U}(x)-y $   
+		\end{enumerate}	\end{enumerate}
+\end{proof}
+
+\begin{remark}
+	Dado $ U\subseteq X $ sub espacio cerrado $ \exists V\subseteq X $ tal que $ U $ y $ V $ son complementos topologicos?.
+
+	Por resultados anteriores esto es equivalente a que exista proyeccion continua $ P $ tal que $ U=Im P $. Pues en tal caso tomamos $ V=Im(I-P) $ (ejercicio)
+
+	Si $ dim V<\infty  $ es cierto (ej). En general esto no es cierto pero si vale en espacios de Hilbert (Lo vemos mas adelante)
+\end{remark}
+
+\begin{lemma}
+	Sea $ S= \{s_{\alpha }: \alpha \in A\} $  tal que $ \overline{Sp}S=X $. Si $ \{f_{n} \} $ es una sucesion acotada en $ X' $ y $ \{f_{n} (s_{\alpha })\} $ converge $ \forall \alpha \in A  $ entonces $ \exists f\in X' $ tal que $ f_{n} (x)\longrightarrow f(x)\quad \forall x\in X  $  
+\end{lemma}
+
+\begin{proof}
+	\begin{enumerate}
+		\item Sea $ x\in X $ como $\{f_{n} \}$ es acotada $ \exists c>0 $ tal que $ \lVert f_{n}  \rVert \leq c \quad \forall n\in \mathbb{N} $.
+		\item Ahora dado $ \epsilon >0 $ existe $ s\in Sp(S) $ con $ \lVert x-s \rVert \leq \frac{\epsilon }{3c} $. Entonces $ \forall n $ $ \lvert f_{n} (x)-f_{n} (s) \rvert \leq \lVert f_{n}  \rVert \lVert x-s \rVert \leq \frac{\epsilon }{3} $
+		\item Luego $$\lvert f_{n} (x)-f_{m}(x) \rvert \leq \lvert f_{n} (x)-f_{n} (s) \rvert +\lvert f_{n} (s)-f_{m}(s) \rvert +\lvert f_{m}(s)-f_{m}(x) \rvert \leq \frac{2}{3}\epsilon +\lvert f_{n} (s)-f_{m}(s) \rvert $$ 
+		\item Pero $ \lvert f_{n}(s)-f_{m}(s) \rvert \leq \frac{\epsilon }{3} $ si $ n,m\geq 0 $ por que $ \{f_{n}(s_{\alpha })\}$ converge $ \forall \alpha \in A  $ y $ S $ es combinacion lineal finita de elementos    
+	\end{enumerate}
 \end{proof}
 
 \end{document}
