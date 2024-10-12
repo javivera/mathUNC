@@ -42,6 +42,29 @@
 \section{Clase 5}
 \section{Clase 6}
 \section{Clase 7}
+
+\begin{theorem}[ Representacion de Riesz ] \label{7.3}
+Sea $\mathcal{H}$ Hilbert $f\in H'$ entonces $\exists !y\in H$ tal que $f(x)=(x,y)\quad\forall x\in \mathcal{H}$. Mas aun $\lVert f \rVert_{\mathcal{H}'}=\lVert y \rVert_{\mathcal{H}}$
+\end{theorem}
+\begin{proof}
+	
+\end{proof}
+
+\begin{theorem} \label{7.4}
+	$\mathcal{H}$ Hilbert sea $T_{H}:\mathcal{H}\rightarrow\mathcal{H'}$ dado por $T_{H}(y)=f_{y}$ donde $f_{y}(x):=(x,y)\quad\forall x\in \mathcal{H}$. Entonces $T_{H}$ es biyectivo. Ademas $\forall y\in \mathcal{H}\quad\alpha,\beta\in \mathbb{F}$
+	1. $T_{H}(\alpha y + \beta z)=\overline{\alpha}T_{H}(y)+\overline{\beta}T_{H}(z)$
+	2. $\lVert T_{H}(y) \rVert_{\mathcal{H}'}=\lVert y \rVert_{H}$
+	Ademas se puede definir un producto interno en $\mathcal{H}'$ como 
+	$$(T_{H}(z),T_{H}(y))_{\mathcal{H}'}=(y,z)_{\mathcal{H}}\quad \forall y,z\in \mathcal{H}$$
+	Con este producto $\mathcal{H}'$ es Hilbert y la norma asociada a cada $f_{y}$ coincide con la norma de $f_{y}$ como elemento $B(\mathcal{H},\mathbb{F})$
+\end{theorem}
+
+\begin{proof}
+	Pendiente copiar
+
+\end{proof}
+
+
 \section{Clase 8}
 \section{Clase 9}
 \section{Clase 10}
@@ -339,63 +362,42 @@ $W\subseteq X$ subespacio. Entonces $W$ es hiperplano que pasa por 0 sii $W\neq 
 \begin{proof}
 $(\Rightarrow)$
 \begin{enumerate}
-\item
-Supongamos $W$ hiperplano que pasa por $0$ $(W=Ker(f))$. Como $f \not\equiv 0$ existe $z\in X$ con $f(z)\neq 0$
-Osea existe $z\in X\setminus W$ entonces $X\neq W$
-\item
-Sea $y\in X\setminus W$ arbitrario entonces $f(y)\neq 0$
-\item
-Para $x\in X$ escribo $x=x-\beta y+\beta y$ con $\beta= \frac{f(x)}{f(y)}$
-\item
-Como $f(x-\beta y)=0$ entonces $x-\beta y\in Ker(f)=W$
-\item
-Entonces $x\in Sp\{ y \}+Ker(f)$ y ademas $W\cap Sp\{ y \}=\{ 0 \}$
-\item
-Entonces $X=W\bigoplus Sp\{ y \}$
+	\item Supongamos $W$ hiperplano que pasa por $0$ $(W=Ker(f))$. Como $f \not\equiv 0$ existe $z\in X$ con $f(z)\neq 0$
+	Osea existe $z\in X\setminus W$ entonces $X\neq W$
+	\item Sea $y\in X\setminus W$ arbitrario entonces $f(y)\neq 0$
+	\item Para $x\in X$ escribo $x=x-\beta y+\beta y$ con $\beta= \frac{f(x)}{f(y)}$
+	\item Como $f(x-\beta y)=0$ entonces $x-\beta y\in Ker(f)=W$
+	\item Entonces $x\in Sp\{ y \}+Ker(f)$ y ademas $W\cap Sp\{ y \}=\{ 0 \}$
+	\item Entonces $X=W\bigoplus Sp\{ y \}$
+\end{enumerate}
+$(\Leftarrow)$
+\begin{enumerate}
+	\item Si $X=W\bigoplus Sp\{ y \}$ dado $x\in X$ entonces $x=w+\alpha y$.
+	\item Definimos $f : X\rightarrow \mathbb{F}$ dada por $f(x)=\alpha$ es claro que es lineal y que $f\not\equiv 0$ y $Ker(f)=W$
 \end{enumerate}
 \end{proof}
 
-$(\Leftarrow)$
-\begin{enumerate}
-\item
-Si $X=W\bigoplus Sp\{ y \}$ dado $x\in X$ entonces $x=w+\alpha y$.
-\item
-Definimos $f : X\rightarrow \mathbb{F}$ dada por $f(x)=\alpha$ es claro que es lineal y que $f\not\equiv 0$ y $Ker(f)=W$
-\end{enumerate}
-
-
 \subsection{El segundo dual, espacios reflexivos, opradores duales}
+
 \begin{remark}
 Sea $X$ normado entonces sabemos que $X'$ es Banach y tambien $X''$ es Banach
 \end{remark}
 
-
-
-[!proposition]
-Para cualquier $x\in X$ la aplicacion $F_{x}:X'\rightarrow\mathbb{F}$ dada por $F_{x}(f)=f(x)$ satisface que $F_{x}\in X''$ y $\lVert F_{x} \rVert=\lVert x \rVert$
-
+\begin{proposition}
+	Para cualquier $x\in X$ la aplicacion $F_{x}:X'\rightarrow\mathbb{F}$ dada por $F_{x}(f)=f(x)$ satisface que $F_{x}\in X''$ y $\lVert F_{x} \rVert=\lVert x \rVert$
+\end{proposition}
 
 \begin{proof}
-
-
-\begin{enumerate}
-\item
-Sean $\alpha ,\beta\in \mathbb{F}$ y $f,g\in X'$ entonces $F_{x}(\alpha f+\beta g)=(\alpha f+\beta g)(x)=\alpha f(x)+\beta g(x)=\alpha F_{x}(f)+\beta F_{x}(g)$ entonces $F_{x}$ es lineal
-\item
-Ademas $\lvert F_{x}(x) \rvert=\lvert f(x) \rvert\leq \lVert x \rVert\lVert f \rVert=k\lVert x \rVert$ entonces $F_{x}$ es continua por lo tanto $F_{x}\in B(X',\mathbb{F})=X''$
-\item
-$\lVert x \rVert=\sup \{ \lvert f(x) \rvert:\lVert f \rVert=1 \}=\sup \{ \lvert F_{x}(f) \rvert:\lVert f \rVert=1 \}=\lVert F_{x} \rVert$ (El ultimo igual de definicion de norma en $B(X',\mathbb{F})$) (El primer igual es por ($2.$) Teórico
-\end{enumerate}
+	\begin{enumerate}
+		\item Sean $\alpha ,\beta\in \mathbb{F}$ y $f,g\in X'$ entonces $F_{x}(\alpha f+\beta g)=(\alpha f+\beta g)(x)=\alpha f(x)+\beta g(x)=\alpha F_{x}(f)+\beta F_{x}(g)$ entonces $F_{x}$ es lineal
+		\item Ademas $\lvert F_{x}(x) \rvert=\lvert f(x) \rvert\leq \lVert x \rVert\lVert f \rVert=k\lVert x \rVert$ entonces $F_{x}$ es continua por lo tanto $F_{x}\in B(X',\mathbb{F})=X''$
+		\item $\lVert x \rVert=\sup \{ \lvert f(x) \rvert:\lVert f \rVert=1 \}=\sup \{ \lvert F_{x}(f) \rvert:\lVert f \rVert=1 \}=\lVert F_{x} \rVert$ (El ultimo igual de definicion de norma en $B(X',\mathbb{F})$) (El primer igual es por ($2.$) Teórico
+	\end{enumerate}
 \end{proof}
-
-
-
 
 \begin{definition}
 Para $X$ normado definimos $J_{X}:X\rightarrow X''$ por $J_{X}x=J_{X}(x)=F_{X}$ osea $F_{X}(f)=J_{X}(x)(f)=f(x)\quad\forall x\in X\quad\forall f\in X'$. (Es claro que $J_{X}$ es lineal)
 \end{definition}
-
-
 
 \begin{corollary}
 $J_{X}:X\rightarrow X''$ es una isometria. En particular:
@@ -407,8 +409,7 @@ $X$ es isometricamente isomorfo a un suconjunto denso de un Banach
 \end{enumerate}
 \end{corollary}
 
-
-\begin{proof} DUDA
+\begin{proof}
 \begin{enumerate}
 \item
 Inyectiva es por ser una isometria. Sobreyectiva es por que $J_{X}(X)=Im(J_{X})$
@@ -417,20 +418,23 @@ Como $X''$ es Banach entonces $\overline{J_{X}(X)}$ es Banach (por ser cerrado e
 \end{enumerate}
 \end{proof}
 
-
-
-
 \begin{remark}
-Si $X$ no es Banach entonces $J_{X}(X)$ no es Banach por que son isometricamente isomorfos por lo tanto $J_{X}X\neq X''$. Pues $X''$ es Banach
+Si $X$ no es Banach entonces $J_{X}(X)$ no es Banach por que son isometricamente isomorfos ademas $J_{X}X\neq X''$ pues $X''$ es Banach
 \end{remark}
 
-
-
-\begin{definition} Reflexivo
-Si $J_{X}(X)=X''$ decimos que $X$ es reflexivo (Luego normado y reflexivo entonces Banach).
-Osea $X$ reflexivo sii $\forall \psi\in X''\quad\exists x_{\psi}\in X$ tal que $\psi = J_{X}(x_{\psi})$. (Osea $\psi (f)=J_{X}(x_{\psi})(f)=f(x_{\psi})\quad\forall f\in X'$)
-(DUDA Osea si $J_{X}$ es sobre??)
+\begin{definition}[ Reflexivo ]
+Decimos que $X$ es reflexivo si $J_{X}(X)=X''$ 
 \end{definition}
+
+\begin{remark}
+	\begin{itemize}
+		\item Luego si $X$ normado y reflexivo entonces es Banach
+		\item $X$ reflexivo sii $\forall \psi\in X''\quad\exists x_{\psi}\in X$ tal que $\psi = J_{X}(x_{\psi})$. 
+		\item Analogamente $\psi (f)=J_{X}(x_{\psi})(f)=f(x_{\psi})\quad\forall f\in X'$)
+(DUDA Osea si $J_{X}$ es sobre??)
+
+	\end{itemize}
+\end{remark}
 
 
 
@@ -448,25 +452,26 @@ Si $H$ es Hilbert entonces $H$ es reflexivo
 \begin{enumerate}
 \item
 Como dimension de $X$ es finita sabemos que $\dim X=\dim X'=\dim X''$ (DUDA Por teorema pasado cual?? ) y como $J_{X}:X\rightarrow X''$ lineal e inyectiva (por ser isometria) entonces es sobre
-\item Por Teórico tenemos que $T_{\mathcal{H}}:\mathcal{H}\rightarrow \mathcal{H}'$ dada por $T_{\mathcal{H}}(y)=f_{y}$ con $f_{y}(x)=(x,y)$ es biyeccion. Y $\mathcal{H}'$ es Hilbert con
+\item Por \hyperref[7.4]{Teorema 7.4} tenemos que $T_{\mathcal{H}}:\mathcal{H}\rightarrow \mathcal{H}'$ dada por $T_{\mathcal{H}}(y)=f_{y}$ con $f_{y}(x)=(x,y)$ es biyeccion. Y $\mathcal{H}'$ es Hilbert con
 $$(T_{\mathcal{H}}(z),T_{\mathcal{H}}(y))_{\mathcal{H}'}=(y,z)_{\mathcal{H}}\quad(I)$$
 
 \item Ahora como $\mathcal{H}'$ es Hilbert entonces re aplicando teorema $T_{\mathcal{H}'}:\mathcal{H}'\rightarrow\mathcal{H}''$ dada por $T_{H'}(g)=\psi_{g}$ con
 $$T_{\mathcal{H}'}(g)(f)=\psi_{g}(f)=(f,g)_{\mathcal{H}'}\quad (II)$$
 es biyeccion (y $\mathcal{H}''$ es Hilbert)
-\item En particular si $f\in \mathcal{H}'$ y $\psi \in \mathcal{H}''$ entonces $\exists !x,y\in H$ tales que $f=T_{\mathcal{H}}x$ y $\psi=T_{\mathcal{H}'}(T_{\mathcal{H}}y)$ (Unicos por que [[Teórico nos dice que son biyectivas, para la parte de $\psi$ seria usar dos veces biyectividad)
+\item En particular si $f\in \mathcal{H}'$ y $\psi \in \mathcal{H}''$ entonces $\exists !x,y\in H$ tales que $f=T_{\mathcal{H}}x$ y $\psi=T_{\mathcal{H}'}(T_{\mathcal{H}}y)$ (Unicos,devuelta por que \hyperref[7.4]{Teorema 7.4} nos dice que son biyectivas, para la parte de $\psi$ seria usar dos veces biyectividad)
 \item Ahora dado $\psi \in \mathcal{H}''$ y $f\in \mathcal{H}'$ tenemos
 
 \begin{align*} 
-	J_{\mathcal{H}}(y)(f)= f(y)&=(y,x)_{\mathcal{H}} & \text{(Por Riesz-Frechet)}\\
+	J_{\mathcal{H}}(y)(f)= f(y)=T_{\mathcal{H}}x(y)&=(y,x)_{\mathcal{H}} & \text{(Por def \hyperref[7.4]{Teorema 7.4})} \\
 	&=(T_{\mathcal{H}}(x),T_{\mathcal{H}}(y))_{\mathcal{H}'} &(\text{Por } (I))\\ 
-	&=(f,T_{\mathcal{H}(y)})_{\mathcal{H}'} & (\text{Por def de }f)\\
+	&=(f,T_{\mathcal{H}}(y))_{\mathcal{H}'} & (\text{Por def de }f)\\
 	& =T_{\mathcal{H}'}(T_{\mathcal{H}}(y))(f) &(\text{Por } (II)) \\
 	&=\psi (f)&\forall f\in \mathcal{H}' \quad(\text{Por def de }\psi)
 \end{align*}
 
+Osea $\psi = J_{\mathcal{H}}(y)$. 
+		\item Pero entonces dado un $\psi \in \mathcal{H}''$ encontramos un unico $y\in \mathcal{H}$ como preimagen. Luego $J_{\mathcal{H}}$ es sobreyectiva 
 
-\item Osea $\psi = J_{\mathcal{H}}(y)$. Luego $J_{\mathcal{H}}$ es sobreyectiva (DUDA Por?? si y=0 no es sobre) entonces $\mathcal{H}$ es [[Teórico
 \end{enumerate}
 \end{proof}
 
@@ -626,7 +631,7 @@ queda pendiente $\mathbb{F}$
 	
 \end{proof}
 
-\begin{theorem}[]
+\begin{theorem} \label{13.2}
 	$ X,Y $ normados $ T\in B( X,Y )   $ 
 	\begin{enumerate}
 		\item Si $ T $ es isomorfismo entonces $ T' $ es isomorfismo con $ ( T')^{-1} =( T^{-1} )'  $. 
@@ -657,5 +662,36 @@ queda pendiente $\mathbb{F}$
 	\end{enumerate}
 \end{proof}
 
+\begin{remark}
+	Recordar que si $1\leq p<\infty, \ x\in \ell^p, \ a\in \ell^{q} $ con $\frac{1}{p}+\frac{1}{q}=1$. 
+
+	Tomando $f_{a}(x)=\sum_{n=1}^{\infty} a_{n} x_{n} $ entonces $T_{p}:\ell^{q} \longrightarrow (\ell^{p} )' $ dada por $T_{p}(a)=f_{a}$  es isomorfismo isometrico
+
+\end{remark}
+
+\begin{corollary}
+	$\ell^{p} $ ,$\ 1<p<\infty$ con $\frac{1}{q}+\frac{1}{p}=1$ es reflexivo 
+\end{corollary}
+
+\begin{proof}
+	
+	\begin{enumerate}	
+		\item Sean $x\in\ell^{p} \quad y\in \ell^{q}$. Entonces 
+			$$T_{p}'(J_{\ell^{p}}(x))=(J_{\ell^{p} }(x))T_{p}(y)=T_{p}(y)(x)=\sum_{n=1}^{\infty} x_{n} y_{n} =T_{q}(x)(y)$$ 
+
+		\item Osea $T_{p}'(J_{\ell^{p} }(x))=T_{q}(x)	$
+		\item Y $T_{p}'$ es iso por \hyperref[13.2]{Teorema 13.2} (por que $T$ lo es)  
+		\item Luego $J_{\ell^{p} }=( T_{p}' )^{-1} \circ T_{q}$ y como $T_{q}$ y $T_{p}'$ son iso entonces la compisicion es iso. 
+		\item como $J_{\ell^{p} }$ es isomorfismo entonces $\ell^{p} $ es reflexivo 
+	\end{enumerate}
+\end{proof}
+
+\begin{theorem}[]
+	$X,Y$ normados, $T\in B(X,Y)$. Entonces 
+	\begin{equation}J_{Y}\circ T=T'' \circ J_{X}\label{1}\tag{1}\end{equation}
+\end{theorem}
+\begin{proof}
+	1
+\end{proof}
 
 \end{document}

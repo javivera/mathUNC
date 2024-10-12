@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1728700305.53034 "AF-Teorico.tex" "AF-Teorico.pdf" "AF-Teorico" 1728700306.67735 0
+["pdflatex"] 1728710190.23091 "AF-Teorico.tex" "AF-Teorico.pdf" "AF-Teorico" 1728710191.51684 0
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/tfm/adobe/palatino/pplb7t.tfm" 1136768653 1616 371d1ee60c04b008c8fd760060cd34f1 ""
@@ -169,9 +169,9 @@
   "/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1727093215.2952 5467645 128b85b7cde5f5edc5cb7f1dd7ff8736 ""
   "/usr/local/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1727093169 8221415 1969b96b7353c783cc830b5de63cbcc1 ""
   "/usr/local/texlive/2024/texmf.cnf" 1710266656 577 e590dabc9e28c5b61546e15f63eebcdf ""
-  "AF-Teorico.aux" 1728700306.58096 2045 d1fb9d790d0acfbcf39e66bf14757c61 "pdflatex"
-  "AF-Teorico.out" 1728700306.58159 1429 f586875047d2073d2b697b8d18f686c1 "pdflatex"
-  "AF-Teorico.tex" 1728700304.99171 32433 702f9334cad0ce4ce919dba22e05acb3 ""
+  "AF-Teorico.aux" 1728710191.42238 2234 f4d4949caf9862945fd7d9a38230fc8c "pdflatex"
+  "AF-Teorico.out" 1728710191.42953 1429 f586875047d2073d2b697b8d18f686c1 "pdflatex"
+  "AF-Teorico.tex" 1728710188.52364 34922 3f67b0f51810b606ef85cfbe02bc8260 ""
   (generated)
   "AF-Teorico.aux"
   "AF-Teorico.log"
