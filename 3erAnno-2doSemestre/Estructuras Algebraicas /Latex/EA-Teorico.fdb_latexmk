@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1728836049.7127 "EA-Teorico.tex" "EA-Teorico.pdf" "EA-Teorico" 1728836050.79232 0
+["pdflatex"] 1728860199.08207 "EA-Teorico.tex" "EA-Teorico.pdf" "EA-Teorico" 1728860200.27308 0
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/tfm/adobe/palatino/pplb7t.tfm" 1136768653 1616 371d1ee60c04b008c8fd760060cd34f1 ""
@@ -165,9 +165,9 @@
   "/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1727093215.2952 5467645 128b85b7cde5f5edc5cb7f1dd7ff8736 ""
   "/usr/local/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1727093169 8221415 1969b96b7353c783cc830b5de63cbcc1 ""
   "/usr/local/texlive/2024/texmf.cnf" 1710266656 577 e590dabc9e28c5b61546e15f63eebcdf ""
-  "EA-Teorico.aux" 1728836050.69889 1959 5d21d55dee0f595ba8a59b030adfdcde "pdflatex"
-  "EA-Teorico.out" 1728836050.70288 1504 f60cbe73aa0215ea29fcf5da4b8bfbc0 "pdflatex"
-  "EA-Teorico.tex" 1728836028.84748 7741 fc9f04b16134ab5221292ee5e36d8ab2 ""
+  "EA-Teorico.aux" 1728860200.17459 2128 ce94f2795f78cff0370bc899d9697d55 "pdflatex"
+  "EA-Teorico.out" 1728860200.17511 1592 ad843b890b42815dfeb22c2463f4b977 "pdflatex"
+  "EA-Teorico.tex" 1728860197.39701 8617 6512d1093cb84a412455868157c2028c ""
   (generated)
   "EA-Teorico.aux"
   "EA-Teorico.log"

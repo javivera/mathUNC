@@ -49,7 +49,33 @@
 \section{Clase 4}
 \section{Clase 5}
 \section{Clase 6}
+
+\begin{theorem}[Aplicacion Abierta]
+	Sean $X,Y$ Banach y $T\in B( X,Y) $ sobreyectiva. Sea $$L=\{Tx: x\in X \text{ con }\lVert x \rVert \leq 1\}$$ Entonces
+	\begin{enumerate}
+		\item $\exists \ r>0$ tal que $\{y\in Y: \lVert y \rVert \leq r\}\subseteq \overline{L}$
+		\item $\{y\in Y: \lVert y \rVert \leq \frac{r}{2}\}\subseteq L$
+		\item Si ademas $T$ es inyectiva entonces $T$ es inversible osea que es biyectiva entonces $T^{-1}$ es continua (Teorema de la inveras continua)  
+	\end{enumerate}
+	
+\end{theorem}
+
 \section{Clase 7}
+
+\begin{lemma}
+	$X,Y$ normados $T\in B( X,Y) $ inversible entonces:
+	$$\lVert Tx \rVert \geq \lVert T^{-1} \rVert^{-1}\lVert x \rVert \quad \forall x\in X  $$ 
+\end{lemma}
+\begin{proof}
+	
+\end{proof}
+
+\begin{lemma}
+	$X$ Banach, $Y$ normado $T\in B( X,Y) $. Si $\alpha >0$ tal que $\lVert Tx \rVert \geq \alpha\lVert x \rVert \quad \forall x\in X $ entonces $ImT$ es cerrado 
+\end{lemma}
+\begin{proof}
+	
+\end{proof}
 
 \begin{theorem}[ Representacion de Riesz ] \label{7.3}
 Sea $\mathcal{H}$ Hilbert $f\in H'$ entonces $\exists !y\in H$ tal que $f(x)=(x,y)\quad\forall x\in \mathcal{H}$. Mas aun $\lVert f \rVert_{\mathcal{H}'}=\lVert y \rVert_{\mathcal{H}}$
@@ -73,8 +99,10 @@ Sea $\mathcal{H}$ Hilbert $f\in H'$ entonces $\exists !y\in H$ tal que $f(x)=(x,
 \end{proof}
 
 
+
 \section{Clase 8}
 \section{Clase 9}
+
 \section{Clase 10}
 
 \begin{corollary}\label{10.0}
@@ -100,7 +128,9 @@ Sea $\mathcal{H}$ Hilbert $f\in H'$ entonces $\exists !y\in H$ tal que $f(x)=(x,
 				\item Entonces$f(-x)=\delta$ osea $f(x)=\delta\neq 0$ pero $f|_{W}\equiv 0$ entonces como $y\in W$ sucede $f(y)=0$\end{enumerate}
 	\end{enumerate}
 
-\end{proof}\section{Clase 11}
+\end{proof}
+
+\section{Clase 11}
 
 \begin{corollary}
 Si $x_{1},\ldots,x_{n} \in X$ son linealmente independientes entonces existe $f_{1},\ldots,f_{n}\in X'$ tal que $$f_{j}(x_{k})=\delta_{k_{j}} \quad 1\leq j,k\leq n$$
@@ -349,8 +379,6 @@ Si $A$ no es comacto $(b)$ en general no es cierto
 \end{itemize}
 \end{remark}
 
-
-
 \begin{remark}
 Es equivalente llamar \emph{hiperplano} a $\tilde{H}=x_{0}+Ker(f)$ (y en este caso decimos que pasa por $x_{0}$) para cierto $f : X\rightarrow \mathbb{F}$ lineal tal que $f\not\equiv 0$ pues sea $x_{0}\in H$ fijo con $\gamma=f(x_{0})$.
 Entonces si $x\in H$ tenemos
@@ -365,7 +393,6 @@ Reciprocamente si $x\in \tilde{H}$ entonces $x=x_{0}+z$ con $f(z)=0$ entonces $f
 \begin{theorem}
 $W\subseteq X$ subespacio. Entonces $W$ es hiperplano que pasa por 0 sii $W\neq X$ y $X=W\bigoplus Sp\{ y \}$ para cualquier $y\in X\setminus W$
 \end{theorem}
-
 
 \begin{proof}
 $(\Rightarrow)$
@@ -443,8 +470,6 @@ Decimos que $X$ es reflexivo si $J_{X}(X)=X''$
 
 	\end{itemize}
 \end{remark}
-
-
 
 \begin{theorem}
 \begin{enumerate}
@@ -528,7 +553,7 @@ $X$ reflexiva, $Y\subseteq X$ subespacio vectorial cerrado entonces $Y$ reflexiv
 		\item Pero entonces dicho $x_{\phi}\in Y$ que estabamos buscando. Por que usando $(II),(III)$
 			$$f|_{Y}(x)(\phi)=f(x_{\phi})=\phi(f)=\psi(f|_{Y})\quad\forall f\in X'$$
 	\end{enumerate}
-	\end{proof}
+\end{proof}
 
 \begin{definition} Anuladores
 $X$ normado $\emptyset \neq W\subseteq X$ y $\emptyset\neq Z\subseteq X'$ defino los anuladores de $W$ y $Z$ como
@@ -585,6 +610,8 @@ $X$ normado $W\subseteq X$ subespacio cerrado $Z\subseteq X'$ subespacio cerrado
 \begin{proof}
 queda pendiente $\mathbb{F}$
 \end{proof}
+
+
 
 \section{Clase 13}
 
@@ -801,8 +828,11 @@ queda pendiente $\mathbb{F}$
 		\item Sea $ x\in X $ como $\{f_{n} \}$ es acotada $ \exists c>0 $ tal que $ \lVert f_{n}  \rVert \leq c \quad \forall n\in \mathbb{N} $.
 		\item Ahora dado $ \epsilon >0 $ existe $ s\in Sp(S) $ con $ \lVert x-s \rVert \leq \frac{\epsilon }{3c} $. Entonces $ \forall n $ $ \lvert f_{n} (x)-f_{n} (s) \rvert \leq \lVert f_{n}  \rVert \lVert x-s \rVert \leq \frac{\epsilon }{3} $
 		\item Luego $$\lvert f_{n} (x)-f_{m}(x) \rvert \leq \lvert f_{n} (x)-f_{n} (s) \rvert +\lvert f_{n} (s)-f_{m}(s) \rvert +\lvert f_{m}(s)-f_{m}(x) \rvert \leq \frac{2}{3}\epsilon +\lvert f_{n} (s)-f_{m}(s) \rvert $$ 
-		\item Pero $ \lvert f_{n}(s)-f_{m}(s) \rvert \leq \frac{\epsilon }{3} $ si $ n,m\geq 0 $ por que $ \{f_{n}(s_{\alpha })\}$ converge (entonces es de Cauchy) $ \forall \alpha \in A  $ y $ s $ es combinacion lineal finita de elementos de $ S $     
+		\item Pero $ \lvert f_{n}(s)-f_{m}(s) \rvert \leq \frac{\epsilon }{3} $ si $ n,m\geq 0 $ por que $ \{f_{n}(s_{\alpha })\}$ converge (entonces es de Cauchy) $ \forall \alpha \in A  $ y $ s $ es combinacion lineal finita de elementos de $ S $
+		\item Entonces $\{f_{n}(x)\}$ es de Cauchy entonces converge. Luego podemos definir $f(x)=\lim_{n}f_{n}(x)$
 	\end{enumerate}
 \end{proof}
+
+
 
 \end{document}

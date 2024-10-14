@@ -167,7 +167,7 @@ pendiente
 	pendiente	
 \end{proof}
 
-\begin{theorem}[Teorema de Cauchy]
+\begin{theorem}[Teorema de Cauchy]\label{12.2}
 	Sea $G$ grupo de orden $ n $ y sea $ p>0 $ primo tal que $ p|n $ entonces $G$ tiene un elemento de orden $ p $
 \end{theorem}
 
@@ -183,6 +183,27 @@ pendiente
 	$$N_{G}(H)= \{g\in G: gHg^{-1}=H\}$$ 
 \end{definition}
 
+
+\section{Clase 13}
+
+\begin{definition}
+	Un grupo $G$ se dice un p-grupo, con $p$ primo si $\forall x\in G \ \exists n\in \mathbb{N} $ tal que $x^{p^{n}}=e$ 
+	
+	Es decir todo elemento de $G$ tiene orden una potencia de $p$ 
+\end{definition}
+
+\begin{remark}
+	El \hyperref[12.2]{Teorema de Cauchy} nos dice que un $p$-grupo finito tiene orden potencia de $p$  
+\end{remark}
+\begin{proof}
+	\begin{enumerate}
+		\item Sea $\lvert G \rvert =p_{1}^{n_{1}}\ldots p_{k}^{n_{k}}$ con $p_{i}$ primos.
+		\item Entonces $p_{i}\big|\lvert G \rvert $ por lo tanto $\exists x\in G\quad \lvert x \rvert = p_{i}$ (Por \hyperref[12.2]{Teorema de Cauchy} )
+		\item Luego $p_{i}=\lvert x \rvert =p^j $ (Esto ultimo por ser $p$-grupo) 
+		\item Entonces $j=1$ y $p_{i}=p\quad \forall 1\leq i\leq k$ 
+		\item por lo tanto $\lvert G \rvert =p^j$ con $j>k$  
+	\end{enumerate}  
+\end{proof}
 
 \section{Clase 14}
 
