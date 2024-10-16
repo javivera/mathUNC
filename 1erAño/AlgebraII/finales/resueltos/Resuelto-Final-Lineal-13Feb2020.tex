@@ -1,0 +1,93 @@
+\documentclass{article}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{mathpazo}
+\usepackage{tcolorbox}
+\usepackage[margin=0.8in]{geometry}
+\usepackage[colorlinks=true]{hyperref}
+
+\newtheoremstyle{break}
+  {\topsep}{\topsep}%
+  {\itshape}{}%
+  {\bfseries}{}%
+  {\newline}{}%
+\theoremstyle{break}
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{corollary}{Corolario}[theorem]
+\newtheorem{lemma}[theorem]{Lema}
+\newtheorem{proposition}{Proposición}
+\newtheorem*{remark}{Observación}
+\newtheorem{definition}{Definición}[section]
+
+\begin{document}
+    % LaTeX
+    
+\title{Title}
+\author{Javier Vera}
+\maketitle
+
+\section{Ejercicio 4}
+\begin{itemize}
+	\item Falso.Por ejemplo definamos la siguiente transformacion
+		\[
+			T(e_1) = e_1 \quad T(e_2) = e_2 \quad T(e_3) = 2e_3
+		\]
+		Esta transformación lineal tiene autovalores $1$ y $2$ que son dos autovalores distintos. Y es directo ver que en base
+		canonica esta transformación ya esta diagnolizada, por ende es diagonalizable
+	\item Falso. Usando cualquier función $f:\mathbb{Q} \rightarrow \mathbb{Q}$ que separe con la suma pero no con escalar
+	Por ejemplo 
+\end{itemize}
+
+\section{Ejercicio 5}
+\begin{itemize}
+	\item Calculando el determinante nos da $\det(A) = 4a-8b+12c$. Ahora probamos que es subespacio. Veamos que es cerrado para 
+		suma. Tomando $\mathcal{T} = \{ (a,b,c)\in \mathbb{R}|\det(A)=0 \}  $   
+
+		\begin{multline} 
+			\text{Sean } (a_1,b_1,c_1)\land(a_2,b_2,c_2)\in \mathcal{T} \Rightarrow \\
+		-4(a_1,b_1,c_1)-8(a_1,b_1,c_1)+12(a_1,b_1,c_1)=0 \land -4(a_2,b_2,c_2)-8(a_2,b_2,c_2)+12(a_2,b_2,c_2)=0\\
+		\text{Ahora tenemos que }
+		-4((a_1,b_1,c_1)+(a_2,b_2,c_2))-8((a_1,b_1,c_1)+(a_2,b_2,c_2))+12((a_1,b_1,c_1)+(a_2,b_2,c_2))\\
+		= -4((a_1,b_1,c_1)-4(a_2,b_2,c_2))-8((a_1,b_1,c_1)-8(a_2,b_2,c_2))+12((a_1,b_1,c_1)+12(a_2,b_2,c_2))\\
+		= [-4(a_1,b_1,c_1)-8(a_1,b_1,c_1)+12(a_1,b_1,c_1)] + [-4(a_2,b_2,c_2)-8(a_2,b_2,c_2)+12(a_2,b_2,c_2)]=0
+	\end{multline}
+	Entonces es cerrado para la suma
+
+\end{itemize}
+\section{Ejercicio 6}
+	Si hacemos la matriz de dicha TL usando las base canonica $B = \{ 1,x\ldots x^{n} \} $ nos queda 
+	\[
+	[A]_{B} =
+	\left[ {\begin{array}{ccccc}
+	1 & -1 & 0 & \cdots & 0\\
+	0 & 1 & -2 & \cdots & 0  \\
+	\vdots & & \ddots & \ddots & 0\\
+	 & & & \ddots & n-1\\
+	0 & & & & 1\\
+	\end{array} } \right]
+	\]
+	Como se triangular su det es la diagonal multipicada que es 1, que es diferente que 0, por lo tanto es inversible.
+	Además es directo cacular su pol característico 
+	\[ \mathcal{X}_{A}= {(\lambda -1)}^{n}\] 
+	Reemplazando en la matriz adecuada con el autovalor 1, y buscando su nucleo llegamos a 
+	\[Nu(\lambda I - A) = <(1,0\ldots,0)>\] que en pols es $<1>$. Que tiene sentido, son los únicos pols que al aplicarles T vuelven ellos mismos. Por lo tanto no es diagonalizable, la dim del autoespacio no alcanza.
+
+	\section{Ejercicio 7}
+	(a) y (b) salen por propiedades de funciones y sumatorias
+
+	\[
+		\phi(T(f),T(g)) = \sum_{n=1}^{\infty} f_1(n)g_1(n) = 0 + \sum_{n=2}^{\infty} f(n-1)g(n-1) = \sum_{n=1}^{\infty} f(n)g(n) = \phi
+		(f,g)
+	\]
+	(c) Cualquier sucesión que tenga algo diferente de 0 en el primer elemento y que sea constantemente 0 a partir de algun $n_0$
+
+	\section{Ejercicio 8}
+	(a) Ver que son li usando $B = \{\frac{x^2 -x}{2},-x^2+1,\frac{x^2 + x}{2}\}$
+
+	(c) \[
+		\phi = (\phi(\frac{x^2 -x}{2}),\phi(-x^2+1),\phi(\frac{x^2 + x}{2}))_{B^*}
+	\]
+
+\end{document}

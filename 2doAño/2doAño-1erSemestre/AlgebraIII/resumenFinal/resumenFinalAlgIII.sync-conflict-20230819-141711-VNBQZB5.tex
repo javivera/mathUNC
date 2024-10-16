@@ -1,0 +1,254 @@
+\documentclass{article}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{mathpazo}
+\usepackage{tcolorbox}
+\usepackage[margin=0.8in]{geometry}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{tcolorbox}
+\usepackage{bookmark}
+
+\newtheoremstyle{break}
+  {\topsep}{\topsep}%
+  {\itshape}{}%
+  {\bfseries}{}%
+  {\newline}{}%
+\theoremstyle{break}
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{corollary}{Corolario}[theorem]
+\newtheorem{lemma}[theorem]{Lema}
+\newtheorem{proposition}{Proposición}
+\newtheorem*{remark}{Observación}
+\newtheorem{definition}{Definición}[section]
+
+\begin{document}
+    % LaTeX
+    
+\title{Resumen Final Analisis III}
+\author{Javier Vera}
+\maketitle
+\newpage
+
+\section{Cayley Hamilton Generalizado}
+\begin{theorem}[Cayley Hamilton Generalizado]
+
+  Sea $\mathbb{V}$ un espacio vectorial de dimensión finita y $T: \mathbb{V} \rightarrow \mathbb{V}$
+  \begin{enumerate}
+    \item $m_T | p_T$ además tienen los mismos factores primos
+    \item Si $m_T = p_1^{v_1}\ldots p_n^{v_n}\quad \land\quad p_T = p_1^{d_1}\ldots p_n^{d_n}$ entonces:
+      $$d_i = \frac{dim(Nu(p_i)^{v_i})}{gr(p_i)}$$
+  \end{enumerate}
+  \begin{proof}
+    \begin{enumerate}
+      \item Primero usamos descomposición cíclica, obtenemos $p_1,\ldots p_n$ anuladores de $v_1,\ldots v_n$ con, $p_T = p_1\ldots p_n$ tales que $p_i | p_{i-1}$ y  
+        $$ \mathbb{V} = \bigoplus_{i = 1}^{n} Z(v_i , T_i) $$ 
+
+        Además sabemos que $m_T = p_1$ entonces $m_T = p_1 | p_1\ldots p_n = p_T$ 
+        Ahora queremos ver que $p$ primo divide a $p_T$ si y solo si divide a $m_T$
+
+        Sea $p|m_T$ entonces obviamente divide a $p_T$
+
+        Sea $p|p_T = p_1\ldots p_n$ entonces existe $i$ tal que $p|p_i$ entonces $p|p_i \land p_i|p_1=m_T$
+      \item Calculemos $r_i$ usando descomposición primaria tenemos $$\mathbb{V} = \bigoplus_{i=1}^{n} V_i $$ 
+
+        con $V_i = Nu (p_i(T)^{v_i})$ T-invariantes y además $T_i := T|_{V_i} : V_i \rightarrow V_i$ con $m_{T_i} = p_i^{v_i}$ 
+        y por parte 1 tenemos $p_{T_i} = p_i^{r_i}$ con 
+        $r_i \geq v_i$ además también por T-invarianza de los $V_i$, $p_T = p_{T_1}\ldots p_{T_n}$ entonces 
+        $$p_1^{d_1}\ldots p_n^{d_n} = p_T = p_{T_1}\ldots p_{T_i} = p_1^{r_1}\ldots p_n^{r_n}$$
+
+        Por lo tanto $d_i = r_i$. Pero entonces $ dim(Nu(p_i(T)^{v_i})= dim(V_i) = gr(p_{T_i}) = gr(p_i^{d_i}) = gr(p_i).d_i$
+    \end{enumerate}
+  \end{proof}
+\end{theorem}
+
+\section{Diagonal + Nilpotente}
+\begin{theorem}[Diagonal + Nilpotente]
+  Sea $T: \mathbb{V}\rightarrow \mathhbb{V}$ con $dim\mathbb{V} \leq \infty$ tal que $m_T$ es producto de factores lineales entonces
+  \begin{enumerate}
+    \item $T = D+N$
+    \item $DN = ND$
+  \end{enumerate}
+
+  \begin{proof}
+    \begin{enumerate}
+      \item Como $m_t=(x-c_1)^{d_1}\ldots (x-c_n)^{d_n} $ es producto de factores lineales es producto de factores primos usamos teorema descomposición primaria y tenemos
+        $V = \bigoplus V_i$ con $V_i = Nu((T-c_i)^{d_i})$. Además tenemos $E_i$ que proyectan en cada $V_i$ y por descomposición primaria
+        estos son polinomios evaluados en $T$.
+
+        Sea $$D= c_1E_1 + \cdots c_nE_n \text{ obviamente diagonal }$$ 
+        $$T.I = T(E_1 + \cdots + E_n) = TE_1 + \ldots TE_n$$
+
+        Luego llamamos $N = T - D = (T-c_1)E_1 + \ldots (T-c_n)E_n$ notar que $N$ un pol evaluado en $T$ (por que $E_i$ lo son)
+
+        Entonces conmuta con $D$ que también es un pol evaluado en $T$ entonces tenemos la parte ii. Ya tenemos el operador diagonal $D$
+        nos falta ver que $N$ es nilpotente.
+
+        $$ N^2 = (T-D)^2 = (\sum_{i=1}^n (T-c_i)E_i)^2 = \sum_{i,j=1}^n (T-c_i)E_i.(T-c_j)E_j =\sum_{i,j=1}^n (T-c_i)(T-c_j)E_jE_i = 
+        \sum_{i=1}^n (T-c_i)^2E_i$$
+
+        Usando propiedades de proyector. Ahora inductivamente es directo ver que $$N^r = \sum_{i=1}^n (T-c_i)^rE_i$$
+
+        Ahora si tomamos $r = \max \{d_i: i=1\ldots n\}$ tenemos que $$N^r(v) = \sum_{i=1}^n (T-c_i)^rE_i(v)$$
+
+        Pero $E_i(v) \in V_i = Nu((T-c_i)^{d_i})$ entonces $N^r(v) = 0 \quad \forall v \in \mathbb{V}$ mostrando que $N$ es nilpotente 
+
+        Ahora resta ver unicidad. Sean $N', D'$ que cumplen las hipótesis entonces 
+        $$D'T = D'(D'+N') = D'D' + D'N' = D'D' + N'D' = (D'+N')D'=TD' $$ por lo tanto $D'$ conmuta con $T$, análogamente
+        $N'$ conmuta con $T$ tambien entonces obviamente conmutan con $D,N$ que son polinomios evaluados en $T$
+        Sabemos que $N'+D' = T  = N + D$ entonces $N' - N = D' - D$. Por un lado $D,D'$ son
+        ambas diagonalizables y como conmutan son simultaneamente diagonalizables entonces $D' - D $ es diagonalizable
+        Sean $r,s$ tales que $N'^s = N^r = 0$
+        $$(N' - N)^{r+s} = \sum_{i=0}^{r+s} \binom{r+s}{i} (-1)^{i}N^{r+s - i}N'^i = 
+        \sum_{i=0}^s \binom{r+s}{i} (-1)^{i}N^{r+s - i}N'^i + \sum_{i = s+1}^r+s \binom{r+s}{i} (-1)^{i}N^{r+s - i}N'^i$$
+
+        El primer sumando es $0$ por que $r+s-i \geq r \quad \forall i\leq s$ y $N^r = 0$ y el segundo es cero por que $i > s$
+        y $N'^s = 0$ 
+
+        Entonces $N'-N$ es nilpotente entonces su único autovalor es $0$, pero también es diagonal por que
+         $N'-N = D' - D$ entonces tiene que ser el operador 0
+
+        Entonces $N=N' \land D=D'$
+    \end{enumerate}
+  \end{proof}
+\end{theorem}
+
+\section{Caracterización de operadores Diagonalizables}
+\begin{theorem}[Caracterización Diagonalizable]
+  $T: V \rightarrow V$ con $dim(V) \leq \infty$ tal que $m_T = (x-c_1)\ldots (x-c_n)$ es producto de factores lineales si y solo si
+  $T$ es diagonalizable.
+
+  \begin{proof}
+    (Ida) Sea $p = (x-c_1)\ldots(x-c_n)$, con $c_1,\ldots,c_n$ los autovalores de $T$ Sabemos que $(x-c_i)$ es raiz del carácteristico por lo tanto es raíz del minimal, por que tienen
+    las mismas raices entonces $(x-c_i)|m_T \quad \forall i=1\ldots n$ entonces $p|m_T$
+
+
+    Además sabemos que existe base de autovectores $\{v_1,\ldots,v_j\}$ para cada auto vector existe un aval $c_i$ tal que 
+    $Tv_i = c_{j(i)}v_i$ equivalentemente $Tv_i - c_{j(i)}v_i = 0$ equivalentemente $p_i(T)(v_i) = 0$ con $p_i = (x-c_{j(i)})$
+
+    Ahora tomemos cualquier $v_i$ en la base de autovectores $p_i(T)(v_i) = 0$ y es claro que existe $h\in K[x]$ tal que $p = p_i.h$ 
+
+    Por lo tanto $p(T)(v_i) = 0$ entonces $m_{T,v_i}|p$ y esto vale para todo $i=1,\ldots,j$ entonces 
+    $$m_T = mcm\{m_{T,v_1},\ldots,m_{T,v_j}\} |p $$ Mostrando finalmente $$p=m_T$$
+
+    (Vuelta) Tomemos $W = W_1 \bigoplus \cdots \bigoplus W_n$ con $W_i$ auto espacio asociado a $c_i$. Supongamos $W\neq V$ entonces 
+    tomo $v\in V- W$. Por lema anteriór sabemos que $\exists c_i$ autovalor tal que $w = (T-c_i)v \in W$. Entonces podemos escribir
+    $(T-c_i)v = w = w_1 + \cdots + w_n$ con $w_i \in W_i$ respectivamente. 
+
+    Ahora definimos $g = \frac{m_T}{x-c_i}$ y definimos $g - g(c_i) \in K[x]$ que claramente tiene
+    como raíz a $c_i$ entonces lo podemos escribir como $h(x-c_i)$. Luego $$ g(T)v - g(c_i)v = h(T)(T-c_i)v = h(T)(w)$$
+
+    Sabemos que $W$ es T-invariante entonces $h(T)(w) \in W$ por que un polinomio en $T$ no es mas que una combinacion de $T$
+
+    Y $0 = m_T(T)(v) = (T-c_i)(g(T)(v))$ pero entonces $g(T)(v)$ es autovector de autovalor $c_i$ por lo tanto $g(T)(v) \ in W$
+
+    Mostrando asi que $g(c_i)v \in W$ pero $v \notin W$ entonces $g(c_i) = 0$. Que es absurdo por como definimos a $g$ claramente $c_i$
+    no puede ser raíz. El absurdo provino de suponer que existia un $v\in V - W$ entonces no existe dicho $v$ por lo tanto $V = W$ 
+    mostrando que la suma de los autoespacios asociados son todo el espacio, por lo tanto tenemos una base de autovectores y $T$
+    es diagonalizable
+  \end{proof}
+\end{theorem}
+
+\section{Adjuntas}
+\begin{theorem}[Proposición adjuntas]
+  Dado $f \in \mathbb{V}^*$ tenemos que $\exists ! w \in \mathbb{V}$ tal que $$f(z) = (z|v) \quad \forall z \in \mathbb{V}$$
+  \begin{proof}
+    Sea $B = \{v_1,\ldots v_n\} $ base de $\mathbb{V}$, proponemos $v = \sum_{i=1}^n \overline{f(v_i)}v_i$. Probemos que funciona
+    $$ (z|v) = (z|\sum \overline{f(v_i)}v_i) = f(v_i)(z|\sum v_i)  = f(\sum(z| v_i)v_i) = f(z) \quad \forall z\in\mathbb{V}$$
+
+    Obs aca usamos que $\sum (z|v_i)v_i$ son coordenadas de $z$ en base $B$.
+
+    Veamos que es único supongamos tenemos $v,v' \in \mathbb{V}$ tal que $$(z|v) = f(z) = (z|v')$$
+    Entonces $$(z|v-v') = 0 \quad \forall z \in \mathbb{V}$$ en particular $$(v-v'|v-v')=0$$
+    Mostrando que $$|| v-v'|| = 0 \iff v-v' = 0 \iff v = v'$$
+  \end{proof}
+  
+\end{theorem}
+
+\begin{theorem}[Transformaciones Adjuntas]
+  Dada $T:V \rightarrow V$ existe una única transformacion lineal $T^*$ que cumple $$(Tv|w) = (v|T^*w)$$ La llamamos adjunta
+  \begin{proof}
+    Dada $T$ definimos $f_w(v) = (Tv|w)$ luego  $f_w\in \mathbb{V}^*$. Por proposición sabemos que 
+    $$\exists ! w^* \text{ tal que } f_w(z) = (z|w^*) \quad \forall z \in \mathbb{V}$$
+
+    Entonces $(Tv|w) = f_w(v) = (v|w^*)$. por lo tanto para cada $w\in \mathbb{V}$ tenemos un único $w^* \in \mathbb{V}$. Luego,
+    naturalmente podemos definir 
+    $$T^* :\mathbb{V} \rightarrow \mathbb{V} \quad T^*(w) = w^*$$
+    Mostrando finalmente que $$(Tv|w) = (v|T^*w) \quad \forall v,w \in \mathbb{V}$$
+  \end{proof}
+\end{theorem}
+
+\section{Descomposición Primaria}
+\begin{theorem}[Descomposición Primaria]
+  Sea $T: \mathbb{V} \rightarrow \mathbb{V}$ y $m_T=p_1^{r_1}.\ldots p_n^{r_n}$ producto de factores primos, entonces
+  \begin{enumerate}
+  \item $\mathbb{V} = V_1 \oplus \cdots \oplus V_n \text{ con } V_i = Nu(p_i(T)^{r_i})$
+  \item Además si $T_i = T|_{V_i} : \mathbb{V}_i \rightarrow \mathbb{V}_i $ sucede que $m_{T_i} = p_i^{r_i}$. 
+  Con $V_i$ T-invariante
+  \end{enumerate}
+  
+  \begin{proof}
+      Sea $$f_i = \frac{m_T }{p_i^{r_i}} = \prod_{i\neq j } p_j^{r_j}$$
+
+      Claramente $f_i$ son coprimos entonces $\exists g_i \in \mathbb{K}[x]\ / \ 1 = f_1g_1 + \cdots f_ng_n$
+      (Por que como son coprimos el generador de su ideal es el 1). Entonces definimos $E_i = f_ig_i(T)$.
+
+      Primero notemos que $$E_1 + \cdots + E_n = f_1g_1(T) + \cdots + f_ng_n(T)= (f_1g_1 + \cdots + f_ng_n)(T) = 1(T) = I$$. 
+
+      Ahora $E_iE_j = f_ig_if_jg_j(T) = g_ig_jf_if_k(T)= 0 $ por que $f_if_j$ es obviamente un múltiplo del minimal de T si $j\neq i $
+      (por como definimos $f_i$). Entonces $E_iE_j = 0$
+
+      
+      Por lo tanto sabemos que es directo concluir de aca obviamente sale $E_i^2 = E_i$
+
+      Luego como cumple estas propiedades $\mathbb{V }  = V_1' \oplus \cdots \oplus V_n' \text{ con } V_i' = Im(E_i)$
+
+      Y por otro lado $E_i$ son pols evaluados en T por lo tanto conmutan con T luego 
+      $$E_i T = TE_i \quad \forall i=1,\ldots,n$$ Mostrando que los $V_i$ son T-invariante
+      
+      Ahora queremos ver que $Im(E_i) = V_i' = Nu(p_i^{r_i}(T)) = V_i$. Tomemos $v \in V_i'$ luego $E_i(v) = v$ por lo tanto 
+      $$ p_i^{r_i}(T)(v) = p_i^{r_i}(T)E_i(v) = p_i^{r_i}(T)f_ig_i(T)(v)= g_im_T(T)(v) = g_i m_T(T)(v) = 0.v = 0$$
+      Mostrando que $v \in V_i$. Ahora tomemos $v \in V_i$. Sabemos que $p_i^{r_i} | f_jg_j \quad \forall j \neq i$ entonces 
+      $f_jg_j = p_i^{r_i}.h$ por lo tanto $$E_j(v) = p_i^{r_i}h(T)(v) = 0  $$ 
+      por que $v\in Nu(p_i^{r_i}(T))$ y esto vale $\forall j \neq i$ entonces 
+      $$v = v.I = v(E_1 + \cdots + E_n) = E_1(v) + \cdots + E_n(v) = E_i(v)$$
+
+      Mostrando que $v \in Im(E_i) = V_i'$ Completando asi la parte i
+
+      Ahora notemos que $p_i^{r_i}(T)(v) = 0 \quad \forall v \in V_i $ por lo tanto $m_{T_i} | p_i^{r_i}$ y 
+      $f_i(T)v = 0 \quad \forall v \in V_j \ j\neq i $. 
+
+      Ahora sea $g$ tal que $g(T_i)(v) = 0 $ entonces $g(T)f_i(T)(v) = 0\quad \forall v \in \mathbb{V} $
+
+      Mostrando que $p_i^{r_i}f_i = m_T | gf_i$ entonces como estamos hablando de factores primos $p_i^{r_i}|g$ como vale
+      para cualquie polinomio anulador vale para $m_{T_i}$, entonces $m_{T_i}|p_i^{r_i}$, finalemente $m_{T_i} = p_i^{r_i}$
+          
+  \end{proof}
+\end{theorem}
+
+\begin{theorem}[Caracterización de Triangulables]
+  Sea $ T: \mathbb{V} \rightarrow \mathbb{V}$ entonces su minimal se escribe en factores 
+  primos si y solo si es triangularizable.
+  \begin{proof}
+      Ida. Como es triangularizable sabemos que en alguna base es una matriz triangular por lo tanto su característico
+      se factoriza en factores primos, por Cayley-Hamilton, el minimal se factoriza en factores primos
+
+      Vuelta. Sea $m_T = p_1^{r_1}\ldots p_i^{r_i}$ para empezar seguro tenemos por lo menos un autovalor $c_1$,
+      entonces definimos $V_1 = <v_1>$ con $v_1$ auto vector de autovalor $c_1$. Por lo tanto $V_1$ es T-invariante.
+      Ahora como el minimal se factoriza en factores primos y $V_1$ T-invariante, entonces podemos aplicar lema.
+      $$\exists v_2 \notin V_1 \text{ tal que } (T-c_2I)v_2 = v \in V_1$$.Llamamos $V_2 = <v_1,v_2>$. Obviamente $v_1$ y $v_2$ son
+      lineamente independiente por que $v_2 \notin V_1$.
+
+      Además $T(v_2) - cv_2 = v$ con $v\in V_1$ entonces $T(v_2) = cv_2 + v$ por lo tanto $T(v_2) \in V_2$
+
+      Finalmente $V_2$ es T-invariante. Ahora hacemos esto recursivamente y llegamos a 
+      $$ \exists v_k \notin V_{k-1} \text{ tal que } (T-c_k)v_k \in V_{k-1}$$
+
+      Entonces tenemos $V_{k} = \{v_1,\ldots,v_k\}$ que es T-invariante y de $dim(V_k) = k$
+
+      Si tomamos $k=n$ tenemos una base que claramente triangulariza por que $T(v_i)\in V_{i}$
+  \end{proof}
+\end{theorem}
+
+\end{document}

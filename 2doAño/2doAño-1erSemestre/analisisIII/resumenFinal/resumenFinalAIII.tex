@@ -1,0 +1,403 @@
+\documentclass{article}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{mathpazo}
+\usepackage{tcolorbox}
+\usepackage[margin=0.8in]{geometry}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{tcolorbox}
+\usepackage{bookmark}
+
+\newtheoremstyle{break}
+  {\topsep}{\topsep}%
+  {\itshape}{}%
+  {\bfseries}{}%
+  {\newline}{}%
+\theoremstyle{break}
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{corollary}{Corolario}[theorem]
+\newtheorem{lemma}[theorem]{Lema}
+\newtheorem{proposition}{Proposición}
+\newtheorem*{remark}{Observación}
+\newtheorem{definition}{Definición}[section]
+
+\begin{document}
+    % LaTeX
+    
+\title{Resumen Final Analisis III}
+\author{Javier Vera}
+\maketitle
+\newpage
+
+\section{Limites Multivariable}
+\begin{theorem}[Limites multivariable]
+	Sea $f:\mathbb{R}^n \rightarrow \mathbb{R}^m \quad f_i: \mathbb{R}^n $ funciones coordenadas y $x=(x_1,\ldots,x_n)$ y 
+	$a=(a_1,\lodts,a_n)$ y $l=(l_1,\ldots , l_m)$ sucede que:
+	\[\lim_{x\rightarrow a} f_i(x) = l_i \iff \lim_{x\rightarrow a} f(x) = l\]
+
+	\begin{proof}
+		$(\Rightarrow)$ dado $\epsilon >0 \quad \exists \tilde{\epsilon}$ tal que $\frac{\epsilon}{\sqrt{m}}= \tilde{\epsilon} $ 
+		sabemos por hipótesis que para cada $i=1\ldots m$
+
+		$$\exists \delta_i > 0 \quad  \text{tal que} \quad  || x - a|| <\delta_i \Rightarrow 
+		|f_i(x) - l_i |< \tilde{\epsilon}$$
+	  
+		Pero entonces sea $\delta = \min\{\delta_i\} $ vale que 
+		$$||x-a||\leq \delta \Rightarrow || f(x) - l || = \sqrt{\sum_{i=1}^m |f_i(x) -l_i|^2} < \sqrt{m .\tilde{\epsilon}^2}
+		= \sqrt{m}.\tilde{\epsilon} = \epsilon $$
+
+		Mostrando lo que queríamos
+
+		$(\Leftarrow)$ Dado $ \epsilon > 0 $ existe 
+		$$ \delta > 0 \quad  \text{tal que} \quad ||x-a|| < \delta \Rightarrow ||f(x) - l|| < \epsilon$$
+		Pero $$|f_i(x)-l_i| < ||f(x) - l||$$ 
+		Por lo tanto $|f_i(x) - l_i| < \epsilon > 0$
+	\end{proof}
+	\end{theorem}
+\section{TL es lipschitz}
+\begin{theorem}[TL es lipschitz ]
+  Sea $L :\mathbb{R}^{n} \longrightarrow \mathbb{R}^{m} $ transformación lineal entonces $L$ es lipschitz y 
+  por lo tanto contínua 
+  \begin{proof}
+    Sea $x\in \mathbb{R}^{n} $ con $x=(\sum_{i=1}^n x_i e_i) $, con $e_i$ vectores canónicos
+    $$ ||Lx|| = ||L(\sum x_i e_i)|| = ||\sum x_i L(e_i)|| = \sum ||x_iLe_i|| = \sum |x_i|||Le_i||
+    \leq n ||x||\sum||Le_i|| = k||x||$$
+
+    Con esto probamos continuidad en $a\in \mathbb{R}^{n} $. Sea $ \epsilon > 0 $ entonces 
+    tomamos $\delta = \frac{\epsilon}{k} $ y tenemos
+    $$||Lx - La|| = ||L(x-a)|| \leq k ||x-a|| \leq \epsilon  $$ 
+  \end{proof}
+\end{theorem}
+
+\section{Continuidad de composición}
+\begin{theorem}[Continuidad de composición]
+  Sean $f:\mathbb{R}^{n} \rightarrow \mathbb{R}^{m} $ y $g:\mathbb{R}^{m} \longrightarrow \mathbb{R}^{p} $ 
+  continuas en a y $f(a)$ respectivamente entonces $g\circ f$ es contínua en $a$
+  \begin{proof}
+    Podemos suponer $Dm(f)$ y $Dm(g)$ abiertos y $f(a)$ punto de acumulación del $dm(g)$.
+
+    Sabemos que $g$ es contínua en $b=f(a)$ entonces dado $\epsilon >0 \quad \exists \delta_1>0$ tal que
+    $$||y-f(a)|| < \delta_1 \Longrightarrow ||g(f(x))-g(f(a))|| \leq \epsilon $$.
+
+    Como $f$ es contínua en a. Dado $\epsilon = \delta_1 \quad \exists \delta >0$ tal que
+    $$||x-a||\leq \delta \Longrightarrow ||f(x) - f(a)||=||y-f(a)|| < \delta_1$$
+
+    Pero entonces $||g(f(x))-g(f(a))|| < \epsilon$. Mostrando que $gof$ es contínua en $a$
+  \end{proof}
+\end{theorem}
+
+\section{Derivadas Cruzadas}
+\begin{theorem}[Derivadaz Cruzadas]
+  Sea $f:\mathbb{R}^{2} \longrightarrow \mathbb{R}$ una función contínua y diferenciable tal que existen $f_x,f_y,f_{xy},f_{yx}$ entonces $f_{xy} = f_{yx}$
+  \begin{proof}
+    Definamos $G_1(u) = f(u,y+k) - f(u,y)$ y $G_2(v) = f(x+h,v) - f(x,v)$ y notemos que 
+    $$G_1(x+h) - G_1(x) = G_2(y+k) - G_2 (y)$$
+
+    Ahora como $G_1$ es contínua (por que f es contínua) aplicamos TVM en $[x,x+h]$
+    y tenemos que $$ G_1(x+h) - G_1(x) = hG_1'(x_1) = h[f_x(x_1,y+k) - f_x(x_1,y)]
+    \quad x_1 \in [x,x+h]$$
+
+    Ahora podemos consideramos $H_1(v) = f_x(x_1,v)$ contínua por que $f_x$ contínua. 
+    Por TVM en $[y,y+k]$ tenemos 
+    $$ f_x(x_1,y+k) - f_x(x_1,y)= H_1(y+k) - H_1(y) = kH_1(y_1) = k f_{xy}(x_1,y_1)$$
+  
+    Entonces $$G_1(x+h) - G_1(x) = h[f_x(x_1,y+k) - f_x(x_1,y)] = hkf_{xy}(x_1,y_1)$$
+ambos
+    Análogamente con $G_2$
+    $$ G_2(y+k) - G_2(y) = kG_2'(y_2) = k[f_y(x+h,y_2) - f_y(x,y_2)]
+    \quad y_2 \in [y,y+k]$$
+
+    Definimos $H_x(u) =f_y(u,y_2)$ usamos TVM en $[x,x+h]$ y terminamos llegando a 
+    $$G_2(y+k) - G_2(y) = hkf_{yx}(x_2,y_2)$$
+
+    Finalmente $$hkf_{xy}(x_1,y_1) = hkf_{yx}(x_2,y_2)$$ 
+    Por lo tanto $$ f_{xy}(x_1,y_1) = f_{yx}(x_2,y_2) \quad x_1,x_2\in [x,x+h] 
+    \quad y_1,y_2\in[y,y+k]$$
+
+    Ahora si hacemos tender $h,k$ a cero $f_{xy}(x_1,x_2) = f_{xy}(x,y)$ 
+    por contínuidad de $f_{xy}$ lo mismo con $f_{yx}$
+
+    Entonces $$f_{xy}(x,y) = f_{yx} (x,y) $$ y esto lo podríamos haber hecho para cualquier $x,y$ en el dominio de $f$
+
+    Es facil generalizarlo a $ f:\mathbb{R}^{n} \longrightarrow \mathbb{R}  $
+    Simplemente vamos haciendo la misma demo fijando todas las coordenadas salvo dos. Y tambien podemos reaplicar la misma demo usando alguna primera derivada como primera funcion para probar lo mismo con derivadas terceras
+
+  \end{proof}
+\end{theorem}
+
+\section{Unicidad Diferencial}
+\begin{theorem}[Unicidad Diferencial]
+  \begin{proof}
+    Sean $L_1$ y $L_2$ dos diferenciales posibles para $f$ diferenciable, entonces:
+    $$ f(a+h) - f(a) - L_1(h) = Z_1(h)||h|| \quad \lim_{h\rightarrow 0} Z_1(h) = 0 $$
+    $$ f(a+h) - f(a) - L_2(h) = Z_2(h)||h|| \quad \lim_{h\rightarrow 0} Z_2(h) = 0 $$
+loremSent
+    Luego restando ambas 
+    $$L_1(h) - L_2(h) = (Z_2(h) - Z_1(h))||h||$$
+
+    Pero $h = tu$ con $||u||=1$
+
+    $$L_1(tu) - L_2(tu) = (Z_2(tu) - Z_1(tu))||tu|| $$
+    $$t(L_1(u) - L_2(u)) = (Z_2(tu) - Z_1(tu))t||u||$$
+    $$(L_1(u) - L_2(u)) = (Z_2(tu) - Z_1(tu))||u|| $$
+    $$L_1(u) - L_2(u) = \lim_{t \rightarrow 0}( L_1(u) - L_2(u)) = \lim_{t \rightarrow 0 } (Z_2(tu) - Z_1(tu))||u|| = 0 $$
+
+    Finalmente $L_1(u) = L_2(u) \quad \forall u \in \mathbb{R}^{n} \quad \text{tal que} ||u|| = 1$
+
+    Por lo tanto usando linealidad de $L_1,L_2$ 
+    $$L_1(h) = L_2(h) \quad \forall h \in \mathbb{R}^{n} $$
+
+  \end{proof}
+\end{theorem}
+
+\section{Teorema 6}
+\begin{theorem}
+  Si $f:\mathbb{R}^{n} \longrightarrow \mathbb{R}^{m}$ es  una transformación lineal $\iff f$ es diferenciable
+  $\forall a \in \mathbb{R}^{n} $ y $d_a f = f$
+  \begin{proof}
+    La vuelta es por definición. Hagamos la ida
+
+    Propongo $L = f$ como diferencial de $f$.
+
+    $$\frac{f(a+h) - f(a) - f(h)}{||h||} = \frac{f(a)+ f(h) - f(a) - f(h)}{||h||} = 0$$
+
+    Entonces $$\lim_{h \rightarrow 0 } \frac{f(a+h) - f(a) - f(h)}{||h||} = 0$$
+
+    Por lo tanto $f$ es diferenciable y por unicidad del diferencial $d_a f = f$
+  \end{proof}
+\end{theorem}
+
+\section{Teorema 7}
+\begin{theorem}[]
+  Sea $f:\mathbb{R}^{n} \longrightarrow  \mathbb{R}^{m} $ diferenciable en $a$ entonces
+  $$\exists \frac{\partial f}{\partial x_j} (a) = \bigg( \frac{\partial f_1}{\partial x_j} (a),\ldots
+  ,\frac{\partial f_m}{\partial x_j} (a) \bigg ) \quad \text{y además }\quad 
+  [d_a f]_{ij} = \frac{\partial f_i}{\partial x_j} (a) $$
+  \begin{proof}
+    $f$ es diferenciable en $a$ entonces 
+    $$ f(a+h) - f(a) = (d_a f).(h)+ ||h||z(h) \quad \text{con}\quad \lim_{h \rightarrow 0 } z(h) = 0$$
+
+    Como vale para cualquier $h \rightarrow 0 $ tomemos $h  = t e_j$ con $e_j$ vector canónico. 
+
+    Ahora cuando $t \rightarrow 0 $ tenemos que $h \rightarrow 0 $
+
+    $$ f(a+te_j) - f(a) = (d_a f).(te_j)+ ||te_j||z(te_j) $$
+    $$ \frac{f(a+te_j) - f(a)}{t} = (d_a f).(e_j)+ \frac{|t|}{t}||e_j||z(te_j) $$
+    $$ \frac{f(a+te_j) - f(a)}{t} = (d_a f).(e_j)+ \frac{|t|}{t}z(te_j) $$
+
+    Usando limite de $t \rightarrow 0 $ de ambos lados llegamos a 
+    $$\bigg( \frac{\partial f_1}{\partial x_j} (a),\ldots
+  ,\frac{\partial f_m}{\partial x_j} (a) \bigg ) = \frac{\partial f}{\partial x_j}(a) = (d_a f).(e_j)$$
+
+    Observación $$\frac{|t|}{t} Z(te_j)$$ es una función partida que dependiendo de si $t$ es positiva o 
+    negativa puede ser $Z(te_j)$ o $-Z(te_j)$ pero para el límite no me importa por que ambas tienden a $0$
+    
+    Entonces existe dicha derivada. Además $(d_a f).(e_j)$ es la j-esima columna de $d_a f$ por lo tanto
+
+    $$ d_a f=
+    \begin{bmatrix}
+      \frac{\partial f_1}{\partial x_1} & \ldots & \frac{\partial f_1}{\partial x_n} \\
+      \vdots & \vdots & \vdots \\
+      \frac{\partial f_m}{\partial x_1} & \ldots & \frac{\partial f_m}{\partial x_n}
+    \end{bmatrix}
+    $$
+
+  \end{proof}
+\end{theorem}
+
+\section{Teorema 8}
+\begin{theorem}[Derivadas parciales contínuas y diferenciabilidad]
+  Si $f$ tiene todas sus derivadas parciales contínuas en un abierto entonces es diferenciable en dicho abierto
+  \begin{proof}
+    Probemosló primero para $f:\mathbb{R}^{2} \longrightarrow  \mathbb{R} $. Propongo 
+    $$d_a f = (f_x(a_1,a_2),f_y(a_1,a_2))$$
+
+    $$f(a+h) - f(a)  = f(a_1+h_1,a_2+h_2) - f(a_1+h_1,a_2) + f(a_1+h_1,a_2)- f(a_1,a_2)$$
+    \begin{equation}
+    \begin{split}
+    f(a+h) - f(a) - (d_af).(h_1,h_2)^T & = f(a_1+h_1,a_2+h_2) - f(a_1+h_1,a_2) + f(a_1+h_1,a_2)- f(a_1,a_2) 
+      -(d_a f).h^T \\
+      \text{(Por Teorema Valor Medio)}& = f_y(a_1+h_1,\tilde{a_2}).h_2 + f_x(\tilde{a_1},a_2).h_1 - (d_a f).h^T \quad
+      \quad (\tilde{a_1} \in [a_1,a_1+h_1] \land \tilde{a_2}\in[a_2,a_2+h_2])\\
+      &=  f_y(a_1+h_1,\tilde{a_2}).h_2 + f_x(\tilde{a_1},a_2).h_1 - f_x(a_1,a_2).h_1 - f_y(a_1,a_2)h_2 \\
+      & = [f_y(a_1+h_1,\tilde{a_2}) - f_y(a_1,a_2)]h_2 + [f_x(\tilde{a_1},a_2) - f_x(a_1,a_2)].h_1  \\
+      &
+    \end{split}
+    \end{equation}
+
+    Por lo tanto 
+    \begin{equation}
+    \begin{split}
+      \bigg|\frac{f(a+h) - f(a) - (d_af)(h)}{||h||}\bigg| & 
+      = \bigg |\frac{[f_y(a_1+h_1,\tilde{a_2}) - f_y(a_1,a_2)]h_2 + 
+      [f_x(\tilde{a_1},a_2) - f_x(a_1,a_2)].h_1}{||h||}\bigg | \\ 
+      & \leq \bigg | [f_y(a_1+h_1,\tilde{a_2}) - f_y(a_1,a_2)] + 
+      [f_x(\tilde{a_1},a_2) - f_x(a_1,a_2)] \bigg |\\
+      &
+    \end{split}
+    \end{equation}
+
+    Pero  $$\lim_{h \rightarrow 0 }[f_y(a_1+h_1,\tilde{a_2}) - f_y(a_1,a_2)] + 
+      [f_x(\tilde{a_1},a_2) - f_x(a_1,a_2)] = 0 $$ $$h \rightarrow 0 \Rightarrow \quad a_1+h_1 \rightarrow a_1 \quad \land \quad a_2+h_1 \rightarrow a_2  $$
+      Porque que ambas funciones (derivadas) son contínuas, por lo tanto
+      $$\lim_{h \rightarrow 0 } f_y(a_1+h_1,\tilde{a_2}) = f_y(a_1,a_2) \quad \lim_{h \rightarrow 0 } 
+      f_x(\tilde{a_1},a_2) = f_x(a_1,a_2)$$
+
+      Por lo tanto el limite de diferenciabilidad es 0, mostrando que $f$ es diferenciable
+      Para llevarlo a $\mathbb{R}^{n} \longrightarrow \mathbb{R}$ es la misma idea pero intercalando $n$
+      términos en vez de solamente dos
+      Para generalizar a $f:\mathbb{R}^{n} \longrightarrow  \mathbb{R}^{m} $ con $f = (f_1,\ldots,f_m)$ 
+      simplemente usamos que una funcion de este tipo es diferenciable si es diferenciable si $f_1,\ldots f_n$ 
+      son cada una diferenciable y estas son funciones como en el caso anterior por lo tanto son diferenciables
+  \end{proof}
+\end{theorem}
+
+
+\section{Teorema 9}
+\begin{theorem}[Teorema 9]
+  Sea $f$ diferenciable, entonces existen las derivadas direccionales en cualquier dirección. Además 
+  $\frac{\partial f}{\partial u} = (d_af)(u)$
+  \begin{proof}
+    Como $f$ diferenciable 
+
+    $$f(a+h) - f(a) = ||h||Z(h) + (d_af)(h) \quad \Longrightarrow \quad \frac{f(a+h) - f(a)}{t} = \frac{||h||Z(h)+(d_af)(h)}{t}$$
+
+    $$\frac{f(a+ tu) - f(a)}{t} = \frac{|t|Z(u) + t(d_af)(u)}{t} = \frac{|t|Z(u)}{t} + (d_af)(u)$$
+
+    Finalmente $$\frac{\partial f}{\partial u} = \lim_{t \rightarrow 0 }\frac{f(a+ tu) - f(a)}{t} =\lim_{t \rightarrow 0 }
+    \frac{|t|Z(u)}{t} + (d_af)(u) = (d_af)(u) $$
+
+    Observación hay que dividir en dos casos el límite de $Z(u)$ arriba dimos un ejemplo
+
+    Por lo tanto existe dicha derivada direccional, en cualquier dirección $u$ y además tenemos una definición para ella
+  \end{proof}
+\end{theorem}
+
+\section{Gradiente es la dirección de máximo crecimiento}
+\begin{theorem}[]
+  Si $f:\mathbb{R}^{n} \longrightarrow \mathbb{R}$ es diferenciable y $\nabla f_{(a)} \neq 0$ entonces 
+  $$u = \frac{\nabla f_{(a)}}{||\nabla f_{(a)}||}$$ es la dirección de mayor variación de $f$ y $||\nabla f_{(a)}||$ es el valór de máxima
+  variación
+  \begin{proof}
+    Sea $u \in \mathbb{R}^{n} $ vector normal. entonces 
+    $$|\frac{\partial f}{\partial u}(a)|= |\nabla f_{(a)}.u| \leq ||\nabla f_{(a)}||.||u|| = ||\nabla f_{(a)}||$$
+
+    (Observación la desigualdad vale por Cauchy Schwarz) Por lo tanto $\nabla f_{(a)}$ es la máxima variación posible. Además la
+    desigualdad se transforma en una igualdad cuando $$u = \frac{\nabla f_{(a)}}{||\nabla f_{(a)}||}$$ que es por lo tanto
+    el máximo valor que puede tomar $u$ mostrando que $u$ es la dirección de máxima variación
+
+    (Observación 2) Acá ya partimos con la idea de que la derivada direccional expresa la variación en dicha dirección
+  \end{proof}
+\end{theorem}
+
+\section{Valor medio multivariable}
+\begin{theorem}[Valor medio multivariable]
+  Sea $f:\mathbb{R}^{n} \longrightarrow  \mathbb{R} $ diferenciable en un abierto de $A$. Sea $a,b\in A$ tal que el segmento
+  que los une esta contenido en $A$ entonces $\exists$ c tal que en el segmento que une $a$ y $b$ 
+  $$f(b) -f(a) = \nabla f_c . (b-a)$$
+  \begin{proof}
+    Primero parametrizamos dicho segmento $S(t) = t(b-a) + a \quad 0 \leq t \leq 1$ observar 
+    $$S(0) = a \quad \land \quad S(1) = b \quad \land \quad S(t) \subseteq A \quad 0 \leq t \leq 1$$
+
+    Ahora sea $g(t) = f(S(t)) = f(t(b-a) + a)$ con $g:[0,1]\rightarrow \mathbb{R}$
+
+    Veamos que $g$ es derivable usando que $f$ es diferenciable
+        \begin{equation}
+    \begin{split}
+      \frac{ g(x+h) - g(x)}{h} &= \frac{f((x+h)(b-a) + a) - f(x(b-a)+a)}{h} \\
+      &  = \frac{f((x(b-a) +a)+ h(b-a)) - f (x(b-a) + a)}{h}\\ 
+      &  = \frac{d_{S(x)}f(h(b-a))}{h} + \frac{||h(b-a)||}{h}Z(h(b-a)) \\
+      & = \frac{h}{h}.d_{S(x)}f(b-a) + \frac{||h(b-a)||}{h}Z(h(b-a))
+    \end{split}
+    \end{equation}
+    Usando limite de ambos lados 
+    $$\frac{g(x+h)-g(x)}{h} = d_{S(x)}f(b-a) $$
+
+    Y esto vale para cualquier $x\in[0,1]$. Por lo tanto la derivada de $g(x)$ existe, $g(x)$ es derivable en $0\leq x \leq 1$
+
+    Entonces por Teorema Valor Medio en $\mathbb{R}$ 
+    $$g(1)-g(0)=g'(t_0)(1-0) \quad \iff \quad f(b)-f(a) = d_{S(t_0)}(b-a)(1-0) = \nabla_c f(b-a) \quad \text{ con }c = s(t_0)$$
+  \end{proof}
+\end{theorem}
+
+\section{Regla de la Cadena}
+Es una demo facil , pero larga de escribir. Pagina 84 Riveros
+
+\section{Polinomio de Taylor multivariable}
+Expresión larga pero entendible para el pol de taylor , despues vale lo mismo que en R
+
+\section{Puntos críticos y derivada}
+\begin{theorem}[]
+  Sea $f:\mathbb{R}^{n} \longrightarrow \mathbb{R} $ diferencianble. Si $a$ es un máximo (mínimo) local de $f$ entonces $\nabla f_a = 0$
+  \begin{proof}
+    Como $f$ diferenciable existen sus derivadas parciales, supongamos que $a$ es un máximo entonces $\exists B(a,\delta)$ tal que 
+    $f(a) \geq f(x) \quad \forall x \in B(a,\delta)$
+
+    Ademas dado $a + t.e_j$ tenemos que $\delta > ||a+te_j -a|| = ||t.e_j|| = |t|$ 
+
+    Por lo tanto dado un $t$ suficientemente pequeño $a+t.e_j \in B(a,\delta)$ entonces 
+    $$f(a+t.e_j) \leq f(a) \quad \forall t\leq t_0 \iff f(a+t.e_j) - f(a) \leq 0 \quad \forall t\leq t_0 $$
+    $$\lim_{t \rightarrow 0^+} \frac{f(a+t.e_j) - f(a)}{t} \leq 0 $$
+    $$\lim_{t \rightarrow 0^-} \frac{f(a+t.e_j) - f(a)}{t} \geq 0 $$
+
+    Por que el numerador es negativo (a partir de un $t_0$) por lo que vimos , pero el 
+    denominador puede ser positivo o negativo dependiendo de si $t$ es negativo tendiendo a 0 o positivo tendiendo a 0
+
+    Finalmente $$\frac{\partial f}{\partial x_j}(a)=\lim_{t \rightarrow 0} \frac{f(a+t.e_j) - f(a)}{t} = 0 \quad \forall j=1,\ldots,n$$
+
+    Entonces $\nabla f_a = 0$
+  \end{proof}
+\end{theorem}
+
+\section{Matriz Hessiana}
+\begin{theorem}[Matriz Hessiana, máximos y mínimos]
+  Pagina 110 apunte riveros
+\end{theorem}
+
+\section{Multiplicadores de Lagrange}
+\begin{theorem}[Multiplicadores de Lagrange]
+  Sea $f:\mathbb{R}^{n} \longrightarrow  \mathbb{R} $ diferenciable y $g_i:\mathbb{R}^{n} \longrightarrow \mathbb{R}  $ 
+  con $i=1,\ldots m$ de clase $C^1$ tal que $$S = \{ p\in \mathbb{R}^{n} \text{ con } g_i(p) = 0 \quad \forall i=1,\ldots,m\}$$
+
+  Y además $\nabla g_1(p),\ldots,\nabla g_m(p)$ son li $\forall P\in S$
+
+  Si $f$ tiene un extremo absoluto en $p_0 \in S$ entonces $p_0$ es punto crítico de la función 
+  $$F(x_1,\ldots,x_n,\lambda_1,\ldots,\lambda_2) = f(x_1,\ldots,x_n) + \lambda_1 g_1(x_1,\ldots,x_n) + \cdots + \lambda_mg_m(x_1,\ldots,x_n)$$
+  Es decir $\exists \lambda_1^0,\ldots ,\lambda_m^0$ tal que $\nabla F (p_0,\lambda_1^0,\ldots,\lambda_m^0) = 0$
+  \begin{proof}
+    Lo probaremos para $g:\mathbb{R}^{n} \longrightarrow  \mathbb{R}\quad g \text{ es } C^1$ con $S = \{p: g(p)=0\}$
+
+    Sea $p_0\in S$ máximo absoluto de $f|_S$ supongamos que $\nabla g_i \neq 0 \quad \forall p \in S$ por comodidad, la demo es similar sin asumir esto
+
+    Sea $\delta(t) \subseteq S$ con $\delta: (-\epsilon , \epsilon ) \rightarrow \mathbb{R}^{n} $ 
+    tal que $\delta(0)=p_0$ además $g(\delta(t)) = 0\quad \forall t \in (-\epsilon ,\epsilon )$ por lo tanto 
+    $$\nabla g_{\delta (0)}. \delta'(0) = \nabla g_{p_0}. \delta'(0)= 0$$
+
+    Entonces $\nabla g_{p_0}$ es perpendicular a $\delta(0)$ que es un vector con dirección tangente a $S$ en $p_0$
+
+    Por otro lado llamamos $h(t) = f(\delta)(t) $ y resulta que 
+    $$h(0) = f(\delta(0)) = f(p_0) \geq h(t) \quad \forall \epsilon < t < \epsilon   $$ justamente por que $p_0$ es un máximo de $f|_S$. Esto nos dice que $0$ es un máximo de $h$
+
+    Entonces $$\nabla f_{\delta(t)}.\delta'(t) = h'(t) \iff \nabla f_{\delta(0)}.\delta'(0) = h'(0) \iff \nabla f_{p_0}.\delta'(0) = 0$$
+    Esto último por que $0$ es un máximo de $h$ por lo tanto $h'(0) = 0$
+
+    Pero entonces $\nabla f_{p_0}$ es perpendicular a $\delta (0)$ por lo tanto paralelo a $\nabla g_{p_0}$
+    $$\nabla f_{p_0} = \lambda_0\nabla g_{p_0}$$
+
+    Si hubiesemos tenido $g:\mathbb{R}^{n} \longrightarrow  \mathbb{R}^{m} $ habríamos hecho lo mismo para cada $g_i$ 
+    llegando a $\nabla f_{p_0} = \lambda_i \nabla g_i_{p_0}$
+    
+  \end{proof}
+\end{theorem}
+
+\section{Teorema función implícita}
+Página 129
+
+\section{Definición de integral}
+Página 140
+
+\section{Teorema 21}
+Página 176
+\end{document}

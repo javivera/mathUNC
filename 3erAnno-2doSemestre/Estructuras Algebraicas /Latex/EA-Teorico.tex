@@ -50,6 +50,7 @@
 \section{Clase 11}
 
 \section{Clase 12}
+
 \begin{definition}[Accion de Grupo]
 	Sean $G$ grupo y $X\neq\emptyset$ conjunto. Una accion de $G$ en $X$ es una funcion
 	\begin{align} 
@@ -111,11 +112,11 @@ pendiente
 	$$<\sigma>.j=\mathcal{O}_{\sigma}=\{\sigma^{k}:k\geq 0\}\quad \forall\sigma \in\mathbb{S}_{n} $$ 
 \end{remark}
 
-\begin{definition}
+\begin{definition}[Accion Transitiva]
 	Una accion se dice transitiva si posee una unica orbita es decir si $\exists x\in X $ tal que $X=G.x$
 \end{definition}
 
-\begin{definition}
+\begin{definition}[G-Estabilizador]
 	Sea $G\times X\longrightarrow X$ accion. Dado $x\in X$ el $G$-estabilizador de $x$ es $$G_{x}=\{g\in G: g.x=x\}$$
 	$G_{x}$ es un subgrupo de $G$ , $\forall x\in X\quad\forall g,h\in G_{x}$ (No necesariamente normal)
 
@@ -175,16 +176,24 @@ pendiente
 	Pendiente
 \end{proof}
 
-
 \section{Clase 13}
 
-\begin{definition}[Normalizador]
-	Sea $H\trianglelefteq G$ el normalizador de $H$ en $G$ 
-	$$N_{G}(H)= \{g\in G: gHg^{-1}=H\}$$ 
-\end{definition}
+\subsection{Duda}
+pagina 1 teo13 parte gris no entiendo
+\begin{remark}
+	Si tenemos $\lvert G \rvert =p$ con $p$ primo y tomamos $e\neq x\in G$ como $\lvert x \rvert |p$ y $p$ primo entonces $\lvert x \rvert =p$, luego $G=<x>$ y $G\equiv \mathbb{Z}_{p}$   
+\end{remark}
 
+\begin{proposition}
+	Sea $p$ primo con $\lvert G \rvert =p^{2}$ entonces $G$ es abeliano 
+\end{proposition}
+\begin{proof}
+	
+\end{proof}
 
-\section{Clase 13}
+\begin{remark}
+	Grupos abelianos de orden $p^{2}$ (No isomorfos entre si) $\mathbb{Z}_{p^{2}}$ y $\mathbb{Z}_{p}\bigoplus \mathbb{Z}_{p}$ 
+\end{remark}
 
 \begin{definition}
 	Un grupo $G$ se dice un p-grupo, con $p$ primo si $\forall x\in G \ \exists n\in \mathbb{N} $ tal que $x^{p^{n}}=e$ 
@@ -193,17 +202,58 @@ pendiente
 \end{definition}
 
 \begin{remark}
-	El \hyperref[12.2]{Teorema de Cauchy} nos dice que un $p$-grupo finito tiene orden potencia de $p$  
+	Un \textbf{p-grupo} finito tiene orden potencia de $p$  
 \end{remark}
 \begin{proof}
 	\begin{enumerate}
 		\item Sea $\lvert G \rvert =p_{1}^{n_{1}}\ldots p_{k}^{n_{k}}$ con $p_{i}$ primos.
 		\item Entonces $p_{i}\big|\lvert G \rvert $ por lo tanto $\exists x\in G\quad \lvert x \rvert = p_{i}$ (Por \hyperref[12.2]{Teorema de Cauchy} )
-		\item Luego $p_{i}=\lvert x \rvert =p^j $ (Esto ultimo por ser $p$-grupo) 
+		\item Luego $p_{i}=\lvert x \rvert =p^j $ (Esto ultimo por ser \textbf{p-grupo}) 
 		\item Entonces $j=1$ y $p_{i}=p\quad \forall 1\leq i\leq k$ 
 		\item por lo tanto $\lvert G \rvert =p^j$ con $j>k$  
 	\end{enumerate}  
 \end{proof}
+
+\begin{remark}
+	Si $\lvert G \rvert =p^{3}$ y $G$ no abeliano entonces $G\times \mathbb{Z}_{p}\times\cdots\times\mathbb{Z}_{p}$ (k-veces) es no abeliano y $\lvert G \rvert =p^{k+3}$ 
+\end{remark}
+
+\begin{proposition}
+	Sea $G$ un \textbf{p-grupo} finito, no tivial entonces $Z(G)=\{e\}$ (no trivial)
+\end{proposition}
+\begin{proof}
+	Copias
+\end{proof}
+
+\begin{definition}[Normalizador]
+	Sea $H\leq G$, el normalizador de $H$ en $G$ es el subgrupo
+	$$N_{G}(H)= \{g\in G: gHg^{-1}=H\}$$ 
+\end{definition}
+
+\begin{remark}
+	$N_{G}(H)$ es el estabilizador de $H\in \{\text{subgrupos de } G\}$ con respecto a la accion de $G$ por conjugacion (DUDA)
+	
+	Version mia sea $H\leq G$ y $G$ actuando sobre $H$ por conjugacion entonces $N_{G}(H)$ es el estabilizador de $H$ en $G$ 
+\end{remark}
+
+\begin{remark}
+	$H\trianglelefteq N_{G}(H)$. Ademas $N_{G}(H)$ es el mayor subgrupo de $G$ que contiene a $H$ como un subgrupo normal. 
+
+	En particular $$H\trianglelefteq G\iff N_{G}(H)=G$$
+\end{remark}
+
+\begin{lemma}
+	Sean $p$ primo y $G$ un \textbf{p-grupo} finito. Si $H<G$ entonces $H<N_{G}(H)$. Concluyendo que $H=N_{G}(H)$ entonces $H=G$    
+\end{lemma}
+
+\begin{definition}
+	Un grupo se llama simple si no contiene subgrupos normales distintos de $\{e\}$ y $G$
+\end{definition}
+
+\begin{corollary}
+	Si $\lvert G \rvert =p^{n}$ y $H\leq G$ con $[G:H]=p$ entonces $H\trianglelefteq G$. En particular el unico \textbf{p-subgrupo} finito simple es $\mathbb{Z}_{p}$  
+\end{corollary}
+
 
 \section{Clase 14}
 
@@ -215,18 +265,21 @@ pendiente
 \end{proof}
 
 \begin{proposition}
-	$ |G|=p^{n} \ n\in \mathbb{N}_{0} $ entonces:
+	$ |G|=p^{n} $ con $ n\in \mathbb{N}_{0} $ entonces:
 	\begin{enumerate}
-		\item $ \forall 0\leq i\leq n$ $ G $ posee subrupos de orden $ p^{i} $
-		\item Si $0\leq i\leq n-1$ y $S\leq G$ con $|S|=p^{i}$ entonces $\exists $ subrupo $T$ de orden $p^{i+}$ tal que $S \trianglelefteq T$ 
+		\item  $ G $ posee subrupos de orden $ p^{i} \quad \forall 0\leq i\leq n$
+		\item Si $0\leq i\leq n-1$ y $S\leq G$ con $|S|=p^{i}$ entonces $\exists $ subrupo $T$ de orden $p^{i+1}$ tal que $S \trianglelefteq T$ 
 	\end{enumerate}
 \end{proposition}
 
-
 \subsection{Teoremas de Sylow}
 
-\begin{definition}
-	Un $p$-subgrupo de Sylow de $G$ es un subgrupo de $H$  tal que $\lvert H \rvert =p^{n}$ donde $\lvert G \rvert =p^{n}k$ con $(p,k)=1$ 
+\begin{remark}
+	En esta seccion $G$ es grupo finito y $p$ primo
+\end{remark}
+
+\begin{definition}[p-grupo de Sylow]
+	Un $p$-subgrupo de Sylow de $G$ es un subgrupo $H$  tal que $\lvert H \rvert =p^{n}$ donde $\lvert G \rvert =p^{n}k$ con $(p,k)=1$ 
 \end{definition}
 
 \subsection{Primer Teorema de Sylow}
@@ -237,5 +290,80 @@ pendiente
 	pendiente  
 \end{proof}
 
+\begin{theorem}[Segundo Teorema de Sylow]\label{14.2}
+	Sea $G$ grupo finito y $p$ primo. Sean $S\leq  G$ tal que $\lvert S \rvert =p^{i}$ con $i\in N_{0}$ y $H$ un \textbf{p-subgrupo de Sylow} de $G$ entonces $\exists a\in G$ tal que $S\trianglelefteq aHa^{-1}$. 
+
+	En particular $S$ es \textbf{p-sylow} si y solo si $S$ y $H$ son conjugados 
+\end{theorem}
+\begin{proof}
+	
+\end{proof}
+
+\begin{corollary}[DUDA]
+	Sea $H\leq  G$ \textbf{p-sylow} entonces $H$ es el unico \textbf{p-sylow} de $G$ si y solo si $H\trianglelefteq G$ 
+\end{corollary}
+\begin{proof}
+	$(\Rightarrow )$ Supongamos que no es normal entonces $aHa^{-1} = J$ con $J\neq H$ entonces por ser $J$ es conjugado de $H$ es \textbf{p-sylow}. Absurdo por que $H$ era el unico \textbf{p-sylow} 
+
+	$(\Leftarrow)$ Existencia no se , se que existe alguno pero no se si es H. Unicidad supongamos que no es unico entonces $\exists J$ \textbf{p-sylow} , entonces $J=aHa^{-1}$ pero $aHa^{-1}=H$ por ser $H$ normal 
+\end{proof}
+
+\begin{theorem}[Tercer Teorema Sylow]
+	Sea $G$ grupo finito, $p$ primo y sea $n_{p}=\lvert \{\text{\textbf{p-sylow de } } G\} \rvert $ entonces $$n_{p}\bigg| \lvert G \rvert \quad \text{ y }\quad  n_{p}\equiv 1 (p)$$   
+\end{theorem}
+
+
+\section{Clase 16}
+\begin{definition}
+	Sea $R$ anillo. Un elemento $0\neq a\in R$ se \textbf{divisor de cero a izquierda (derehca)} si $\exists 0\neq b\in R$ tal que $ab=0$ (respectivamente $ba=0$ ) 
+	
+	Si $a$ es divisor de cero a izquierda y a derecha entonces se dice que $a$ es divisor de cero
+\end{definition}
+
+\begin{example}
+	\begin{enumerate}
+		\item En $\mathbb{Z}_{n}$ si $n$ no es primo tomamos $d|n$ entonces $\overline{d}$ es un divisor en $\mathbb{Z}_{n}$
+		\item En $M_{n}(R)\quad n>1$ tomamos COPIAR MATRICES   
+	\end{enumerate}
+\end{example}
+
+\begin{definition}
+	Un anillo conmutativo con identidad $1\neq 0$ se dice de dominio integro (o de integridad) si no posee divisores de 0
+\end{definition}
+
+\begin{example}
+	\begin{enumerate}
+		\item $\mathbb{Z},\mathbb{R},\mathbb{Q},\mathbb{C} $ son dominios de integridad
+		\item $\mathbb{Z}_{n}$ es dominio de integridad sii $n$ es primo observamos que $\mathbb{Z}_{n}=\quotient{\mathbb{Z} }{n\mathbb{Z} }$ 
+		\item $\mathbb{Z}[x],\mathbb{Z} [x_{1},\ldots,x_{k}]$ etc , son dominios de integridad (Los polonomios con eoficientes en $\mathbb{Z} $ y variables $x_{i}$ ) 
+	\end{enumerate}
+\end{example}
+
+\begin{definition}[Anillo inversible]
+	Sea $R$ un anillo con identidad y sea $0\neq a\in R$ se dice que $a$ es:
+	\begin{itemize}
+		\item Inversible a izquierda $\iff\exists b\in R$ tal que $ba=1$    
+		\item Inversible a derecha $\iff\exists b\in R$ tal que $ab=1$
+		\item Inversible si lo es a derecha y a izquierda
+	\end{itemize}
+
+	Un anillo $D$ con $1\neq 0$ donde todo elemento es inversible se llama \textbf{anillo de division} 
+\end{definition}
+
+\begin{remark}
+	Si $a\in R$ es inversible entonces el inverso a izquierda de $a$ coincide con su inverso a derecha y esta univocamente determiando por $a$ (Notacion: $a^{-1}$)  
+\end{remark}
+
+\begin{definition}
+	El conjunto de los elementos inversibles en un anillo $R$ (con $1\neq 0$ ) se llama \textbf{grupo de unidades de R}. 
+
+	(Notacion: $R^{X}$ o $R^{*}$ o $\mathcal{U}(R))$   )
+\end{definition}
+
+\begin{example}
+	\begin{enumerate}
+		\item 
+	\end{enumerate}
+\end{example}
 
 \end{document}

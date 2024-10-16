@@ -1,0 +1,1495 @@
+\documentclass{article}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{mathpazo}
+\usepackage{tcolorbox}
+\usepackage[margin=0.8in]{geometry}
+\usepackage[colorlinks=true]{hyperref}
+
+\newtheoremstyle{break}
+  {\topsep}{\topsep}%
+  {\itshape}{}%
+  {\bfseries}{}%
+  {\newline}{}%
+\theoremstyle{break}
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{corollary}{Corolario}[theorem]
+\newtheorem{lemma}[theorem]{Lema}
+\newtheorem{proposition}{Proposición}
+\newtheorem*{remark}{Observación}
+\newtheorem{definition}{Definición}[section]
+
+\def \R{\mathbb{R}}
+\def \N{\mathbb{N}}
+\def \Z{\mathbb{Z}}
+
+\begin{document}
+    % LaTeX
+    
+    \title{Resumen Álgebra I}
+    \author{Javier Vera}
+    \maketitle
+
+    \section{Relaciones}
+    Dado un conjunto $A$ una relación es un suboconjunto $R$ de pares ordenados de $A$.
+    Es decir $R \subseteq A \times A$. Dados $x,y \in A$ decimos que están relacionados si $(x,y) \in R$
+    (Notación: $x \mathrel{R} y$ o $x \sim y$) \\
+    Hay diferentes tipos de relaciones sobre un conjunto $A$:
+    \begin{itemize}
+        \item Reflexivas: $\forall x \in A \quad x\sim x$
+        \item Simétricas: $\forall x,y \in A \quad x\sim y \Rightarrow y \sim x$
+        \item Antisimétrica: $\forall x,y \in A \quad x\sim y \land y\sim x \Rightarrow x = y$
+        \item Transitiva: $\forall x,y \in A \quad x\sim y \land y\sim z \Rightarrow x \sim z$
+    \end{itemize}  
+    \noindent Una relación Reflexiva, simétrica y transitiva se llama Relación de equivalencia
+
+    \noindent Una relación Reflexiva, antisimétrica y transitiva se llama Relación de orden 
+
+    \subsection{Particiones}
+
+    Dada una relación de equivalencia $R$ en un conjunto $A$ definimos una partición 
+    
+    $$[a] = \{b \in A | b\sim a\} = \{b \in A | a \sim b \}$$
+
+    Llamamos $a$ al representante de dicha partición. 
+
+    \begin{lemma}
+        Por un lado tenemos $a \in [a]$. Por otro lado dos clases de equivalencia $[a],[b]$ son disjuntas
+        o son exactamente iguales
+    \end{lemma}
+    \begin{proof}
+            Si son disjuntas no hay nada que demostrar, si no lo son entonces existe $c \in [a]\cap[b]$.
+            Ahora tomemos cualquier $x \in [a]$ sabemos que $x\sim a$ pero entonces $x\sim c$ y luego $x\sim b$
+            Entonces $x \in [b]$ por lo tanto $[a] \subseteq [b]$. \\
+            Análogamente probamos $[b] \subseteq [a]$ Finalmente $[a] = [b]$
+    \end{proof}
+    
+    \newpage
+    
+    \section{Número Naturales}
+    \subsection{Axiómas de Peano}\label{sec:Peano}
+    \begin{tcolorbox}
+    \begin{itemize}
+        \item[N1.] El 1 no és sucesor de nadie
+        \item[N2.] Dos naturales distinto tienen distintos sucesores
+        \item[N3.] (Axioma de inducción) Si $K \subseteq \N$ con $1 \in K$ y además dado $x \in K$
+        sucede que $S(x) \in K$ (sucesors de x está en K) entonces $\N \subseteq K$
+    \end{itemize}
+    \end{tcolorbox}
+    Hay otros axioma de Peano, pero no se han dado en la materia, se pueden buscar en Wikipedia
+
+    \subsection{Inducción Matemática}\label{sec:Induc}
+    Partiendo de los axiomas de Peano podemos definir $\N$ como el subconjunto de $\R$
+    que cumple dichos axiomas
+    \begin{tcolorbox}
+        \begin{theorem}[Principio de inducción]
+            Sea $P(n)$ una función proposicional con $n \in \N$
+            \begin{enumerate}
+                \item $P(1)$ es verdadera 
+                \item Dado $n\in\N$ si $P(n)$ verdadera entonces $P(n+1)$ es veradera
+            \end{enumerate}
+        Entonces $P(n)$ es verdadera $\forall n\in \N$
+        \end{theorem}
+    \end{tcolorbox}
+    \begin{proof}
+
+            Sea $$K = \{n \in \N \ | \ P(n) \text{ es verdadera } \}$$ Por hipótesis 1. tenemos $1\in K$, por 2.
+            tenemos que $n \in K$ implica $n+1 \in K$ usando estos dos se cumple el axioma N3 de peano. Por lo tanto
+            $\N \subseteq K$ esto implica además sabemos que $K\subseteq \N$ entonces tenemos $K=\N$.
+            Esto implica que $P(n)$ es verdadera $\forall n \in \N$
+    \end{proof}
+    
+    \begin{tcolorbox}\label{sec:corrida}
+        \begin{theorem}[Inducción Corrida]
+            Sea $P(n)$ una función proposicional con $n \geq N$
+            \begin{enumerate}
+                \item $P(N)$ es verdadera
+                \item Si $P(n)$ verdadera implica $P(n+1)$ verdadera $\forall n \geq N$
+            \end{enumerate}
+
+            Entonces $P(n)$ es verdadera $\forall n \geq N$
+        \end{theorem}    
+    \end{tcolorbox}
+
+    \begin{proof}
+        Sea $Q(n) = P(N -1 + k)$. Ahora consideremos el conjunto $$ K = \{n \in\N \ |\ Q(n) \text{ es verdadera }\}$$
+        
+        \noindent Trivialmente tenemos $Q(1) = P(N)$ entonces por hipótesis es verdadera. Además dado cualquier $n\in\N$ tenemos $Q(n) = P(N-1+n)$ y dado que $N-1 + n \geq N$
+        por hipótesis $P(N-1+n+1) = Q(n+1)$ es verdadera.
+
+        Pero entonces $K$ cumple las hipótesis de \hyperref[sec:Peano]{el axioma N3 de peano}, por lo tanto $\N\subseteq K$ y como sabemos $K \subseteq\N$
+        entonces $K = \N$. 
+        
+        Como cada natural $m \geq N$ se escribe de la forma $N - 1 + n$ tenemos que $P(n)$ es verdadera $\forall n \geq N$
+    \end{proof}
+
+    \begin{tcolorbox}\label{sec:fuerte}
+        \begin{theorem}[Inducción Fuerte]
+            Sea $n\in\N$ y $P(n)$ una función proposicional
+            \begin{enumerate}
+                \item $P(1)$ es verdadera
+                \item Si $P(1),P(2)\ldots P(k)$ verdaderas implica $P(k+1)$ verdadera $\forall k \in \N$
+            \end{enumerate}
+
+            Entonces $P(n)$ es verdadera $\forall n \in \N$
+        \end{theorem}    
+    \end{tcolorbox}
+
+
+    \begin{remark}[Suma de Gauss]
+        $$ \sum_{i=1}^{n} i = \frac{n.(n+1)}{2}$$
+
+        \noindent Se demuestra usando inducción
+    \end{remark}
+    \begin{remark}[Suma Aritmética]
+        Una sucesión es aritmética si satisface $a_{n+1} = a_n + c$. Por ejemplo $a_1 = b, \ a_2 = b + c, \ a_3 = b +2c \ \cdots a_n = b +c(n-1) $
+        $$ \sum_{i=1}^{n} a_i = nb + \frac{(n-1)n}{2}$$
+    \end{remark}    
+    \begin{proof}
+        $\sum_{i=1}^{n} a_i = \sum_{i=1}^{n} b + (i-1) = \sum_{i=1}^{n} b + \sum_{i=1}^{n} (i-1) = bn + \sum_{i=1}^{n} (i-1) = nb + \frac{(n-1)n}{2}$. 
+        
+        Aquí usamos la Suma de Gauss
+    \end{proof}
+
+    \begin{remark}[Suma Geométrica]
+        Una sucesión es geométrica si satisface $a_1 = b, \ a_2 = br , \ a_3 = br^2 \cdots a_n = br^{n-1}$
+        $$ \sum_{i=0}^{n} br^i = b\sum_{i=0}^{n} r^i  = b \frac{1-r^{n-1}}{1-r}$$
+    \end{remark}
+
+    
+    \begin{lemma}
+        $$ \text{Inducción Fuerte}\iff \text{Inducción Corrida} \iff \text{Inducción}$$
+    \end{lemma}
+    \begin{proof}
+        Veamos $\text{Inducción Fuerte}\iff \text{Inducción}$
+
+        $\Rightarrow )$ Tomemos $Q(k)$ como la proposición $"P(n) \text{ verdadera} \ \forall n \leq k"$. Para empezar $Q(1)$ es trivialmente verdadera.
+
+        Ahora inducción nos dice que $Q(k)$ implica $Q(k+1)$ para cualquier $k \in\N$
+        \begin{enumerate}
+            \item Luego $" P(n) \text{ verdadera} \ \forall n \leq k " \iff Q(k)$ Verdadera.
+            \item Pero si $Q(k)$ verdadera entonces $Q(k+1)$ Verdadera (Inducción)
+            \item $Q(k+1) \text{ Verdadera } \iff "P(n) \text{ verdadera} \ \forall n \leq k+1"$ 
+        \end{enumerate}
+
+        Juntando nos queda $$P(1)\ldots P(k) \text{ Verdaderas} \iff "P(n) \text{ Verdadera} \ \forall n \leq k" \Rightarrow "P(n) \text{ Verdadera} \ \forall n \leq k+1" \Rightarrow P(k+1) \text{ Verdadera } $$ 
+
+        Entonces por inducción corrida $P(n)$ es verdadera $\forall n \in \N$. Pero entonces 
+        $Q(k)$ es verdadera $\forall k \in\N$.
+        
+        Por lo tanto probamos que si inducción completa vale.
+        Las dos hipótesis de inducción implican el resultado de inducción que conocemos, que es lo mismo que decir que inducción vale.
+
+        Probar que inducción completa vale usando inducción es trivial, queda como ejercicio para el lector 
+        
+    \end{proof}
+    \newpage
+    
+    \section{Principio de buen órden}
+
+    \begin{theorem}[Principio de buen órden]
+        Un conjunto $A$ se dice bien ordenado si dado cualquier $B \subseteq A$ con $B\neq \emptyset$ tiene primer elemento.
+    Un primer elmento es un elemento menor o igual que el resto. En esta matería solo nos interesará
+    el buen órden de los naturales
+    \end{theorem}
+    \begin{proposition}
+        $\N$ es bien ordenado
+    \end{proposition}
+
+    \begin{proof}
+        Supongamos que no es bien ordenado entonces $\exists H \subseteq \N$ tal que $H \neq \emptyset$,
+        sin primer elemento
+
+        Ahora consideremos $H^c = \N - H $ sabemos que $1 \in H^c$, si nó estaría en $H$ lo cual sería
+        absurdo
+
+        Ahora consideremos $K = \{n \in \N \ | \ [1\ldots n] \subseteq H^c\}$. Por lo dicho arriba 
+        $1\in K$
+
+        Ademas si $n\in K$ tenemos que $n+1 \in K$ por que si $n+1 \notin K$ tendríamos que todos
+        los elementos menores o iguales que $n$ estan en $K$ por lo tanto estarían en $H^c$ y 
+        $n+1 \notin K$ por lo tanto $n+1 \notin H^c$ entonces $n+1 \in H$ pero entonces $n+1$ sería
+        primer elemento de $H$ lo cual sería absurdo.
+
+        Entonces $K$ cumple las hipótesis de inducción por lo tanto $K=\N$. Pero entonces $\N \subseteq H^c$
+        Y ya teníamos que $H^c\subseteq \N$ por lo cual $H^c = \N$. Finamente $\N=\N - H$ entonces $H = \emptyset$. Absurdo
+
+        Provino de suponer que existía dicho $H$ no vacío sin primer elemento, entonces no existe dicho
+        conjunto
+    \end{proof}
+    \begin{proposition}
+        Buen órden en $\N$ implica inducción
+    \end{proposition}
+    \begin{proof}
+        Sea $K= \{n\in\N \ | \ P(n) \text{ es verdadera}\}$ y miremos usando las hipótesis de
+        inducción y el buen orden nos gustaría llegar a que $K=\N$ o lo que es lo mismo 
+        $K^c = \emptyset$. Supongamo que $K^c \neq \emptyset$ entonces por buen órden
+        $\exists k \in K^c$ primer elemento. 
+
+        Por inducción sabemos que $1 \in K$. Entonces dicho $k > 1$ luego tenemos que $n\in K$ para todo $n \leq k-1$.
+        Si nó $k$ no sería primer elemento de $K^c$, pero por inducción esto nos dice que $k \in K$
+        lo que es absurdo. Provino de suponer que $K^c \neq \emptyset$ por lo tanto $K^c=\emptyset$
+        Entonces $K = \N$ probando que $P(n)$ es verdadera $\forall n\in\N$ y por lo tanto probando
+        la implicación final de inducción
+    \end{proof}
+
+    \begin{proposition}
+        Inducción implica buen órden en $\N$
+    \end{proposition}
+    \begin{proof}
+        Sea $K \subseteq \N$ tal que $K\neq \emptyset$ y $K$ no tiene primer elemento.
+        Como no tiene primer elemento $1 \in K^c$. Ahora supongamos que $1\ldots n \in K^c$ entonces
+        $n+1 \in K^c$ por que si nó estaría en $K$ y sería su primer elemento, pero entonces por
+        inducción $K^c = \N $ por lo tanto $K = \emptyset$ abusrdo. Provino de suponer que existía
+        dicho $K\neq \emptyset$, no vacío y sin primer elemento, entonces todo $K\neq \emptyset$ 
+        no vacío, tiene primer elemento 
+    \end{proof}
+
+    \begin{corollary}
+        $$ \text {Buen órden en } \N \iff \text{ Inducción } \iff \text{Inducción completa} \iff \text{Inducción corrida}$$
+    \end{corollary}
+    
+    \section{Combinatoria}
+
+    \begin{definition}
+        Un conjunto $A$ tiene $n$ elementos si y solo sí existe $$f: A \rightarrow [1\ldots n] \text{ biyectiva }$$
+        En estos casos decimos $|A| = n$ (cardinal de $A$ es $n$)
+    \end{definition}
+    
+    \begin{lemma}[Principio de adición]\label{sec:padicion}
+        Sean $A$ y $B$ conjuntos disjuntos tales que $|A| = n$ y $|B| = m$ entonces $$|A \cup B| = |A| + |B|=n+m$$    
+    \end{lemma}
+    \begin{proof}
+        Por hipótesis tenemos $f: A \rightarrow [1\ldots n]$ y $g: B \rightarrow [1\ldots m]$ ambas biyectivas. 
+
+        Definimos $h: A\cup B \rightarrow [1\ldots n+m]$
+
+        \[   
+            h(x) = 
+            \begin{cases}
+            f(x) &\quad\text{si } x\in A \\
+            g(x) +n &\quad\text{si } x\in B \\
+
+            \end{cases}
+        \]
+
+        Veamos que es biyectiva. Podríamos ver que es inyectiva y suryectiva, pero es más facil dar su inversa.
+        Sabemos que $f$ y $g$ tienen inversas por ser biyectivas llamemoslas $f^{-1}$ y $g^{-1}$ 
+
+        Sea $r: [1\ldots n+m] \rightarrow A \cup B $
+        \[   
+            r(x) = 
+            \begin{cases}
+            f^{-1}(x) &\quad\text{si } x\leq n \\
+            g^{-1}(x - n)  &\quad\text{si } x > n \\
+
+            \end{cases}
+        \]
+
+        Veamos que efectivamente es su inversa mostrando que $h \circ r = id = r \circ h$
+
+        Primero supongamos $x \leq n$ entonces $h\circ r (x) = h (r(x)) = h (f^{-1}(x))$ además $f^{-1}(x) \in A$ por definición 
+        entonces $h(f^{-1}(x)) = f(f^{-1}(x)) = x$, por que $f^{-1}$ es la inversa de $f$.($f$ tiene
+        inversa por ser biyectiva)
+        
+        Si en cambio $x > n$ entonces $h\circ r (x) = h (r(x)) = h (g^{-1}(x -n))$  además $g^{-1}(x) \in B$ por definición
+        entonces $h(g^{-1}(x-n)) = g(g^{-1}(x-n)) + n = x-n+n = x$
+            
+        $r\circ h = id$ sale con las mismas ideas, queda como ejercicio para el lector.
+        Entonces como $h(x)$ tiene inversa por lo tanto es biyectiva
+
+        Finalmente $|A\cup B| = |[1\ldots n+m]| = n+m$
+    \end{proof}
+
+    \begin{corollary}
+        $$|A_1 \cup A_2 \ldots \cup A_n| = |A_1| + |A_2| + \cdots + |A_n|$$
+    \end{corollary}
+    \begin{proof}
+        Por inducción, el caso base es trivial.
+
+        Ahora si tenemos $|A_1 \cup \ldots \cup A_n \cup A_{n+1}| = |(A_1\cup\ldots\cup A_n) \cup A_{n+1}| = |B \cup A_{n+1}| = |B| + |A_{n+1}|$
+
+        Por hipótesis tenemos $|B| + |A_{n+1}| = |A_1| + |A_2| + \cdots + |A_n| + |A_{n+1}|$
+    \end{proof}
+
+    \begin{lemma}[Principio de multiplicación]\label{sec:pmult}
+        $A$ y $B$ conjuntos finitos entonces $|A\times B| = |A||B|$
+    \end{lemma}
+
+    \begin{proof}
+        Tenemos $A\times B = (\{a_1\} \times B )\cup  (\{a_2\} \times B )\cdots \cup(\{a_n\} \times B )$ 
+
+        Por principio de adición 
+        $|A\times B| = |\{a_1\} \times B |+ |\{a_2\} \times B | + \cdots +|\{a_n\} \times B |$
+
+        Es trivial notar que $|\{a_n\} \times B|$ es igual para cualquier $n$
+
+        Entonces calculemos $|\{a_1\} \times B|$. Sabemos que existe una función biyectiva $h: B\rightarrow [1\ldots|B|]$
+
+        Entonces podemos construir la función $g: \{a_1\}\times B \rightarrow [1\ldots m]$ donde $|B| = m$
+        dada por $$ g(a_1,b) = h(b)$$
+
+        Veamos $g$ inyectiva. Sean $g(a_1,b_1) = g(a_1,b_2)$ entonces $h(b_1) = h(b_2)$ como $h$ es inyectiva
+        $b_1=b_2$
+
+        Veamos $g$ sobreyectiva. Sea $y\in[0\ldots |B|]$ dado que $h$ es sobreyectiva existe $b_1 \in B$ 
+        tal que $h(b_1) = y$ pero entonces $g(a_1,b_1) = h(b_1) = y$. Finalmente dado cualquier $y \in [1\ldots |B|]$
+        se puede dar una preimagen por $g$. 
+
+        Entonces $g$ es sobreyectiva mostrando que $|\{a_n\} \cup B | = |B|$. Ahora si juntamos esto con lo que
+        habíamos visto por principio de adición tenemos
+        $$|A\times B| = |\{a_1\} \times B |+ |\{a_2\} \times B | + \cdots +|\{a_n\} \times B | = |B| + |B| \ldots |B|$$ 
+
+        Donde la cantidad de sumandos es igual a la cantidad de elementos en $A$ que es igual a $|A|$
+
+        Entonces $|A\times B|= |A||B|$
+
+
+    \end{proof}
+
+    \begin{lemma}[Principio de complemento]
+        Sea $A \subseteq \mathcal{U}$ entonces $|A| = |\mathcal{U}| - |A^c|$
+    \end{lemma}
+
+    \begin{lemma}[Principio de inyección de Cantor]
+        Sean $A$ y $B$ finitos entonces si $|A| > |B|$ no existe ninguna función $f:A \rightarrow B$ 
+        inyectiva. Mas aún si tenemos $f: A\rightarrow B$ inyectiva entonces $|A| \leq |B|$
+    \end{lemma}
+
+    \begin{proof}
+        Tomemos el conjunto $H = \{n\in\N | \exists m \in \N , m<n \text{ y } f:[1\ldots n] \rightarrow [1\ldots m] \text { inyectiva }\}$
+
+        Nos gustaria ver que dicho conjunto es vacío. Supongamos que nó, entonces tiene primer elemento 
+        llamémoslo $h$.Sabemos que $1 \notin H$ por que no existe ningún natural menor que 1. Entonces 
+        $h > 1$
+
+        Como $h \in H$ tenemos un $m \in\N$ con $m < h$ tal que $f:[1\ldots h] \rightarrow [1\ldots m]$
+        inyectiva. Supongamos que $f(h) = m $, entonces podemos restringir $f$ 
+        y obtener $g:[1\ldots h-1] \rightarrow [1\ldots m-1]$, que es inyectiva por que restringimos una inyectiva
+        Pero entonces $h-1 \in H$ que sería absurdo.
+
+        Ahora si $f(h) = p < m$ podemos armar armar $\alpha:[1\ldots m] \rightarrow [1\ldots m]$ con 
+        $\alpha(p) = m$, $\alpha (m) = p$, $\alpha (i) = i \ \forall i\neq m \neq p$
+
+        Ahora podemos dar $r = \alpha \circ f : [1\ldots h] \rightarrow [1\ldots m]$ 
+        y sabemos que $r(h) = \alpha(f(h)) = \alpha(p) = m$. Pero entonces estamos en el anteriór caso
+        restringimos $r$ y llegamos a un absurdo
+    \end{proof}
+
+    \begin{corollary}
+        $|A| = n \land |A| = m$ entonces $n=m$
+    \end{corollary}
+    \begin{proof}
+        $|A|=n$ entonces tenemos $f:A\rightarrow [1\ldots n]$ biyectiva y $g:A\rightarrow [1\ldots m]$
+
+        Entonces tenemos $g \circ f^{-1} :[1\ldots n] \rightarrow [1\ldots m] $ inyectiva por ser composición
+        de inyectivas entonces $$n = |[1\ldots n]| \leq |[1\ldots m]| = m$$ analogamente tenemos una función 
+        $h:[1\ldots m] \rightarrow [1\ldots n]$ por lo cual $$m = |[1\ldots m]| \leq |[1\ldots n]| = n $$
+
+        Entonces finalmente $n = m $
+    \end{proof}
+
+    \begin{remark}[Permutaciones]
+        Sea $A$ tal que $|A| = n$ entonces hay $n!$ formas de ordenar $A$. En este tipo de conteo importa el órden
+    \end{remark}
+
+    \begin{remark}[Combinaciones]
+	    Sea $A$ tal que $|A| = n$ entonces tenemos $\binom{n}{k}$ subconjuntos de $A$ te tamaño $k$. En este tipo de conteo
+        no importa el ordan $\{1,2,3\}$ es lo mismo que $\{1,3,2\}$ por ende no lo cuento dos veces
+    \end{remark}
+    
+    \begin{proof}
+        Tengo que elejir $k elmentos$ para el primer elemento tengo $n$ opciones , para el segudno $n-1$ así hasta el 
+        k-esimo en donde tengo $n-k+1$ opciones. Por ende tengo $n.(n-1)\ldots(n-k+1)$ formas de elegir $k$ elementos entre $n$ elementos
+        Una vez seleccionados esos $k$ elementos, tengo $k!$ permutaciones dentro de mi selección que no me interesan dado que dos conjuntos
+        con diferente orden son iguales. Entonces divido por $k!$ obteniendo 
+        $$\frac{n.(n-1)\ldots(n-k+1)}{k!} = \frac{n.(n-1)\ldots(n-k+1)(n-k)!}{k!(n-k)!} = \frac{n!}{k!(n-k)}$$
+    \end{proof}
+
+    \begin{remark}[Arreglos]
+        Un arreglo es una selección de $k$ elementos sobre un conjunto $A$. Si $|A|=n$ entonces tenemos $\frac{n!}{(n-k)!}$ arreglos
+    \end{remark}
+
+    \begin{remark}
+	    $\binom{n}{k}$ = $ \binom{n}{n-k}$
+    \end{remark}
+    \begin{proof}
+        $\binom{n}{n-k}$ = $\frac{n!}{(n-k)!(n-(n-k))!} = \frac{n!}{(n-k)!(k!)}$ = $\binom{n}{k}$        
+
+        Otra forma alternativa es considerar $f: P_{k} (I_n) \rightarrow P_{n-k} (I_n)$ , la función complemento.
+        Tomas conjuntos de tamaño $k$ y devuelve su complemento que son conjuntos de tamaño $n-k$. Resta ver que es biyectiva
+        y eso nos diría que $\binom{n}{k}$   $=|P_{k}(I_n)| = |P_{n - k}(I_n)| = $ $\binom{n}{n-k}$  
+
+    \end{proof}
+    
+    \begin{theorem}[Identidad de pascal]
+
+	    $\binom{n+1}{k}$  = $\binom{n}{k-1}$   + $\binom{n}{k}$   
+    \end{theorem}
+
+    \begin{proof}
+        Una forma es aritmética, queda como ejercicio para el lector
+
+        Otra forma es mirar los conjuntos $$B = \{K \subseteq I_{n+1} \ | \ |K|=k \land n+1 \in K\}  = \{K \subseteq I_{n} \ | \ |K|=k-1\} = \mathcal{P}_{k-1}(I_n)$$
+         $$A = \{K \subseteq I_{n+1} \ | |K| = k \land n+1 \notin K\}  = \{K \subseteq I_{n} \ | \ |K|=k \} = \mathcal{P}_{k}(I_n)$$
+
+	 Notemos que $A\cup B = \mathcal{P}_{k}(I_{n+1})$ entonces $|A\cup B| =$ $\binom{n+1}{k}$  
+        
+	 Pero además tenemos $\binom{n+1}{k}$  $= |A\cup B| = |A| + |B| = |\mathcal{P}_{k-1}(I_n)| + |\mathcal{P}_{k}(I_n)|  = $ $\binom{n}{k-1}$   + $\binom{n}{k}$  
+    \end{proof}
+
+    \begin{theorem}
+        $|\mathcal{P}(I_n)| = 2^n$. Mas aún dado $A$ tal que $|A|=n$ entonces $|\mathcal{P}(A)| = 2^n$
+    \end{theorem}
+
+    \begin{proof}
+        Ahora notemos que $|\{f \ |\  f: I_n \rightarrow \{0,1\}\}| = 2^n$. Esto sale facil usando combinatoria, particularmente permutaciones
+        dado el primer elemento de $I_n$ tenemos 2 opciones y así sucesivamente entonces tenemos $2.2.2\ldots 2$ n veces cantidad de funciones 
+        en dicho conjunto
+
+        Ahora veamos $g: \mathcal{P}(I_n) \rightarrow \{f \ |\  f: I_n \rightarrow \{0,1\} \}$ dada por
+        \[   
+            X \rightarrow f_X(x) \quad f_X(x) =
+            \begin{cases}
+            0 &\quad\text{si } x \notin X \\
+            1  &\quad\text{si } x \in X \\
+
+            \end{cases}
+        \]
+
+        Inyectividad dados $X, Y$ supongamos que $g(X) = f_x = f_y = g(Y)$.  Ahora tomemos $x \in X$ sabemos entonces que $f_x(x) = 1 $
+        entonces como $f_x = f_y$ sabemos que $f_y(x) = 1$ por lo tanto $x\in Y$ esto nos dice $X \subseteq Y$ y analogamente vemos que 
+        $Y \subseteq X$ mostrando que $X=Y$ mostrando inyectividad
+
+        La sobreyectividad es trivial, dada cualquier función $f_x$ en $Im(g)$ podemos tomar $X$ y sabemos que $g(X) = f_x$ 
+
+        Finalmente $g$ es biyectiva, por lo tanto $|\mathcal{P}(I_n)| = |\{f \ |\  f: I_n \rightarrow \{0,1\}\}| = 2^n$
+
+        Hay otra prueba alternativa, veámosla   
+        Sabemos que $|\mathcal{P}(I_n)| = \sum_{i=0}^{n} |\mathcal{P}_{i}(I_n)| = \sum_{i=0}^n $ $\binom{n}{i}$  
+
+        Veamos que $\sum_{i=0}^n $ $\binom{n}{i}$   $= 2^n$ por inducción. El caso base es trivial
+
+        Como hipotesis inductiva tenemos $\sum_{i=0}^n $ $\binom{n}{i}$   $= 2^n$. Miremos 
+
+	\[ \left[\sum_{i=0}^{n+1} \binom{n+1}{i}\right]   = [\sum_{i=1}^n  \binom{n+1}{i}] + \binom{n+1}{n+1}   + \binom{n+1}{0} \]  
+
+        Usando la identidad de pascal \[\left[\sum_{i=1}^n \binom{n+1}{i}  \right] + \binom{n+1}{n+1}   +\binom{n+1}{0}   = 
+	\left(\sum_{i=1}^n  \binom{n}{i} + \binom{n}{i-1} \right)+ \binom{n+1}{n+1} + \binom{n+1}{0} \]
+
+	Separando la suma \[ \left(\sum_{i=1}^n  \binom{n}{i} + \sum_{i=1}^n  \binom{n}{i-1} \right)+ \binom{n+1}{n+1} + \binom{n+1}{0} \]
+	
+	Ademas sabemos \[ \binom{n+1}{0}  =\binom{n}{0} \quad \land \quad \sum_{i=1}^n  \binom{n}{i-1}  = \sum_{i=0}^{n-1} \quad\land\quad  \binom{n}{n}  
+	 \binom{n+1}{n+1} = \binom{n}{n} \]
+        
+	Juntando todo con cuidado queda 
+	\[\sum_{i=0}^{n+1}  \binom{n+1}{i} = \sum_{i=0}^n  \binom{n}{n}   + \sum_{i=0}^n  \binom{n}{n} \] 
+	
+	Que por hipótesis es $2^n +2^n = 2.2^n = 2^{n+1}$. Probando así la inducción
+    \end{proof}
+
+    \begin{theorem}[Binomio de Newton]
+ 
+    \[(x+y)^n = \sum_{k=0}^{n} \binom{n}{k}  x^{n-k}y^k \]
+    \end{theorem}        
+
+    \begin{proof}
+        Sabemos que $(x+y)^n$ es una suma de productos de $x$ con $y$ con cada producto $x^{n-k}y^k$ con $0 \leq k \leq n$
+
+	Ahora la pregunta es cuantos de cada uno de estos productos tenemos, primero seleccionamos $\binom{n}{k}$ esto nos dice
+        las posiciones de las $y$ en el producto y una vez definidas estas lo espacios restantes son para $x$
+
+	Entonces sabemos que tenemos $\binom{n}{k}$ formas de armar un producto de la pinta $x^{n-k}y^k$.
+
+	Ahora si sumamos todo tenemos $\sum_{0}^{n}$ $\binom{n}{k}$ $x^{n-k}y^k$ como queríamos mostrar
+    \end{proof}
+
+    \section{Aritmética Entera}    
+
+    Definimos a $\Z = -\N \cup \{0\} \cup \N$
+
+    Y damos dos operaciones $(Producto) *: \Z\times \Z \rightarrow \Z$ y suma $(Suma) +: \Z\times \Z \rightarrow \Z$
+
+    Estas operaciones las definimos como la restricción de las mismas en $\R$
+
+    Tenemos entonces que $(\Z,(*,+))$ es un anillo conmutativo. Más aún es un anillo conmutativo al que le podemos dar un orden estricto
+    \newpage
+    \begin{definition}
+        En todo anillo ordenado valen:
+        \begin{enumerate}
+        \item $a<b \Rightarrow a +c < b + c$
+        \item $c>0 \land a >b \Rightarrow ca > cb$
+        \item $-a.b = -(ab)$
+        \end{enumerate}
+    \end{definition}
+     
+
+    \begin{proposition}
+        En todo anillo ordenado valen:
+        \begin{enumerate}
+            \item $c>0 \iff -c <0$
+            \item $c<0 \land a >b \Rightarrow ac < bc$
+            \item $ab=0 \iff a=0\lor b=0$
+            \item $c\neq 0 \land ac = bc \Rightarrow a = b$
+        \end{enumerate}
+    \end{proposition}
+
+    \begin{proof}
+        \begin{enumerate}
+            \item $c>0 \iff c -c  > 0 -c \iff 0 > -c$ (usando la prop 1 dada por órden)
+            \item $c<0 \Rightarrow -c >0 \land a > b\Rightarrow -c.a > -c.b \iff -(ca) > -(cb) \iff cb > ca$ 
+            
+
+            (usando la propiedad 2 y 3 dadas por órden)
+            \item Ida. Supongamos que $a\neq 0 \land b\neq 0$
+            
+            Hay que dividir en casos \begin{enumerate}
+                \item $a>0 \land b>0 \Rightarrow ab > b.0 \iff ab>0$
+                \item $a>0 \land b<0 \Rightarrow a.b < b.0 \iff ab < 0$
+                \item Los otros dos caso son iguales
+            
+                Finalmente en todos los casos llegamos a que $ab \neq 0$ que es absurdo, provino de suponer $a\neq 0 \land b\neq 0$
+
+                Entonces vale el complemento $a=0 \lor b=0$
+            \end{enumerate}
+
+            La vuelta es trivial
+            \item $ac = bc \Rightarrow ac -bc = 0 \Rightarrow c(a-b) = 0$ por la prop anteriór 
+            $c= 0 \lor a-b=0 \Rightarrow a-b = 0 \Rightarrow a=b$
+        \end{enumerate}    
+    \end{proof}
+
+    \section{Divisibilidad}
+    \begin{definition}
+        Decimos que $a$ divide a $b$ sii $\exists k\in \Z$ tal que $a.k = b $ lo notamos $a|b$ y este $k$ es único dado que si $ak =b =ak'$
+        entonces $ak -ak' =0 \iff a(k-k') = 0 $ como $a\neq 0$ entonces $k=k'$. Si $a=0$ entonces $b=0$ en ese caso $k$
+        no es necesariamente único, pero es un caso que no nos interesa mucho
+    \end{definition}
+
+    \begin{proposition}
+        $\forall a,b \in \Z$ valen:
+        \begin{enumerate}
+            \item $1|\pm a \land -1|\pm a$
+            \item $a|\pm a \land -a|\pm a$
+            \item $a|b \iff a|\pm b \iff -a | \pm b$
+            \item $a|0$
+            \item $0|a \iff a = 0 $
+        \end{enumerate}
+    \end{proposition}
+    Las demostraciones son triviales y salen usando la definición
+
+    \begin{proposition}
+        \begin{enumerate}
+            \item $a|b \land b|c \Rightarrow a|c$
+            \item $a|b \land b|a \Rightarrow b = a \lor a = -b$
+            \item $a|b \land a|c \Rightarrow a|b\pm c$
+            \item $a|b\pm c \land a|b \Rightarrow a|c$
+            \item $a|b \Rightarrow a|bc$
+        \end{enumerate}
+    \end{proposition}
+
+    \begin{definition}
+        El conjunto de divisores de $n$ se nota $div(n) = \{d\in\Z \ | \ d|n \}$. Y cumple ciertas propiedades
+        \begin{enumerate}
+            \item Además $\{1,-1,n,-n\} \subseteq div(n)$
+            \item Además $div(1) = \{1,-1\}$
+            \item $div(0) = \Z$
+            \item $a \in div(n) \iff -a \in div(n)$
+            \item $div(n) = div(-n)$
+            \item $div(a) = div(b) \iff a = |b|$
+        \end{enumerate}
+    \end{definition}
+        \begin{lemma}
+            Si $b\neq 0$ y $a|b \Rightarrow |a|\leq |b|$
+        \end{lemma}
+        \begin{proof}
+            $a|b \Rightarrow b = ak \Rightarrow |b| = |ak|=|a||k| \geq |a|$ esto último vale por que $|k| \in \Z$
+        \end{proof}
+        
+        \begin{corollary}
+            Sea $n\in \Z$ con $n\neq 0$ entonces $Div(n)$ es finito y más aún $Div(n) \subseteq [-n,n]$
+        \end{corollary}    
+
+    \section{Números Primos}
+
+    Todo número entero $a$ tiene cuatro divisores triviales $\{a,-a,1,-1\}$.    
+    Un número natural mayor que 1 es primo si tiene solo divisores triviales.
+
+    \begin{remark} Veamos un par de detalles
+
+        \begin{enumerate}
+            \item 1 no es primo
+            \item 2 es primo (-2 no)
+            \item 0 no es primo
+            \item si p y q son primo entonces o no se dividen o son el mismo primo ($p|q$ con p y q primos entonces $p=q$)  
+        \end{enumerate}
+    \end{remark}
+
+    \begin{theorem}[Teorema fundamental de la aritmética]
+        Todo numero natural mayor que 1 se puede escribir como producto único de primos salvo permutaciones de orden
+        Además si el número es entero no natual menor que -1 se puede escribir como producto de primos multiplicados por -1
+    \end{theorem}
+    \begin{proof}
+        Veamos la existencia usando inducción fuerte. el caso base es trivial por que es 2 que ya és primo
+
+        Veamos la inducción, nuestra hipótesis es que todo numero $2\leq k \leq n$ se puede escribir como producto de primos
+
+        Ahora tenemos $n+1$ si es primo ya está escrito como producto de primos, si no és primo tiene algún divisor no trivial j
+        entonces $n+1=jl$ con $2<j<n+1 $ y $2<l<n+1$ por lo tanto $j$ y $l$ por hipótesis pueden ser escritos como productos de primos.
+
+        Pero entonces $k$ puede ser escrito multiplicando j y l como producto de primosz
+
+
+    \end{proof}
+
+    \begin{proposition}
+        Directamente del TFA tenemos que todo entero diferente de $\pm 1$ es divisible por un primo
+    \end{proposition}
+    \begin{remark}
+        Habría que correjirlo para números negativos, pero es directo. Si tenemos un número negativo lo
+        multiplicamos por -1, ahora usamos TFA y el primo divisor que obtenemos, nos sirve para el número
+        negativo también por que $p|a \iff p|-a$
+    \end{remark}
+
+    \begin{theorem}
+        Existen infinitos primos
+    \end{theorem}
+    \begin{proof}
+        Supongamos que hay finitos primos si los multiplicamos todos tenemos $p = p_1p_2\ldots p_n$. Ahora $p+1$
+        no es primo, por que es mas grande que $p_n$ que era el primo mas grande. Pero por el
+        inciso anteriór sucede que entonces existe $p_i$ entre nuestros primos tal que $p_i |p+1$ además
+        $p_i | p$ pero entonces $p_i |1$ lo que es absurdo
+    \end{proof}
+
+    \begin{lemma}
+        Dados dos enteros positivos a,b existen k y r con $0\leq r \leq b $ tales que $a = bk + r $. Mas aún 
+        $q$ y $r$ son únicos. 
+    \end{lemma}
+    \begin{proof}
+        Sea $H\{n\in\N | a <nb \}$ sabemos que $H\neq \emptyset$ entonces tiene primer elemento
+
+        sea $n$ su primer elemento y $q = n-1$ entonces $qb\leq a<nb = (q+1)b$, si nó $qb \leq a$ por que si fuera $a < qb = (n-1)b$ entonces
+        $n-1 \in H$ por lo cual $n$ no sería primer elemento
+
+        Ahora tenemos que $0 \leq a -qb < b $ llamando $a-qb = r$ tenemos que $0\leq r < b$ y $a = bq + r$
+
+        Veamos que son únicos, supongamos $bq + r = bq' + r'$ entonces $b(q-q') = r' -r$. sin pérdida de generalidades supongamos $r' > r$
+        entonces $r' -r \geq 0$ y además dado que $r'<b $ por definición entonces $r'-r < b$.
+
+        Pero entonces tengo que $b$ por un entero es igual a algo menor que $b$ y mayor igual que 0, la única forma de que 
+        esto suceda es que dicho algo sea cero y $b$ por un entero también sea cero.
+
+        Entonces $r'-r = 0 $ mostrando que $r=r'$ y $b(q-q') = 0$ como $b\neq 0$ entonces $q=q'$
+    \end{proof}
+
+    \begin{corollary}[Algoritmo de la división]
+        Dados $a,b \in \Z$ con $b\neq 0$ existen únicos enteros $q$ y $r$ tales que 
+        $a = bq + r$ con $0 \leq r < |b|$. 
+        
+        Notación: dicho $r$ se nota $r_b(a)$ que sería resto de dividir a por b
+    \end{corollary}
+
+    \begin{proof}
+        Veamos por casos $a>0 \land b>0$ es lo mismo que la anteriór y $b = |b|$ entonces ya está demostra
+        $a<0 y b>0$ tenemos que $-a>0$ entonces por inciso anteriór $-a = bk + r$ entonces $$a = -bk -r = -bk -r -b +b = b(-k-1) -r+b$$
+
+        Ahora sabemos si llamamos $b-r = r' \land -k-1=q$ tenemos $a = bq +r'$ con  $0 \leq r' < b = |b|$. 
+
+        La unicidad vale sale de la misma forma que el inciso anteriór
+
+        Caso $a>0 \land b<0$ entonces $-b>0$ entonces $a = -bj + r' $ si tomamos $-j = q$ tenemos $a=bq +r'$ con $0\leq r' < -b < |b|$
+
+        La unicidad sale igual
+
+        Caso $a<0 \land b<0$ entonces $-a>0 \land -b>0$ por lo tanto $-a = -bk +r'$ entonces 
+        $a = bk -r' = bk -b +b -r' = b(k-1) -r' - b = bq + r$ con $0 \leq r< |b|$
+    \end{proof}
+    
+    \section{Máximo común divisór}    
+
+    \begin{definition}
+        El máximo común divisór (MCD) entre dos enteros a y b es valga la rebundancia el mas grande de 
+        los divisores comunes entre a y b. Notación $(a:b)$
+
+        Otra forma de verlo es $max(div(a) \cap div(b))$
+    \end{definition}
+
+    \begin{remark}
+        el MCD está bien definido por que $div(a) \cap div(b)$ seguro es no vacío, dado que el 1 pertenece
+        a ambos conjuntos y son finitos ambos siempre y cuando $a \neq 0 \neq b$ por lo tanto la intersección
+        es finita también. Por otro lado todos los divisores de a y b son enteros,entonces su intersección
+        seran enteros
+    \end{remark}
+
+    \begin{remark}
+        Propiedades
+        \begin{enumerate}
+            \item $(a:b) \geq 1$
+            \item $(a:b) = (b:a)$
+            \item $(1:a) = 1\quad \forall a \in \Z$
+            \item $(a:b) = (-a:b) = (a:-b)=(-a:-b) = (|a|:|b|)$
+            \item Dos números a,b se dicen coprimos si $(a:b = 1)$
+        \end{enumerate}
+    \end{remark}
+
+    \subsection{Combinaciones Lineales}
+    \begin{definition}
+        $(a:b)$ tiene como propiedad relevante que puede ser escrito como combinación lineal de 
+        a y b, es decir $$\exists k,j\in\Z \ \text{ tal que } \ (a:b) = aj + bk$$
+    \end{definition}
+
+    \begin{lemma}[Caracterización I del MCD]
+        Dados a y b no nulos $(a:b)$ es el menor natural que puede ser escrito como combinación lineal
+        entre a y b.
+    \end{lemma}
+    \begin{proof}
+        Sea $e = na + mb$ el menór natural que puede ser escrito como combinación lineal entre a y b.
+        Veamos primero que divide a $b$ y a $a$.
+        Supongamos que no divide a b entonces $b = qe + r$ con $0<r\leq |e| = e$. Luego $b = qna +qmb +r$
+        por lo tanto $r = b -qna -qmb = b(1-qm) + (-qn)a $, pero entonces $r$ es una combinación lineal 
+        de a y b mas chica que $e$ lo cual es absurdo
+        Lo mismo sucede con a, entonces $e$ es divisr común, veamos ahora que es el más grande
+        Tomemos otro divisor común $d$ ahora $d|a \Rightarrow d|na$ y $d|b \Rightarrow d|mb$ entonces $d|nm+mb = e$
+        
+        Por lo tanto $d \leq |e| = e$. Entonces cualquier otro divisor común es mas peqeño que $e$
+    \end{proof}
+
+    \begin{corollary}
+        \begin{enumerate}
+            \item Si $a|bc \land (a:c) = 1 \Rightarrow a|b$
+            \item Si $a|c \land b|c \land (a:b)=1 \Rightarrow ab|c$
+        \end{enumerate}
+    \end{corollary}
+    \begin{proof}
+        \begin{enumerate}
+            \item Como $(a:c) = 1$ entonces existen $n,m\in\Z$ tales que $1 = am + cn$ entonces $b = bam +bcn$
+            
+        \indent Ahora $a|bc \land a|bam \Rightarrow a | bam + bcn = b$
+            \item $am +bn = 1$ entonces $cam +cbn = c$ pero $a|c$ entonces $ab|cb$ y $b|c$ entoces $ab|ca$.
+            
+            Juntando todo tenemos que $ab | cbn + cam = c$
+        \end{enumerate}
+        
+    \end{proof}
+
+    \begin{corollary}
+        Dados $a,b\in\Z$ $\frac{a}{(a:b)}$, $\frac{b}{(a:b)}$ son coprimos
+    \end{corollary}
+    \begin{proof}
+        Sea $(a:b) = am + bn$ entonces $1 = \frac{am}{(a:b)} + \frac{bn}{(a:b)} = 1 = m\frac{a}{(a:b)} + n\frac{b}{(a:b)}$
+        
+        Lo que implica que $1=(\frac{a}{(a:b)}:\frac{b}{(a:b)})$, por que no hay combinación lineal posible
+        mas pequéna que 1
+    \end{proof}
+
+    \begin{lemma}
+        Sea $a,b \in \Z$ entonces $(a:b) = (a:b+ma)$ para cualquier $n\in\Z$
+    \end{lemma}
+    \begin{proof}
+        $(a:b) = aj +bk = aj +bk -kma + kma = (j-km)a + k(b +ma)$. Entoces escribi a $a$ y a $b+ma$ como
+        combinación lineal.
+        Supongamos que dicha combinación lineal no es la mas chica, entonces existe $k',j'\in \Z$ 
+        tal que $ak' + (b+ma)j' < (j-km)a + k(b +ma) = (a:b)$ entonces reordenando $a(k' +mj) + bj' < (a:b)$
+        Pero esto es absurdo, no podemos tener una combinación de $a$ y $b$ mas chica que $(a:b)$
+    \end{proof}
+
+    \begin{lemma}[Caracterización 2 del MCD]
+        Sean $a,b$ y sea $d\in \N$ tal que 
+        \begin{enumerate}
+            \item $d|a \land d|b$
+            \item $d'|a \land d'|b \Rightarrow d'|d$
+        \end{enumerate}
+
+        Entonces $d = (a:b)$
+        
+    \end{lemma}
+
+    \begin{remark}
+        Vale la recíproca también, si $d(a:b)$ entonces cumple 1 y 2
+    \end{remark}
+
+    \begin{corollary}
+        Sean $a,b\in\Z$ con $a\geq b$ sabemos que existen $q,r$ tales que $a = qb + r$ con $0 \leq r < b$.
+        Entonces $(a:b) = (b:r)$
+    \end{corollary}
+    \begin{proof}
+        $(a:b) = (b:a) = (b: a + mb)$ ahora si tomamos $q= -m$ tenemos $(b:a+mb) = (b:a -qb)$ pero 
+        $a-qb = r_b(a)$ entonces $$ (a:b) = (b:a) = (b: a + mb) = (b:a -qb) = (b:r_b(a)) $$    
+    \end{proof}
+
+    \begin{proposition}
+        Usando este último resultado podemos tenemos una forma de calcular $(a:b)$ llamada algoritmo de euclides
+
+        $(a:b) = (b:r_1) = (r_1:r_2) = \ldots = (r_n:0)$ con $|b| > r_1 > r_2 > \ldots > 0 $
+
+        Como son todos números naturales esta suceción debe ser finita y nos quedamos. Finalmente $(a:b) = r_{n-1}$
+    \end{proposition}
+
+    \section{Mínimo Común Múltiplo}
+    \begin{definition}
+        Dados dos enteros no nulos a y b el mínimo común multiplo es el primer elemento de $div(a) \cap div(b)$. Notación [a:b] (mcd)
+    \end{definition}
+
+    \begin{proposition}
+        Algunas propiedades
+        \begin{enumerate}
+            \item $[a:b] = [b:a] $
+            \item $[1:b] = |b|$
+            \item $[0,b]=0$
+            \item $[a:b]=[|a|:|b|]$
+            \item Si $k$ es un múltiplo de a y b entonces $[a:b]|k$
+        \end{enumerate}
+    \end{proposition}
+    \begin{proof}
+        Demostremos el último item. k es múltiplo de a y b por lo tanto es mas grande que $[a:b]$ que es el mínimo común múltiplo
+
+        Ahora tenemos que $k = [a:b]q + r$ con $0\leq r < [a:b]$ pero $a|k \land b|k \land a|[a:b] \land b|[a:b]$ entonces $a|r \land b|r$
+
+        Lo que nos dice que r es un común múltiplo, pero entonces $r\geq [a:b] \lor r=0$ finalmente $r=0$ mostrando que $[a:b]|k$ 
+    \end{proof}
+
+    \begin{definition}
+        Caracterización del mínimo común múltiplo
+        \begin{enumerate}
+            \item $k$ es múltiplo de a y b
+            \item sea $k'$ múltiplo de a y b entonces $k|k'$
+        
+        \end{enumerate}
+        si y solo si $k=[a:b]$
+    \end{definition}
+
+    \begin{proposition}
+        Sean $a,b$ dos naturales (uno de ellos puede ser 0) entonces $ab=(a:b)[a:b]$
+    \end{proposition}
+    \begin{proof}
+        Análogamente queremos ver $\frac{ab}{(a:b)} = [a:b] $. Para empezar $\frac{ab}{(a:b)}$ es múltiplo común de a y de por que
+        $\frac{ab}{(a:b)} = b\frac{a}{(a:b)}$ mostrando que es múltiplo de b y análogamente probamos que es múltiplo de a.
+        Restaría ver que divide a todo otro mcd.
+        sea $m$ un múltiplo común de a y b entonces $m=ra=kb$ entonces $\frac{ra}{(a:b)} = \frac{kb}{(a:b)}$ ahora tenemos que $\frac{ra}{(a:b)} = k\frac{b}{(a:b)}$
+        por lo tanto $\frac{b}{(a:b)} | r\frac{a}{(a:b)}$ pero sabemos que $\frac{a}{(a:b)}, \frac{b}{(a:b)}$ son coprimos
+        entonces $\frac{b}{(a:b)} | r$ entonces puedo escribir $r = \ell\frac{b}{(a:b)} $
+        
+        Finalmente $m = ra = \ell\frac{b}{(a:b)} a = \ell\frac{ab}{(a:b)} $ que es obviamente divisible por $\frac{ab}{(a:b)}$
+    \end{proof}
+
+    \begin{proposition}
+        Sea $a = p_1^{k_1}p_2^{k_2}\ldots p_n^{k_n}$ y $b = p_1^{j_1}p_2^{j_2}\ldots p_n^{j_n}$ números expresados como factores primos
+        entonces $a|b \iff k_i\leq j_i \quad \forall i\leq n$
+    \end{proposition}
+
+    \begin{proof}
+        Ida, como $a|b$ entonces $b=ca$ como son iguales ambos lados tienen los mismos primos a las mismas potencias, ahora si $c=1 \iff a=b$
+        pero el caso interesante es si $a\neq b$ esto implica que $c$ o bien es primo o se escribe como producto de primos, en ambos
+        casos a no puede tener todos los primos a las potencias iguales que los de b, por que si no $ca\neq b$ entonces debe tener 
+        alguna potencia menor
+
+        La vuelta. Si $k_i \leq j_i \quad \forall i\leq n$ entonces basta con usar un $c$ que corrija y emparece todos los exponentes
+        para que $b=ac$ dicho c sería $c= p_1^{j_1-k_1}p_2^{j_2k_2}\ldots p_n^{j_n-k_n} $
+    \end{proof}
+
+    \begin{corollary}
+        Sale directo de la proposicón anteriór 
+        Si $a=p_1^{k_1}p_2^{k_2}\ldots p_n^{k_n}$ entonces 
+        $div(a) = \{\pm p_1^{j_1}p_2^{j_2}\ldots p_n^{j_n} : j_i \leq k_i \quad \forall i \leq n\}$
+    \end{corollary}
+
+    \begin{corollary}
+        Si $a = p_1^{k_1}p_2^{k_2}\ldots p_n^{k_n}$ entonces a tiene $(k_1 + 1)(k_2 + 1)\ldots(k_n+1)$ divisores
+    \end{corollary}
+
+    \begin{lemma}
+        Sea $a = p_1^{k_1}p_2^{k_2}\ldots p_n^{k_n}$ y $b = p_1^{j_1}p_2^{j_2}\ldots p_n^{j_n}$ entonces:
+        \begin{enumerate}
+            \item $(a:b) = p_1^{min(j_1,k_1)}p_2^{min(j_2,k_2)}\ldots p_n^{min(j_n,k_n)} $
+            \item $[a:b] = p_1^{max(j_1,k_1)}p_2^{max(j_2,k_2)}\ldots p_n^{max(j_n,k_n)} $
+        \end{enumerate}
+    \end{lemma}
+
+    \begin{corollary}
+        Si $a|c \land b|c$ y $(a:b)=1$ entonces $ab|c$
+    \end{corollary}
+
+    \begin{proof}
+        $(a:b) = 1 $ entonces existen $m,n\in\Z$ tal que $1 = ma + nb$ entonces $c = mac + nbc$. Por otro lado sabemos que $a|c$ entonces 
+        $ab|cb$ entonces $ab|cbn$ también $b|c$ entonces $ba|ca \Rightarrow  ab|cam$ entonces $ab|mac + nbc = c$
+    \end{proof}
+
+    \section{Desarrollos P-Ádicos}
+    \begin{proposition}
+        Dado cualquier $n\in\N $ y dado $s \in \N$ con $s\geq 2$, para $n\in\N$ tenemos que $\exists ! \ a_0,a_1,\cdots,a_k$ con $0\leq a_i < s$ 
+        tales que $$n = a_ks^k + a_{k-1}s^k-1+\cdots + a_1s + a_0$$.
+
+        En estos casos $s$ es llamada la base. Notamos $n =(a_ka_{k-1}\ldots a_0)_s $
+    \end{proposition}
+    \begin{proof}
+        Unicidad: Supongamos $n =b_ks^k + b_{k-1}s^k-1+\cdots + b_1s + b_0 = a_ks^k + a_{k-1}s^k-1+\ldots + a_1s + a_0$
+        Entonces $$n = s(a_ks^{k-1} + a_{k-1}s^k-2+\cdots + a_1) + a_0  = sq_1 + a_0 \text{ con } 0\leq a_0 < s$$
+        por otro lado $$ n = s(b_ks^{k-1} + b_{k-2}s^k-1+\cdots + b_1) + b_0 = sq_2 + b_0 \text{ con } 0\leq b_0 < s $$
+
+        Entonces $sq_1 + a_0 = sq_2 + b_0$ pero por algoritmo de división $q_2,q_1,b_0,a_0$ 
+        son únicos entonces $$q_1=q_2 \land b_0 = a_0$$ Mostrando que ambas formas eran exactamente iguales
+
+        Existencia: si $n<s$ entonces $n = a_0$ ya nos queda lo que queríamos con su notación $n = (a_0)_s$.
+
+        Si $n>s$ entonces algoritmo de división tenemos $q_1, r_1\in\Z$ tales que $n = sq_1 +r_1$. Ahora si $q_1 < s$ 
+        ya tenemos lo que necesitamos, nos queda $n = (q_1r_1)_s$.
+
+        Si $q_1>s$ entonces devuelta por algoritmo de divisón existen $q_2,r_2\in \Z$ tales que $q_1 = q_2s + r_2$. Juntando todo
+        nos queda $n = s(q_2s+r_2) + r_1 = q_2 s^2 + r_2s + r_1$ devuelta si $q_2 < s$ ya tenemos lo que necesitamos y $n = (q_2r_2r_1)_s$
+
+        Notemos que $q_1 > q_2 > \cdots > q_n > 0$ (son estrictamente decrecientes por algoritmo de división y 
+        son mayores que cero por que s y n son números naturales y por algoritmo de divisón (pensar)).
+
+        Entonces en algún momento $q_n < s$ por que son todos naturales y no hay infinitos naturales entre dos números naturales
+        
+    \end{proof}
+
+    \section{Congruencia de Enteros}
+        \begin{definition}
+            Dada $m\in\N$ y $a,b \in\Z$ decimos que $a$ es congruente con $b$ módulo $m$ si $m|a-b$. Lo escribimos $a\equiv b (m)$
+        \end{definition}
+        \begin{proposition}
+            Es trivial notar que congruencia es una relación de equivalencia
+        \end{proposition}
+
+        \begin{proposition}
+            Algunas propiedades
+            \begin{enumerate}
+                \item $a\equiv b (m)\land c \equiv d(m)$ entonces $a+c \equiv b+d (m) \land ac \equiv bd (m)$
+                \item Si $a\equiv b(m) \land \alpha \equiv \beta (m)$ entonces:
+                    \begin{enumerate}
+                        \item $ax + \alpha y \equiv bx + \beta y $
+                        \item $a^n \equiv b^n (m)\quad \forall n\in\N$
+                        \item (Polinomios) $f(a) \equiv f(b)(m)\quad\forall f\in\Z[X]$
+                    \end{enumerate}
+            \end{enumerate}
+        \end{proposition}
+
+        \begin{proposition}
+            $a \equiv b(m) \iff ac\equiv bc (mc)$
+        \end{proposition}
+        \begin{proof}
+            $m|a-b \Rightarrow a-b=km \iff ca -cb = k(cm)$ finalmente $cm|ca-cb$ entonces $ca\equiv cb (mc)$
+        \end{proof}
+
+        \begin{proposition}
+            Si $ac \equiv bc (m)$ y $d=(m:c)$ entonces $a\equiv b(\frac{m}{d})$
+        \end{proposition}
+        \begin{proof}
+            $ac-bc=mk \iff \frac{c}{d}a - \frac{c}{d}b = k\frac{m}{d}\iff \frac{c}{d}(a-b) = k\frac{m}{d} $
+
+            Entonces $\frac{m}{d} | \frac{c}{d}(a-b)$ como $\frac{m}{d}$ es coprimo con $\frac{c}{d}$ concluimos que
+            $\frac{m}{d} | (a-b)$ o lo que es lo mismo $a\equiv b (\frac{m}{d})$
+        \end{proof}
+
+        \begin{corollary}
+            Algunos resultados
+            \begin{enumerate}
+                \item Del la anteriór proposición se sigue $ac\equiv bc (mc) \iff a\equiv b (m)$
+                \item Si $(m:c)=1$ entonces $ac\equiv bc (m) \iff a\equiv b (m)$ 
+                \item Si $p$ primo y $p\neq m$ entonces $ap\equiv bp (m) \iff a\equiv b(m)$
+            \end{enumerate}
+        \end{corollary}
+
+        \begin{remark}
+            Para el segundo y tercer item: las vueltas valen siempre, pero las idas requieren $(m:c) = 1 \land p\neq m$ respectivamente
+            si no se cumplen estamos en el caso mostrado en la proposición anteriór
+        \end{remark}
+
+        \begin{lemma}
+            Si $a\equiv b(m)$ y $0\leq |b-a| <m$ entonces $a=b$
+        \end{lemma}
+        \begin{proof}
+            $a-b=km \Rightarrow |a-b| = |k|m$ pero por hipótesis $0 \leq |a-b| < m$ entonces $k=0$ 
+            necesariamente
+        \end{proof}
+            
+        \begin{lemma}
+            Dos enteros son congruentes módulo m si y sólo si tienen el mismo resto dividio por m
+        \end{lemma}
+        \begin{proof}
+            Ida. Tenemos $a\equiv b (m)$ con $a=q_1m+r_1 \land b=q_2m +r_2$. Sabemos que $m|a-b$
+
+            Equivalentemente $m|(q_1 - q_2)m +r_1-r_2$ y $m|(q_1-q_2)m$ entonces $m|r_1-r_2$ o lo mismo 
+            $r_1\equiv r_2 (m)$
+            
+            .Pero además sabemos que $0<r_1 <m \land 0<r_2 <m$ entonces sabemos que $r_1 -r_2 < m $
+            por lo tanto $0<|r_1-r_2|<|m| = m$ 
+
+            Entonces $r_1 = r_2$ usando el lema anteriór
+
+            Vuelta. Sabemos que $a = q_1m + r_1$ y $b=q_2m+r_2$ con $r_1=r_2$ entonces $a-b = (q_1 -q_2)m$
+
+            Entonces $m|a-b$ mostrando que $a\equiv b (m)$
+        \end{proof}
+
+        \begin{proposition}
+            Si $a\equiv b (m)$ y $a\equiv b (n)$ y $(m:n) = 1$ entonces $a\equiv b (mn)$
+        \end{proposition}
+        \begin{proof}
+            $m|a-b \land n|a-b$ como $(m:n) =1$ entonces $mn|a-b$ mostrandoq ue $a\equiv b(mn)$
+        \end{proof}
+        \begin{remark}
+            La recíproca también vale
+        \end{remark}
+        \begin{corollary}
+            Sea $m=p_1^{j_1}p_2^{j_2}\ldots p_n^{j_n}$ sus factores primos entonces $a\equiv b(m)\iff a\equiv b(p_i^{j_i})$
+        \end{corollary}
+
+        \begin{corollary}[Sistemas equivalentes]
+            $a_1\equiv b (c_1) \land a_2\equiv b (c_2) \ldots a_n\equiv b(c_n)$ con $c_1\ldots c_n$ coprimos
+            2 a 2 $\iff a_1a_2\ldots a_n \equiv b (c_1c_2\ldots c_n)$ 
+        \end{corollary}
+
+
+        \begin{lemma}
+            Sea $a\in K$ con $a\neq 0$ entonces existe un $a'\in\Z$ no nulo tq $aa' \equiv 1(m) \iff (a:m)=1$.
+            Mas aún $a'$ es único congruente m
+        \end{lemma}
+        \begin{proof}
+            Unicidad supongamos exsiten $a',a''\in\Z$ tal que $aa'\equiv 1(m) \land aa''\equiv 1(m)$
+
+            Entonces $aa'\equiv aa''(m)$ como $(a:m)=1$ puedo dividir de ambos lados
+            por lo tanto $a'\equiv a'' (m)$
+
+            Ida. $m|aa'-1$ entonces si $d=(a:m)$ sabemos que $d|m$ por lo tanto $d|aa'-1$ pero además 
+             $d|a$ y entonces $d|1$ y $d\geq 1$ entonces $d=1$
+            
+            Vuelta. Existen $k,p\in\Z$ tales que $1 = ka + pm$ entonces $ka-1 = -pm$ entonces $m|ka-1$
+            o lo que es lo mismo $ka\equiv 1(m)$ ahora tomamos $k=a'$ y obtenemos lo que queríamos
+        \end{proof}
+
+        \begin{remark}
+            Si $a\equiv b(m) \land (b:m)=1 \Rightarrow (a:m)=1$
+        \end{remark}
+        \begin{proof}
+            $a=b+km$ como si $d|a \land d|m$ entonces $d|b$ luego $d$ es divisor común de b y m
+            por lo tanto es $d=1$
+        \end{proof}
+
+
+        \section{Teorema de Euler}
+        \begin{definition}[Phi de Euler]
+            $\phi (n) = | \{a\in\Z \ | \ 1<a\leq n \land (a:n)=1 \}|$
+            
+        \end{definition}
+        
+        \begin{remark}
+            Algunas propiedades. Si $p$ primo
+            \begin{enumerate}
+                \item $\phi(p) = p-1$
+                \item $\phi(p^2) = p^2-p$
+                \item $\phi(p^k) = p^k - p^{k-1}$
+                \item $m,n \in \N$ entonces $\phi(n)\phi(m) = \phi(nm)$ si $(m:n)=1$
+            \end{enumerate}
+        \end{remark}
+        \begin{definition}
+            Una forma de calcular $\phi(m)$
+            $$\phi(m)=m\prod_{p|m}^n (1-\frac{1}{p_i})$$
+        \end{definition}
+        \begin{definition}
+            Un sistema residual completo (de ahora en mas llamado sistema residual) es un conjunto 
+            con m elementos, cada uno un representante de cada una de las m clases de equivalencia módulo m
+
+            Un sistema residual reducido es un subconjunto del anteriór donde solo estan los representantes
+            coprimos con m
+        \end{definition}
+
+        \begin{lemma}
+            Sea $(k:m)=1$
+            \begin{enumerate}
+                \item Si $\{a_1,a_2,\ldots a_n\}$ es un sistema residual 
+                módulo m entonces $\{ka_1,ka_2,\ldots ka_n\}$ es un sistema residual
+                \item Si $\{b_1,b_2,\ldots b_{\phi(m)}\}$ es un sistema reducido entonces 
+                $\{kb_1,kb_2,\ldots kb_{\phi(m)}\}$ es un sistema reducido
+            \end{enumerate}
+        \end{lemma}
+
+        \begin{proof}
+            \begin{enumerate}
+                \item Probemos que son todos no congruentes en $\{ka_1,ka_2,\ldots ka_n\}$.
+                Supongamos que tenemos  $ka_i \equiv ka_j (m)$ en el conjunto, por un lado sabemos que 
+                $a_i$ y $a_j$ deben estar en $\{a_1,a_2,\ldots a_n\}$ pero como $(k:m)=1$ 
+                tenemos que $a_i \equiv a_j (m)$ pero no puedo tener dos número equivalentes en el mismo sistema
+                por como se define sistema residual (un representante de cada clase de equivalencia)
+
+
+                Entonces $\{ka_1,ka_2,\ldots ka_n\}$ tiene elementos NO equivalentes entre si y tiene la misma
+                cantidad de elementos que $\{a_1,a_2,\ldots a_n\}$ mostrando que es sistema residual módulo m
+                
+                \item Sabemos,usando la misma idea que el ejericio anteriór que ningún par de 
+                $k_i,k_j \in \{kb_1,kb_2,\ldots kb_n\}$ son equivalentes. Además ambos sistemas tiene la misma
+                cantidad de elementos. 
+                
+                Por otro lado $$(b_i:m)=1 \quad\forall i\in\N \quad 1\leq i \leq \phi(m)$$ justamente por 
+                definición de sistema reducido. Además, por hipótesis $(k:m)=1$ 
+                entonces $$(kb_i:m)=1 \quad\forall i\in\N \quad  1\leq i \leq \phi(m)$$
+
+                Luego $\{kb_1,kb_2,\ldots kb_{\phi(m)}\}$ es un sistema reducido
+            \end{enumerate} 
+        \end{proof}        
+
+
+        \begin{theorem}[Teorema de Euler Fermat]
+            Si $(a:m)=1$ entonces $$a^{\phi(m)} \equiv 1 (m)$$
+        \end{theorem}
+
+        \begin{proof}
+            Sea $$\{b_1\ldots b_{\phi(m)}\}$$ un sistema reducido mod m entonces $$\{ab_1\ldots ab_{\phi(m)}\}$$
+            También lo és por ser $(a:m)=1$
+
+            Pero entonces $$b_1\ldots b_{\phi(m)} \equiv ab_1\ldots ab_{\phi(m)} (m) $$ Esto vale por que ambos
+            conjuntos tienen representantes modulo m y los representantes son equivalentes mod m
+
+            Entonces $$b_1\ldots b_{\phi(m)} \equiv a^{\phi(m)}(b_1\ldots b_{\phi(m)}) (m)$$ Sabemos que 
+            todos los $b_i$ son coprimos con m por definición de sistema residual reducido, entonces 
+            $$1  \equiv a^{\phi(m)} (m)$$ 
+        \end{proof}
+
+        \begin{corollary}[Pequeño teorema de Fermat]
+            Si p primo entonces $\phi(p) = p-1$ por lo tanto tendríamos que $(p:a) = 1 $
+            $$ a^{p-1} \equiv 1 (p)$$
+
+            que es el pequeño teorema de fermat, como caso particular de Euler , por lo tanto ya quedó
+            demostrado
+        \end{corollary}
+
+        \begin{theorem}[Teorema de Wilson]
+            Si $p$ primo entonces $(p-1)! \equiv -1 (p)$
+        \end{theorem}
+        \begin{proof}
+            queremos ver que $1.2\ldots (p-2)(p-1) \equiv -1 (p)$ sabemos que $p-1\equiv -1 (p)$
+            entonces queremos ver que $1.2\ldots (p-2) \equiv 1 (p)$.
+
+            Sabemos que si $1 \leq a \leq p-2$ entonces $(a:p)=1$ por lo tanto usando lema anteriór 
+            tenemos que para cada $a$ existe un $a*$ tal que $aa*\equiv 1(p)$ y si $a_1\neq a_2$ 
+            entonces $a_1*\neq a_2*$ por unicidad además es único congruente p por lo tanto
+            tenemos un representante menor estricto que p
+
+            ** Veamos que para cada factor a de $(p-2)!$ a es distinto de su inverso $a*$. Supongamos que no,
+            entonces tenemos un $a\in [2,p-2]$ tal que $a=a*$ entonces $a^2 = aa* \equiv 1 (p)$. 
+ 
+            Luego $(a-1)(a+1) = a^2 -1 \equiv 0 (p)$ entonces $a-1\equiv 0 (p)$ o $a+1\equiv 0 (p)$. Pero sabemos
+            que $a-1 \land a+1$ son menores que p entonces $a=1$ o $a = p-1$ lo cual es absurdo en ambos casos.
+            Además es facil ver que 1 es inverso de si mismo y $(p-1)(p-1)=p^2 -2p +1 \equiv 1 (p)$ entonces 
+            $p-1$ es inverso de si mismo también.
+
+            Pero entonces todos los otros inversos seran menores que $p-1$ y mayores que 1, por que ya dijimos
+            no pueden ser inversos de dos numeros diferentes, entonces para $a$ tal que $1<a <p-1$, existe
+            $a*$ inverso de a modulo p
+
+            Entonces podemos reescribir y reordenar $(p-2)! = 1.(a_1a*_1)\ldots (a_qa*_q) \equiv 1 (p)$
+
+            Entonces $(p-1)! = (p-1)(p-2)! \equiv (p-1) (p)$ y $p-1 \equiv -1 (p)$
+
+            ** Esta es una demostración también de que $p-1 \land 1$ son inversos de si mismo modulo $p$. 
+            Es por esto que no lo podemos simplificar y al resto si
+        \end{proof}
+
+        \begin{definition}
+            Dado $n\in\N$ definimos $\Z_n$ como el conjunto de clases de equivalencia módulo m
+            $Z_n = \{[0]_m,[1]_m,\ldots , [n-1]_m\} = \{[1]_m,[2]_m \ldots [m-1]_m\}$
+        \end{definition}
+        \begin{definition}
+            Definimos 
+            \begin{enumerate}
+                \item $+:Z_n\times Z_n \rightarrow Z_n $ dada por $[a]+[b] = [a+b]$
+                \item $*:Z_n\times Z_n \rightarrow Z_n $ dada por $ [a]*[b] = [a*b]$
+            \end{enumerate}
+        \end{definition}     
+        
+        \begin{definition}
+            Usando esto se puede probar que $(Z_n,+,*)$ es un anillo conmutativ es un anillo conmutativoo
+        \end{definition}
+
+
+        \begin{definition}
+            Sea $n\in\N$ y $[a]\in \Z_n$
+            \begin{enumerate}
+                \item $[a]$ es unidad si $\exists [b]$ tq $[a]* [b] = [1]$
+                \item $[a]$ es un divisor de cero si $\exists [b]\in \Z_n $ diferente de $[0]$ 
+                tq $[a]* [b]=0$
+            \end{enumerate}
+        \end{definition}
+
+        \begin{proposition}
+            Algunas propiedades
+            \begin{enumerate}
+                \item $[n-1]$ es unidad modulo n
+                \item Si $a|m$ entonces $[a]$ es divisor de cero módulo n
+                \item Si $(a:m) > 1$ entonces $[a]$ es divisor de cero módulo n
+                \item $[a]$ es unidad módulo m $iff$ $(a:m)=1$, ya lo habíamos visto
+            \end{enumerate} 
+
+        \end{proposition}
+        \begin{corollary}
+            $\Z_n$ no tiene divisor de cero o equivalentemente todos sus elementos no nulos son unidades
+            (son invertibles) si y sólo si $m$ es primo. (Otra forma de decirlo $\Z_p$ es un cuerpo si 
+            y sólo si p es primo)
+        \end{corollary}
+
+        \section{Ecuaciones lineales de congruencia}
+
+        \begin{definition}
+            Una ecuación lineal de congruencia tiene esta pinta $$ ax \equiv b (m)$$
+            y tiene solución si y sólo si $(a:m) | b$. Si tiene solución tiene infinitas, aunque ya veremos
+            que módulo m no son infinitas
+        \end{definition}
+        \begin{theorem}
+            Consideremos $ax\equiv b (m)$
+            \begin{enumerate}
+                \item $(a:m) = 1$ entonces la ecuacíon tiene solución y es única módulo m
+                \item $(a:m) =d\neq 1$ entonces la ecuación tiene solución si sólo si $d|b$. Y dicha solución
+                es única módulo $\frac{m}{d}$
+            \end{enumerate}
+        \end{theorem}
+        \begin{proof}
+            Tenemos $ax\equiv b(m)$
+            \begin{enumerate}
+                \item $(a:m)=1$ entonces tenemos $ak +mj = 1$ por lo tanto $akb + mjb = b$ entonces
+                si tomamos $jb=q \land kb = x'$ tenemos $ax' - b = qm$ entonces tenemos que $x'$ cumple
+                la ecuación.
+
+                Veamos que es única módulo m. Supongamos que tenemos dos soluciones distintas $c \land c'$ 
+                modulo m entonces $c<m \land c'<m$. Pero $ac \equiv b \equiv ac' (m)$ entonces $ac\equiv ac' (m)$
+                como $(a:m)=1$ tenemos $c\equiv c'(m)$ como ambas son menores que m entonces $c=c'$ absurdo
+
+                \item Ida la ecuación tiene solución entonces $ax -b = km$ ahora como $d=(a:m)$ entonces 
+                $d|-ax \land d|km$ entonces $d|b$. 
+
+                La vuelta $d|b$ y $(a:m) = 1$ entonces $ax\equiv b(m) $ tiene solución si y sólo si
+                existe $k\in\Z$ tal que $mk=ax-b$ si y sólo si $k\frac{m}{d} = \frac{a}{d}x - \frac{b}{d}$
+                si y sólo si $\frac{a}{d}x \equiv \frac{b}{d} (\frac{m}{d})$, pero sabemos que 
+                $(\frac{a}{d} :\frac{m}{d}) = 1$ entonces estamos en el caso 1, por lo tanto tiene solucíon
+                Como la última ecuación tiene solucíon entonces por la cadena $ax\equiv b (m)$ también tiene.
+
+                Veamos que es única sean $x_0,x_1$ soluciones, entonces $ax_0\equiv b(m)$ y $ax_1\equiv b(m)$
+                usando la misma cadena que el párrafo anteriór llegamos a 
+                $\frac{a}{d}x_0 \equiv \frac{b}{d} (\frac{m}{d})$ y 
+                $\frac{a}{d}x_1 \equiv \frac{b}{d} (\frac{m}{d})$ 
+                entonces $\frac{a}{d}x_0 \equiv \frac{a}{d}x_1 (\frac{m}{d})$ como 
+                $(\frac{a}{d}:\frac{m}{d})=1$ entonces $x_0\equiv x_1 (\frac{m}{d})$. Mostrando que la solución
+                es única modulo $\frac{m}{d}$
+            \end{enumerate}
+        \end{proof}
+
+        \begin{proposition}
+            El sistema $x\equiv b_1 (n_1)$ y $x\equiv b_2 (n_2)$ tiene solución si y sólo si $(n_1:n_2)|b_1 -b_2$
+
+            Además la solución es única mod $[n_1:n_2]$
+        \end{proposition}
+        \begin{proof}
+            Ida: Supongamos $x_0$ es solución entonces $n_1 | x_0 - b_1$ y $n_2 |x_0 -b_2$ entonces 
+            $(n_1:n_2)|x_0-b_2 - (x_0 -b_1) = b_1 - b_2$
+
+            Vuelta: $(n_1:n_2) |b_1-b_2$ entonces $n_1x \equiv b_1-b_2 (n_2)$ tiene solución
+            
+            Por lo tanto existe $x_0$ tal que $n_1x_0 = b_1-b_2 + n_2l$. Pero entonces tomo 
+            $k_0 = n_2l -b_2 =n_1x_0 -b_1 $ y $k_0$ satisface $k_0 \equiv b_2 (n_2)$ y $k_0\equiv b_1(n_1)$
+            Mostrando que dicho sistema tiene solución
+
+            Finalmente si tenemos dos soluciones $x_0,x_1$ entonces $x_0 - x_1 \equiv 0 (n_1)$
+            y $x_0 - x_1 \equiv 0 (n_2)$. Entonces $n_1|x_0-x_1$ y $n_2|x_0-x_1$ entonces $x_0-x_1$
+            es común múltiplo de $n_1$ y $n_2$ por lo tanto $[n_1:n_2]|x_0-x_1$ 
+            
+            Equivalentemente
+            $x_0\equiv x_1 ([n_1:n_2])$
+        \end{proof}
+
+        \begin{theorem}[Teorema Chino del Resto]
+            Sean $n_1,n_2\ldots n_k \in \N$ coprimos dos a dos el sistema de congruencia $x\equiv b_1(n_1)$
+            \[ 
+                \begin{cases} 
+                x\equiv b_1 (n_1) \\
+                x\equiv b_2 (n_2) \\
+                 \vdots \\
+                x\equiv b_k (n_k)
+                \end{cases}
+            \]
+                Tiene solución y es única mod $\prod_{i=1}^k n_i$
+        \end{theorem}
+
+        \begin{proof}
+                Sea $n = n_1n_2\ldots n_k$ y para cada $i\in\N$ tal que $1\leq i \leq k$ sea 
+                $a_i = \frac{n}{n_i}$ como $(n:a_i) = 1$ tenemos que $a_ix \equiv b_1 (n)$ tiene solución
+                llamemos a dicha solución $x_i$ ahora si tomamos $z = \sum_{i=1}^{k} a_ix_i$ tenemos que 
+                $z \equiv a_ix_i (n_i)$ (por que $n_i$ va a dividir a todos los $a_j$ tal que $j\neq i $)
+                entonces $z \equiv b_i (n_i)$ y esto vale para cualquier $i\in\N$ tal que $0\leq i \leq k$
+                Por lo tanto $z$ es solución de todas las ecuaciones del sistema.
+
+                Veamos que es unica mod $\prod_{i=1}^k n_i$. Sea $x_0$ y $x_1$ dos soluciones, entonces
+                $x_0\equiv b_i (n_i)$ y $x_1\equiv b_i(n_i)$ para todo $i\in\N$ con $0\leq i \leq k$
+                Entonces $x_0\equiv x_1 (n_i)$ para todo $i\in\N$ con $0\leq i \leq k$
+                Entonces $n_i| x_0 - x_1$ para todo $i\in\N$ con $0\leq i \leq k$, como son todos coprimos
+                $n_1n_2\ldots n_k | x_0 - x_1$ lo que me dice que $x_1 \equiv x_0 (n_1n_2\ldots n_k)$
+        \end{proof}
+
+        \newpage
+        \section{Números Reales}
+        \begin{definition}[Axiomas de cuerpo]
+            Teniendo un conjunto $A$ y las dos operaciones típica $(+,*)$
+            Entonces si $(A,+,*)$ es un cuerpo cumple
+            Sobre la suma \begin{enumerate}
+                \item Asociativa
+                \item Conmutativa
+                \item Tiene elemento neutro
+                \item Existe opuesto
+            \end{enumerate}
+            Sobre la multiplicación
+            \begin{enumerate}
+                \item Asociativa
+                \item Conmutativa
+                \item Tiene elemento neutro
+                \item Existe opuesto
+            \end{enumerate}
+            Sobre la suma y la multiplicación, la ley de la distributiva
+        \end{definition}
+
+        \begin{remark}
+            Todo cuerpo es un anillo en particular, $\R$ es un cuerpo
+        \end{remark}
+
+        \begin{definition}[Axiomas de cuerpo ordenado]
+            Todos los del cuerpo y estas otras
+            \begin{enumerate}
+                \item Tricotomia y transitividad
+                \item Compatibilidad en la suma: $a\geq b \Rightarrow a+c \geq b+c$
+                \item Compatibilidad en la multiplicación: $c>0 \land a>b \Rightarrow ca> cb$
+            \end{enumerate}
+        \end{definition}
+        \begin{remark}
+            $\R$ resulta un cuerpo ordenado (dándole el órden tradicional). Pero $\Z_p$ es un cuerpo no ordenado
+            $\mathbb{C}$ tampoco
+        \end{remark}
+
+        \begin{definition}[Axiomas de cuerpos ordenados y completos]
+            Tiene todos los del cuerpo ordenado y además cumple el axioma de completitud
+
+                Axioma de completitud: Todo conjunto no vacío y acotado superiormente tiene supremo
+        \end{definition}
+        \begin{remark}
+            $\R$ es completo, pero $\mathbb{Q}$ no lo és
+        \end{remark}
+
+        \begin{proposition}
+            En todo cuerpo (en particular en $\R$) valen 
+            \begin{enumerate}
+                \item $x0=0$
+                \item $x+y = x+z \Rightarrow y=z$
+                \item $\exists \ !x$ tq $a+x=b$
+                \item $ab=0 \Rightarrow a=0 \lor b=0$
+                \item $-(-x)=x$
+                \item $-(x+y)=(-x)+(-y)$
+                \item $=-(xy)=(-x).y = x.(-y)$
+                \item $(-x)(-y) = xy$
+            \end{enumerate}
+        \end{proposition}
+        Todas salen usando que un cuerpo es anillo conmutativo
+
+        \begin{proposition}
+            En todo cuerpo valen
+            \begin{enumerate}
+                \item $(x^{-1})^{-1}=x$
+                \item $(xy)^{-1} = x^{-1}y^{-1}$ 
+                \item $(-1)^{-1}=-1$
+                \item $(-x)^{-1} = -x^{-1}$
+            \end{enumerate}
+        \end{proposition}
+        \begin{proof}
+            Veamos cada una
+            \begin{enumerate}
+                \item $(x^{-1})^{-1}=x \iff (x^{-1})^{-1}x^{-1}=1$ y el de la derecha vale por definición
+                \item tenemos que $(xy)^{-1} = x^{-1}y^{-1} \iff (xy)^{-1} (xy)=1$.
+                Entonces $(xy)^{-1}$ es inverso de $xy$ entonces $(xy)^{-1} = x^{-1}y^{-1}$
+            \end{enumerate}
+        \end{proof}
+
+       \begin{proposition}
+            En todo cuerpo vale 
+            \begin{enumerate}
+                \item $xy=0 \Rightarrow x=0 \lor y=0$
+                \item En particular $xy=\neq 0 \Rightarrow x\neq 0 \lor y\neq0$
+                En particular 
+                \begin{enumerate}
+                    \item $x^2 =0 \iff x=0$
+                    \item $x^2 =1 \iff x=1 \lor x=-1$
+                    \item $x^{-1}=x \iff x=1 \lor x=-1$
+                \end{enumerate}
+            \end{enumerate}
+        \end{proposition}
+        \begin{proof}
+            Demostremoslas
+            \begin{enumerate}
+                \item Ya lo vimos arriba
+                \item Supongamos $x\neq 0$ entonces como $xy=0$ sucede $x^{-1}xy=0$ por lo tanto $y=0$
+                \begin{enumerate}
+                    \item $x^2=0 \Rightarrow x.x=0 \Rightarrow x=0 \lor x=0$ usando la de arriba
+                    \item $x^2=1 \iff x^2-1=0 \iff (x-1)(x+1) = 0 \iff x-1=0 \lor x+1=0$
+                    \item $x^{-1}=x \iff x^2=1 \iff  x=1 \lor x=-1$ usando $b$
+                \end{enumerate}
+
+            \end{enumerate}
+        \end{proof}
+
+        \begin{proposition}
+            En todo cuerpo ordenado valen
+            \begin{enumerate}
+                \item $0<1$
+                \item $x>0 \iff -x<0$
+                \item $x<y \iff -x>-y$
+                \item $x<y \land m < b \Rightarrow x+m>y +b$
+                \item $x<y \land z<0 \Rightarrow xz > yz$
+                \item
+                \begin{enumerate}
+                    \item $x>0 \land y>0 \Rightarrow xy>0$
+                    \item $x>0 \land y<0 \Rightarrow xy<0$
+                    \item $x<0 \land y<0 \Rightarrow xy>0$
+                    \item $x<0 \land y>0 \Rightarrow xy<0$
+                \end{enumerate}
+                \item $x>0 \iff x^{-1} >0$
+            \end{enumerate}
+        \end{proposition}
+        \begin{proof}
+            \begin{enumerate}
+                \item Trivial
+                \item $x>0 \iff -x +x > -x +0 \iff 0> -x$
+                \item $x<y \iff -x - y + x < -x -y +y \iff -y < -x $
+                \item $x + m < y +m < y+b$
+                \item $x<y$ por 2 $-z>0$ entonces $-zx<-zy$ por 3 $xz>yz$
+                \item Salen todas con el 5.
+                \item $x>0$ suponemos $x^{-1} < 0$ entonces $xx^{-1} < 0x^{-1} \iff 1 < 0$ abs 
+            \end{enumerate}
+        \end{proof}
+
+
+        \begin{proposition}
+            En todo cuerpo ordenado valen:
+            \begin{enumerate}
+                \item $x^2 \geq 0 \quad \forall x$ en dicho cuerpo y $x^2 = 0 \iff x=0$
+                \item $x^2 + y^2 \iff x=0 \land y=0$
+                \item $0<x<y \Rightarrow x^2<y^2$
+                \item $x<y<0 \Rightarrow x^2>y^2$
+                \item $0<x<y\Rightarrow y^{-1} < x^{-1}$
+                \item $x<0<y \Rightarrow x^{-1} < y^{-1}$
+                \item $x<y<0 \Rightarrow y^{-1} < x^{-1}$
+            \end{enumerate}
+        \end{proposition}
+        \begin{proof}
+            Veamos las demostraciones
+            \begin{enumerate}
+                \item Se sigue de 6 de la prop anteriór y la segunda parte ya la habíamos probado
+                \item Si $x^2 = -y^2$ pero $x^2\geq  0 \land y^2 \geq 0$ entonces $y=0=x$ por que si $y>0$
+                entoncse $y^2 > 0$ entonces $-y^2 <0$ entonces $x^2 = -y^2 <0$ que es absurdo
+                \item Por hipótesis $xx < yx < yy$
+                \item Como $x<0 $ tenemos $xx>yx$ como $y<0$ tenemos $xy> yy$ entonces $x^2 >y^2$
+                \item $x>0 \land y>0 \Rightarrow 1 < yx^{-1} \Rightarrow y^{-1} < x^{-1}$
+                \item $x<0 \Rightarrow 1 > x^{-1}y \Rightarrow y^{-1} > x^{-1}$
+                \item Sale con la misma idea que los otros dos 
+            \end{enumerate}
+        \end{proof}
+
+        \section{Números Complejos}
+
+    \end{document}

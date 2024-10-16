@@ -1,0 +1,156 @@
+\documentclass[12pt]{book}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{mathpazo}
+\usepackage{tcolorbox}
+\usepackage[margin=0.8in]{geometry}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{tcolorbox}
+\usepackage{bookmark}
+\usepackage{titlesec}
+\usepackage{helvet}
+
+\titleformat{\chapter}
+  {\normalfont\fontsize{16}{19}\sffamily\bfseries}
+  {\thechapter}
+  {1em}
+  {}
+
+\titleformat{\section}
+  {\normalfont\fontsize{12}{17}\sffamily\bfseries}
+  {\thesection}
+  {1em}
+  {}
+
+\titleformat{\subsection}
+  {\normalfont\fontsize{12}{17}\sffamily\bfseries\slshape}
+  {\thesubsection}
+  {1em}
+  {}
+
+\newtheoremstyle{break}
+  {\topsep}{\topsep}%
+  {\itshape}{}%
+  {\bfseries}{}%
+  {\newline}{}%
+\theoremstyle{break}
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{corollary}{Corolario}[theorem]
+\newtheorem{lemma}[theorem]{Lema}
+\newtheorem{proposition}{Proposición}
+\newtheorem*{remark}{Observación}
+\newtheorem{definition}{Definición}[section]
+
+
+\begin{document}
+    % LaTeX
+
+\title{\textsc{\footnotesize Geometría Diferencial} \hfill
+\includegraphics[scale=0.15]{logo_UNC-FAMAF.png} \\ 
+Resumen}
+\author{Javier Vera}
+\maketitle
+\newpage
+
+\section{Superficies Regulares}
+
+\begin{definition}
+  Un subconjunto $S \subseteq \mathbb{R}^3 $ es una superficie regular si para cada $p \in S$ existe un entorno
+  $V$ en $\mathbb{R}^3 $, un abierto $U \subseteq \mathbb{R}^2 $ y un mapa $\phi:U\rightarrow V\cap S$ que cumple
+  \begin{enumerate}
+      \item $\phi$ es differenciable si lo miramos como $\phi:U\rightarrow \mathbb{R}^3 $. 
+      Esto significa que si escribimos
+      $$ \phi(u,v) = (\phi_1(u,v),\phi_2(u,v),\phi_2(u,v)) \quad (u,v) \in U$$
+      Entonces $\phi_1(u,v),\phi_2(u,v),\phi_3(u,v)$ tienen derivadas parciales de todos los órdenes
+      en $U$
+      \item $\phi$ es un homeomorfismo, es decir $\phi$ tiene inversa $\phi^{-1}:V\cap S \rightarrow U$
+      que es contínua, esto es $\phi^{-1}$ es una restrición de una mapa contínuo 
+      $F:W \subseteq \mathbb{R}^3 \rightarrow \mathbb{R}^2$ definido en un abierto $W$ que contiene a $V\cap S$
+      \item Para cada $q\in U$, la differencial $d\phi_q:\mathbb{R}^2 \rightarrow \mathbb{R}^3$ es inyectivo
+  \end{enumerate}
+\end{definition}
+
+\section{Diferenciabilidad}
+\begin{definition}
+    Sea $f:V\rightarrow \mathbb{R}^n$ una función definida en un abierto $V$ de una superficie regular $S$.
+    Decimos que $f$ es diferenciable en $p\in V$ si existe alguna parametrización 
+    $\phi:U \subseteq \mathbb{R}^2 \rightarrow S$ con 
+    $p\in \phi(U) \subseteq V$ tal que $f\circ \phi:U \subseteq \mathbb{R}^2 \rightarrow \mathbb{R}^n$ es
+    diferenciable en $\phi^{-1}(p)$. 
+    
+    Además decimos que $f$ es diferenciable en $V$ si lo és para todo $p \in V$
+\end{definition}
+
+\begin{definition}
+    Sea $f:V \subseteq \mathbb{R}^n\rightarrow S$ con $V$ abierto se dice que $f$ es diferenciable en $p\in V$
+    si existe $\phi:U\rightarrow S\cap V$ parametrización de $f(p) \in \phi(U)$, $\tilde{V} \subseteq V$,
+    $\tilde{V}$ entorno abierto de $p$ tal que $f(\tilde{V}) \subseteq \phi(U)$ y 
+    $\phi^{-1}\circ f: \mathbb{R}^n \rightarrow U$ es
+    dif en $p$. 
+
+    Además decimos que $f$ es diferenciable en $V$ si $f$ lo es $\forall p \in V$
+\end{definition}
+
+\begin{definition}
+    Sean $S_1,S_2$ superficies regulares $f:S_1\rightarrow S_2$ y $p\in S_1$. Decimos que $f$ es 
+    diferenciable en $p$ si existen parametrizaciones $\phi:U\rightarrow S_1$ y $\psi:V\rightarrow S_2$
+    de $p$ y $f(p)$ respectivamente tales que 
+    \begin{enumerate}
+        \item $f(\phi(U)) \subseteq \psi(V)$
+        \item $\psi^{-1}\circ f \circ \phi $ es diferenciable en $\phi^{-1}(p)$
+    \end{enumerate}
+    $f$ se dice diferenciable en $S_1$ si lo es para todo $p \in S_1$  
+\end{definition}
+
+\begin{definition}
+    Dos superficies reguleres $S_1$ y $S_2$ se dicen difeomorfas si existe una biyección $f:S_1\rightarrow S_2$
+    diferenciable con inversa diferenciable (homemorfismo). Una tal $f$ se llama difeomorfismo
+\end{definition}
+
+\begin{definition}
+    Localmente diferenciable p1 clase 11
+\end{definition}
+
+\section{Orientabilidad}
+
+\begin{proposition}
+  Sea $V \subseteq \mathbb{R}^3 $ abierto, $S$ superficie. clase 9,10
+\end{proposition}
+
+\begin{proposition}
+    Dado $R \subseteq S$ región acotada contenida en $\phi(U)$ para cierta carta $\phi:U\rightarrow S$. Se 
+    define el área de $R$ de la siguiente manera: 
+    $$A(R) = \int \int_{Q=\phi^{-1}(R)} ||\phi_u(u,v) \times \phi_v(u,v)||dudv$$
+\end{proposition}
+
+\begin{definition}
+    página 1 clase 12 orientable
+\end{definition}
+
+\begin{proposition}
+    Sea $S$ una superficie regular supongamos que existe una $\phi:U\rightarrow S$ y $\psi:V\rightarrow S$
+    parametrizaciones tales que $\phi(U)\cup \psi(V) = S$ y $\phi(U)\cap \psi(V) = W$ es conexo entonces 
+    $S$ es orientable
+\end{proposition}
+
+\section{Isometrías}
+\begin{proposition}
+  Dada $F:S_1\rightarrow S_2$ se dice que $F$ es una isometría si es un difeomorfismo tal que
+  $$<dF_p(v),dF_p(w)>_{F(p)} = <v,w>_p \quad \forall p\in S_1 \quad \forall v,w \in T_pS_1$$
+
+  Esta condición es equivalente a $$ I_{F(p)}(dF_p(v)) = I_p(v) \quad \forall p \in S_1 , v \in T_pS_1$$
+\end{proposition}
+
+\begin{proposition}
+  Localemnte isometrica clase 17 p8    
+\end{proposition}
+
+\section{Egregium}
+\begin{proposition}
+    Los simbolos de cristoffer son las coordenadas de phi uu , phi uv , phi vv en base phiu , phiv,N 
+    pagina clase 18 
+\end{proposition}
+
+\end{document}

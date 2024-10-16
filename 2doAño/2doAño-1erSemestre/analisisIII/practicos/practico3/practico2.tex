@@ -1,0 +1,65 @@
+\documentclass{article}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm}
+\usepackage{parskip}
+\usepackage{graphicx}
+
+% Margins
+\usepackage[top=2.5cm, left=3cm, right=3cm, bottom=4.0cm]{geometry}
+% Colour table cells
+\usepackage[table]{xcolor}
+
+% Get larger line spacing in table
+\newcommand{\tablespace}{\\[1.25mm]}
+\newcommand\Tstrut{\rule{0pt}{2.6ex}}         % = `top' strut
+\newcommand\tstrut{\rule{0pt}{2.0ex}}         % = `top' strut
+\newcommand\Bstrut{\rule[-0.9ex]{0pt}{0pt}}   % = `bottom' strut
+
+%%%%%%%%%%%%%%%%%
+%     Title     %
+%%%%%%%%%%%%%%%%%
+\title{Coursework template CO343}
+\author{Firstname Lastname \\ CID 01234567}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+%%%%%%%%%%%%%%%%%
+%   Problem 1   %
+%%%%%%%%%%%%%%%%%
+\section{Problem 1}
+    Definamos una base \[\mathcal{B}= \{v_1,\ldots,v_n\} \]
+
+    Sabemos que $T(v_j) = 1.v_j$ para $i=1\ldots n$ por lo tanto
+    \[[T]_{ \mathcal{B} } = 
+    \begin{bmatrix}
+        \vert & & \vert \\
+        e_1   & \cdots & e_n   \\
+        \vert & & \vert
+    \end{bmatrix}
+    \]
+
+    Por lo tanto es directo notar que \[X_c = (x-1)^n\]
+    Usando Cayley-Hamilton $X_m = (x-1)^k$ con $k\leq n$
+
+    Pero evaluando la matriz en $x-1$ nos da 0 , por lo tanto es el 
+    pol minimal
+
+    Usando las mismas ideas en el operador nulo vemos que
+     $X_c = x^n$ y $X_m=x$
+
+\section{Problema 2}
+    \[ \mathcal{X}_a= det
+    \begin{pmatrix}
+    x+9 & -4 & -4\\
+    8 & x-3 & -4 \\
+    16 & -8 & x-7 \\
+    \end{pmatrix} 
+    = x^3 - x^2 -5x -3 = (x+1)^2 (x-3)\]
+
+    La base de auto vectores seria \[\]
+\end{document}

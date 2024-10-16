@@ -1,0 +1,847 @@
+\documentclass{article}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{mathpazo}
+\usepackage{tcolorbox}
+\usepackage[margin=0.8in]{geometry}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{tcolorbox}
+
+\newtheoremstyle{break}
+  {\topsep}{\topsep}%
+  {\itshape}{}%
+  {\bfseries}{}%
+  {\newline}{}%
+\theoremstyle{break}
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{corollary}{Corolario}[theorem]
+\newtheorem{lemma}[theorem]{Lema}
+\newtheorem{proposition}{Proposición}
+\newtheorem*{remark}{Observación}
+\newtheorem{definition}{Definición}[section]
+
+\begin{document}
+    % LaTeX
+    
+\title{Resumen Final Analisis II}
+\author{Javier Vera}
+\maketitle
+\newpage
+
+\begin{theorem}[Sumas superiores e inferiores]
+	Sea $f$ una función acotada en el intervalo $[a,b]$ y sean $P,Q$ dos particiones de $[a,b]$.
+	\begin{enumerate}
+		\item $L(f,P) \leq U(f,P)$
+		\item $P \subset Q$ implica $L(f,P) \leq L(f,Q)$. Analogamente $U(f,Q) \leq U(f,P)$
+		\item $L(f,P) \leq U(f,Q)$
+	\end{enumerate}
+\end{theorem}
+\begin{enumerate}
+	\item 
+	\begin{proof}
+	\[L(f,P) = \sum_{i=1}^{n} m_i(t_i-t_{i-1}) \leq \sum_{i=1}^{n} M_i(t_i-t_{i-1}) = U(f,P)\]
+	Esto vale por que \[
+		m_i = \inf \{f(x) \ | \ t_{i-1} \leq x \leq t_{i}\} \leq \sup \{f(x) \ | \ t_{i-1} \leq x \leq t_{i}\} = M_i
+	\]
+	\end{proof}
+
+	\item 
+	\begin{proof}
+	Como $P \subset Q\quad \exists x \in Q \ /\  P \subset P \cup \{x\} \subseteq Q$ 
+
+	Ahora si miramos la particion de $P\cup\{x\}$ (llamemosla $A$) $$A=\{a=t_0 < t_1 <\ldots < t_{j-1}<x<t_j < \ldots < t_n=b\}$$
+
+	Que es muy parecida a la de $P$ \[P = \{a=t_0 < t_1 <\ldots < t_{j-1} <t_j < \ldots < t_n=b\}\]
+
+	Y llamemos \[m_{\text{izq}}=\inf\{f(t) \ |\ t_{j-1} \leq t \leq x \}\quad m_{\text{der}}=\inf\{f(t) \ |\ x\leq  t \leq t_{j} \}\]
+
+	Ahora \[L(f,A)= \sum_{i=1}^{j-1} m_i(t_i - t_{i-1}) + m_{izq}(x-t_{j-1}) + m_{der}(t_j-x)+\sum_{i=j+1}^{n} m_i (t_i - t_{i-1})\]
+
+	\begin{tcolorbox}
+	Pero \[\{f(t) \ |\ t_{j-1} \leq t \leq x \}\subseteq \{f(t) \ |\ t_{j-1} \leq t \leq t_j \}  \]
+
+	Luego \[m_{izq}=\inf\{f(t) \ |\ t_{j-1} \leq t \leq x \}\geq \inf\{f(t) \ |\ t_{j-1} \leq t \leq t_j \} = m_j  \] 
+
+	Entonces $m_{izq} \geq m_i$. De forma análoga vemos que $m_{der} \geq m_i$ 
+
+	(Si agrandamos el conjunto el infimo se queda igual o se achica)
+	\end{tcolorbox}
+
+	Continuando la ecuacion tenemos \[
+		L(f,A)\geq \sum_{i=1}^{j-1} m_i(t_i - t_{i-1}) + m_j(x-t_{j-1}) + m_j(t_j-x)+\sum_{i=j+1}^{n} m_i (t_i - t_{i-1}) = \sum_{i=1}^{n} m_i(t_i-t_{i-1}) = L(f,P)
+	\]
+
+	Ahora si $A=Q$ tenemos nuestro resultado $L(f,Q) \geq L(f,P)$, si no agregamos otro punto a $A$ y repetimos hasta que $A=Q$. Esto es posible por que $Q$ es finito, entonces repetiremos finitas veces el proceso.
+
+	La otra afirmación sale igual y usando que al agrandar un conjunto el supremos se queda igual o se agranda por lo tanto tendremos \[M_{izq}\leq M_i\quad M_{der}\leq M_i\]
+
+	Y llegaremos a $U(f,A) \leq U(f,P)$. Etc
+
+	\end{proof}
+
+	\item Sea $R=P\cup Q$ entonces $P\subset R \land Q \subset R$
+		\[
+			L(f,P) \leq L(f,R) \quad \text{ Por item 2}
+		\]
+
+		\[
+			L(f,R) \leq U(f,R) \quad \text {Por item 1}
+		\]
+
+		\[
+			U(f,R) \leq U(f,Q) \quad \text{Por item 2 devuelta}
+		\]
+
+		Finalmente \[
+			L(f,P) \leq U(f,Q)
+		\]
+	\end{enumerate}
+
+\begin{theorem}[Criterio integrabilidad: Limite de Particiones]
+	Sea $f:[a,b]\rightarrow \mathbb{R}$ una función acotada. Si para todo $x \in \mathbb{N}$ 
+	existe una partición $P_n$ de $[a,b]$ tal que 
+	\[ \lim_{n \rightarrow \infty} L(f,P_n) = \lim_{n \rightarrow \infty} U(f,P_n) = L \]
+	entonces $f$ es integrable sobre $[a,b]$ y $\int_{a}^{b} f = L$
+\end{theorem}
+\begin{proof}
+	Trivial. Sabemos que $L(f,P_n) \in A = \{L(f,P)\ | \ \text{P es partición}\} 
+	\quad \forall n \in \mathbb{N}$
+
+	Por lo tanto $L(f,P_n)\leq \sup A \quad \forall n \in \mathbb{N}$. De la misma forma $\inf B \leq U(f,P_n) \quad \forall n \in \mathbb{N}$
+
+	Por Teorema 0.1.3 sabemos que las sumas inferiores estan acotadas por las sumas
+	superiores entonces \[ L(f,P_n) \leq \sup A \leq \inf B \leq U(f,P_n) \quad \forall n \in \mathbb{N}\]
+
+	Por lo tanto \[L= \lim_{n \rightarrow \infty} L(f,P_n) \leq  \sup A \leq \inf B
+	\leq \lim_{n \rightarrow \infty} U(f,P_n) =L\]
+
+	Mostrando que $\sup A = \sup B = L$ entonces $f$ es integrable. Más aún su integral vale $L$ 
+
+\end{proof}
+
+\begin{theorem}[Criterio integrabilidad: Epsilon]
+	Sea $f$ una función acotada en el intervalo $[a,b]$. Enotnces $f$ es integrable sobre $[a,b]$ 
+	si y sólo si para todo $\epsilon > 0$ existe una partición $P$ de $[a,b]$ tal que \[ 
+		U(f,P) - L(f,P) < \epsilon \]
+\end{theorem}
+\begin{proof}
+	$\Rightarrow )$ Sean \[B=\{U(f,P) \ | \ P\ \text{ partición de } [a,b] \}
+	\quad \text{y} \quad A=\{L(f,P) \ | \ P\ \text{ partición de } [a,b]\} \]
+
+	Y sea $\ell = \sup A = \inf B$. Sabemos por propiedades de supremo e ínfimo que existe
+	\[ P_1 \text{ tal que } \ell<U(f,P_1)<\ell + \epsilon\]
+	\[ P_2 \text{ tal que } \ell - \epsilon <L(f,P_2) < \ell \]
+
+	Restando a la primera expresión la segunda obtenemos 
+	\[ -\epsilon \leq U(f,P_1) - L(f,P_2) \leq \epsilon \]
+
+	Ahora llamamos $P_{\epsilon} = P_1 \cup P_2$ y sabemos que
+	\[ U(f,P_{\epsilon}) \leq U(f,P_1) \quad \text{y}\quad L(f,P_2) \leq L(f,P_{\epsilon})\]
+	
+	Sumando ambas expresiones \[ U(f,P_{\epsilon}) + L(f,P_2) \leq U(f,P_1) + L(f,P_{\epsilon}) \]
+	\[U(f,P_{\epsilon}) - L(f,P_{\epsilon}) \leq U(f,P_1) - L(f,P_2) \leq \epsilon \]
+
+	Probando lo que queriamos
+
+	$\Leftarrow )$ Dado $\epsilon > 0$ sabemos que exsiste $P_{\epsilon}$ particion tal que 
+	\[U(f,P_{\epsilon}) - L(f,P_{\epsilon}) \leq \epsilon\]
+
+	Además \[U(f,P_{\epsilon}) \geq \inf(B) \quad \text{y} \quad \sup(A) \geq L(f,P_{\epsilon}) \]
+
+	Sumando ambos y pasando términos de lado a lado 
+	\[ \epsilon \geq U(f,P_{\epsilon}) - L(f,P_{\epsilon}) \geq \inf(B) - \sup(A) > 0 \]
+
+	Pero esto vale para todo $\epsilon > 0$ en particular si tomamos $\epsilon = \frac{1}{n}$ y
+	usamos límte podemos ver que \[0 \geq  \inf(B) - \sup(A) \geq 0\]
+
+	Mostrando que $\inf(B) = \sup(A)$. Mostrando que $f$ es integrable
+\end{proof}
+
+\begin{theorem}[Separación de integrales]
+	Si $a<c<b$ entonces $f$ es integrable sobre $[a,b]$ si y sólo si es integrable en
+	$[a,c]$ y $[c,b]$ y en ambos casos se cumple 
+	\[ \int_{a}^{b} f = \int_{a}^{c} f + \int_{c}^{b} f \]
+\end{theorem}
+\begin{proof}
+	$\Rightarrow ) $ Como es integrable dado $\epsilon > 0 $ sabemos que existe partición $P$ 
+	tal que \[ U(f,P)- L(f,P) < \epsilon  \]
+
+	Ahora si $c\in P$ seguimos con $P$ si no definimos $Q=P\cup \{c\}$. Además sabemos
+	\[ U(f,P) > U(f,Q) \quad \text{y} \quad L(f,Q) > L(f,P) \]
+
+	Entonces sumando ambos y operando llegamos a que \[ U(f,Q) - L(f,Q) < \epsilon  \]
+
+	Sabemos que $Q=\{a=t_0,\ldots,t_{j-1},c,t_{j+1}\ldots, t_n=b\}$
+
+	Entonces podemos definir \[ Q_1=\{a=t_0,\ldots , c \} \quad \text{y}\quad Q_2=\{c,\ldots , t_n=b\} \]
+
+	Sabemos que $Q_1\cup Q_2 = Q$ luego
+	\[ U(f,Q) = U(f,Q_1) + U(f,Q_2) \quad \text{y} \quad L(f,Q)=L(f,Q_1) + L(f,Q_2)\]
+
+	Entonces \[\epsilon > U(f,Q) - L(f,Q) = U(f,Q_1)-L(f,Q_1) + U(f,Q_2)-L(f,Q_2) \]
+
+	Como $U(f,Q_1) > L(f,Q_1)$ entonces $U(f,Q_1) - L(f,Q_1) > 0$ y lo mismo con $Q_2$
+
+	Entonces $\epsilon>U(f,Q_1) - L(f,Q_1)$ y lo mismo con $Q_2$
+
+	Entonces $f$ es integrable en $[a,c]$ y en $[c,b]$
+
+	$\Leftarrow )$ Sabemos que es integrable en $[a,c]$ y en $[c,b]$ entonces
+	\[ U(f,P_1) - L(f,P_1) < \frac{\epsilon}{2} \quad \text{y} \quad U(f,P_2) - L(f,P_2) <\frac{\epsilon}{2}\]
+
+	Donde $P_1,P_2$ son particiones de $[a,c]$ y $[c,b]$ respectivamente 
+
+	Entonces \[ U(f,P_1) + U(f,P_2) - L(f,P_1) - L(f,P_2) < \epsilon \]
+	Ahora sea $P = P_1 \cup P_2$ tenemos que 
+	\[ U(f,P) - L(f,P) = U(f,P_1) + U(f,P_2) - L(f,P_1) - L(f,P_2) < \epsilon\]
+
+	Entonces $f$ integrable en $[a,b]$
+
+	Finalemente veamos la igualdad. Sea $Q$ una partición cualquiera. Definimos
+	$P = Q\cup \{c\}$
+
+	Luego tenemos $P_1,P_2$ particiones de $[a,c]$ y $[c,b]$ tales que $P=P_1\cup P_2$ por lo tanto
+	\[ L(f,Q) \leq L(f,P) = L(f,P_1) + L(f,P_2) \leq \int_{a}^{c} f + 
+	\int_{c}^{b} f < U(f,P_1) + U(f,P_2) = U(f,P) \leq U(f,Q)\]
+
+	Entonces para toda partición $Q$
+	\[ L(f,Q) < \int_{a}^{c} f + \int_{c}^{b} f < U(f,Q) \]
+
+	\[ \int_{a}^{b} f =\sup(A) \leq \int_{a}^{c} f + \int_{c}^{b} f \leq \inf (B) = \int_{a}^{b} f \]
+\end{proof}
+
+\begin{theorem}[Integral cf = c Integral f]
+	Si $f$ es una función integrable en $[a,b]$ y $c\in \mathbb{R}$ entonces $cf$ es integrable
+	en $[a,b]$ y vale
+	\[ c \int_{a}^{b} f = \int_{a}^{b} cf \]
+\end{theorem}
+\begin{proof}
+	Sea $P$ partición de $[a,b]$ y $M_i,m_i$ los de siempre. Definimos
+	\[ M_i' = \sup \{cf(t) \ | \ t_{i-1}<t<t_i\} \quad \text{y} \quad m_i' 
+	= \inf \{cf(t) \ | \ t_{i-1}<t<t_i\} \]
+
+	Como $c>0$ sabemos que $cM_i = M_i'$ y $cm_i = m_i'$
+
+	Entonces \[ U(cf,P) = \sum_{i=1}^{n} M_i' (t_{i+1}-t_i)=\sum_{i=1}^{n} cM_i = c U(f,P) \]
+
+	Análogamente vemos $L(cf,P) = cL(f,P)$
+
+	Como es integrable en $[a,b]$ dado $\epsilon > 0$ tenemos 
+	\[ U(f,P)-L(f,P) < \frac{\epsilon}{c}\] 
+	Entonces 
+	\[ U(cf,P) - L(cf,P) = c(U(f,P)-L(f,P)) = \epsilon \]
+
+	Entonces $cf$ es integrable en $[a,b]$
+
+	Mostremos la igualdad 
+	\[ cL(f,P) = L(cf,P) \leq \int_{a}^{b} cf \leq c U(cf,P) =c U(f,P)\]
+
+	Entonces \[ c\int_{a}^{b} f=c \sup A \leq \int_{a}^{b} cf \leq c\inf B = c \int_{a}^{b} f \]
+
+	Si $c < -1$. Sucede algo similar solo que esta vez $-m_i=M_i'$ y $-M_i=m_i'$
+
+	Entonces esta vez \[ U(-f,P) = \sum_{i=1}^{m} M_i' (t_{i+1}-t_{i}) =
+	 - \sum_{i=1}^{n} m_i(t_{i+1}-t_i)=- L(f,P) \]
+
+	Análogamente llegamos a $L(-f,P) = - U(f,P)$. De donde podemos ver
+	\[ U(-f,P) - L(-f,P) = U(f,P) - L(f,P) < \epsilon \]
+	Concluyendo que $-f$ es integrable en $[a,b]$
+
+	Veamos la igualdad
+	\[ -L(f,P) = U(-f,P) \geq \int_{a}^{b} -f \geq L(-f,P) = - U(f,P) \]
+
+	\[ L(f,P) \leq - \int_{a}^{b} -f \leq  U(f,P) \]
+	esto vale para toda partición, entonces
+	\[ \int_{a}^{b} f=\sup(A) \leq - \int_{a}^{b} -f \leq \inf(B) \int_{a}^{b} f\]
+
+	Entonces $\int_{a}^{b} -f = -\int_{a}^{b} f$
+
+	Caso $c<0$ entonces $cf=(-c)(-f)$. Por el paso 2 sabemos que $-f$ es integrable
+	además $-c > 0$ entonces como $-f$ es integrable $(-c)(-f)$ es integrable por paso 1.
+	Entonces $cf$ integrable
+
+	\[ \int_{a}^{b} cf = \int_{a}^{b} (-c)(-f) = -c \int_{a}^{b} -f = 
+	(-c)(-1)\int_{a}^{b} f = c\int_{a}^{b} f \]
+\end{proof}
+
+\begin{theorem}[Lema acotación]
+	Sea $f$ una función integrable que satisface $m \leq f(x) \leq M$ para todo
+	$x \in [a,b]$ entonces $m(b-a) \leq \int_{a}^{b} f \leq M (b-a)$
+\end{theorem}
+\begin{proof}
+	Sabemos que $m < f(x) < M$. Useos las sumas de la partición $P=\{a,b\}$
+	\[ m(b-a )\leq m_i (b-a) =  L(f,P)\leq \int_{a}^{b} f \leq  U(f,P) = M_i (b-a) \leq M (b-a) \]
+\end{proof}
+
+\begin{theorem}[Promedio]
+	Sea $f$ una función integrale definida en el intervalo $[a,b]$ y sea 
+	$\mu = \frac{1}{b-a}\int_{a}^{b} f$. Entonces
+	\begin{enumerate}
+		\item Si $m \leq f \leq M$ sucede $m\leq \mu \leq M$
+		\item Si $f$ es contínua entonces $\mu = f(x_0)$ para algún $x_0 \in [a,b]$
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	El primero sale de usar el lema de acotación y dividir todo por $(b-a)$
+	El segundo como es contínua podemos usar tvm \[\int_{a}^{b} f = f(x_0)(b-a) \quad x_0\in[a,b]\]
+
+	Entonces \[ \mu = \frac{f(x_0)(b-a)}{(b-a)} = f(x_0) \quad x_0\in[a,b]\]
+\end{proof}
+
+\begin{theorem}[Continuidad de Primitiva]	
+	Si $f$ es una función integrable en $[a,b]$, entonces la función 
+	$F:[a,b]\rightarrow \mathbb{R}$	\[ F(x) = \int_{a}^{x} f \]
+
+	es contínua
+\end{theorem}
+\begin{proof}
+	Veremos que $F$ es contínua en $c\in [a,b]$ un punto arbitrario 
+	\[ \lim_{h \rightarrow 0 } F(c+h) = F(c) \]
+	Veamos primero el caso $h>0$
+	\[ F(c+h) - F(c) = \int_{a}^{c+h}f - \int_{a}^{c} f = \int_{a}^{c} f 
+	+ \int_{c}^{c+h} - \int_{a}^{c} f = \int_{c}^{c+h} f \]
+
+	Ahora como $f$ es integrable entonces es acotada $m<f<M$ entonces usamos lema acotació
+	\[ mh\leq \int_{c}^{c+h}f\leq Mh \quad \Longrightarrow \quad mh \leq F(c+h) - F(h) \leq Mh \]
+
+	Usando limie de $h \rightarrow 0^+$ de ambos lados vemos que 
+	\[ \lim_{h \rightarrow 0^+ } F(c+h)-F(c) = 0 \]
+
+	Si $h<0$ \[ F(c+h) - F(c) = \int_{a}^{c+h} f - \int_{a}^{c}f = - \int_{c+h}^{c}f  \]
+
+	Por lema acotación \[m(-h) \leq \int_{c+h}^{c}f \leq M(-h) \]
+	Lo mismo usando límite se termina la demostración llegamos a 
+	\[ \lim_{h \rightarrow 0^-} F(c+h) -F(c) = 0  \]
+
+	Entonces $\lim_{h \rightarrow 0} F(c+h)-F(c)=0 $ 
+	Y esto vale para todo $c \in [a,b]$ por lo tanto $F$ es contínua
+\end{proof}
+
+\begin{theorem}[Primer TFC]
+	Sea $f:[a,b] \rightarrow \mathbb{R}$ una función contínua y sea $F:[a,b] \rightarrow \mathbb{R}$
+	definida por \[ F(x) = \int_{a}^{x} f \]
+
+	Entonces $F$ es derivable y $F'=f$. Para los extremos se entiende que se cumple $F_+'(a)=f(a)$
+	$F_{-}'=f(b)$
+\end{theorem}
+\begin{proof}
+	Sea $c \in (a,b)$ (Para los extremos a y b valen argumentos similares). Por definición
+	\[ F'(c) = \lim_{h \rightarrow 0 }\frac{F(c+h)-f(c)}{h} \]
+
+	Nos gustaria ver que el lìmite es igual a $f(c)$.
+	Caso $h>0$
+	\[ F(c+h) - F(c) = \int_{c}^{c+h} f - \int_{a}^{c} f = \int_{c}^{c+h} f \]
+
+	Ahora definimos \[ m(h)=\min\{f(x) \ | \ x\in [c,c+h]\} \]
+	\[ M(h)=\max\{f(x) \ | \ x\in [c,c+h]\} \]
+
+	Como $h$ tiende a 0 y $f$ es contínua $f(x)$ con $x\in [c,c+h]$ tiende a $f(c)$. Entonces
+	el mìnimo tiende a $f(c)$ entonces $m(h)$ tiende a $f(c)$. Lo mismo pasa con $M(h)$
+
+	y además \[ m(h) \leq f(x) \leq M(h) \quad \forall x \in [c,c+h]\]
+	Si vamos fijando $h$ podemos usar lema de acotación entones para cada $h$
+	\[ hm(h)\leq \int_{c}^{c+h} f \leq hM(h) \]
+	\[ m(h) \leq \frac{\int_{c}^{c+h} f}{h} \leq M(h) \]
+
+	Usando limite llegamos a \[ f(c) \leq \lim_{h \rightarrow 0^+ } 
+	\frac{ F(c+h)-F(c)}{h} \leq f(c) \]
+		
+	Si tomamos $h<0$ $(-h>0)$. Haciendo algo similar al ejercicios pasado llegamos a
+	\[ (-h)m(h) \leq \int_{c+h}^{c} f \leq (-h)M(h) \]
+	\[ m(h) \leq -\frac{\int_{c+h}^{c}f}{h} \leq M(h) \]
+	Sabemos que el limite de $m(h)$ y $M(h)$ es $f(c)$ entonces el limite por izquierda lo és
+
+	Ahora usando limite \[ f(c) = \lim_{h \rightarrow 0^-} \frac{ F(c+h)-F(c)}{h}  \]
+	Finalmente \[ \lim_{h \rightarrow 0 } \frac{F(c+h) -F(c)}{h} = f(c) \]
+
+	Que es la definición de derivada de $F$, entonces $F'(c)=f(c)$ y esto vale para
+	cualquier $c\in[a,b]$ que tomemos entonces $F'=f$
+\end{proof}
+
+\begin{theorem}[Barrow]
+	Sea $g:[a,b]\rightarrow \mathbb{R}$ una función tal que su derivada $g'$ es contínua en $[a,b]$.
+	Entonces \[ \int_{a}^{b} g'(t) dt = g(b) - g(a) \]
+\end{theorem}
+\begin{proof}
+	Sea $F(x) = \int_{a}^{x} g'(t) dt$. Como $f$ es contínua.
+	\[ F'(x) = g'(x) \]
+	Pero entonces $F(x) = g(x) + c\quad \forall x\in [a,b]$
+
+	Evaluando en $a$ tenemos $0 =F(a) = g(a) + c $ entonces $-g(a) = c$
+
+	Evalaundo en $b$ tenemos $\int_{a}^{b} g'(t)dt = F(b) = g(b) + c = g(b) - g(a)$
+\end{proof}
+
+\begin{proposition}[Propiedades Log]
+	Algunas propiedades del $\log \quad \forall x,y > 0$
+\begin{enumerate}
+	\item $\log(xy) = \log(x) + \log(y)$
+	
+	Derivamos ambos miembros con respeto a $x$ y vemos que ambas derivadas coinciden entonces dichas funciones difieren por
+	una constante
+
+	\[ \log(xy) = \log(x)+\log(y) + c \quad \forall x,y > 0\]
+	
+	Entonces evaluando $x=1$ \[ \log(y)=\log(1)+\log(y) + c \]
+
+	Finalmente $c=0$. Mostrando la igualdad
+	\item $\log{x^n}=n\log(x)$. Sale de la primera. Para rigurosidad usar inducción
+	\item $\log{(\frac{x}{y})}=\log{x}-\log{y}$
+	\[ \log(x) = \log\bigg(\frac{x}{y}.y\bigg) = \log\bigg(\frac{x}{y}\bigg) + \log(y)  \]
+\end{enumerate}
+\end{proposition}
+
+\begin{proposition}[Propiedades exp]
+	Algunas propiedades
+\begin{enumerate}
+	\item $\exp = \exp'$
+	
+	\[\exp'(x) = (\log^{-1})'(x) = \frac{1}{\log ' (\log^{-1}x)} = \frac{1}{\frac{1}{\log^{-1}x}}=\log^{-1}x = \exp(x)\]
+	\item $\exp(x+y) = \exp(x)\exp(y)$ 
+	
+	Veámoslo. Sabemos \[x+y = \log (exp (x)) + \log(exp (y))\] 
+	Entonces por prop del $\log$ \[\log exp(x+y) = \log (exp (x) exp (y))\]
+
+	Como $\log$ es inyectiva tenemos lo que queremos
+	\item $a^{x+y}$ Vale por que $a^{x+y}= e^{(x+y)\log(a)} =e^{x\log a}.e^{y\log a} = a^{x}.a^{y} $
+	\item ${(a^x)}^y = a^{xy}$. Sale igual
+\end{enumerate}
+\end{proposition}
+
+\begin{proposition}[Log a vs Log e]
+	\[ \log_a x = \frac{1}{\log a}\log x \]
+\end{proposition}
+\begin{proof}
+	Veremos equivalentemente que $\log_a x.\log a = \log x $ 
+	
+	Sabemos que $e$ es inyectiva. Entonces basta ver que $e^{\log_a x.\log a } = e^{\log x}$
+
+	Pero \[e^{\log_a x.\log a} = e^{(\log a)^{\log_a x}} = a^{\log_a x} = x = e^{log x} \]
+\end{proof}
+
+\begin{proposition}[Derivadas de log]
+	\[  \frac{\partial a^x}{\partial x} = a^x\log{a}\]
+
+	\[ \frac{\partial{\log_a (x)}}{\partial x} = \frac{1}{x \log (a)}\]
+\end{proposition}
+\begin{proof}
+    Ambas salen usando $a^x= e^{x\log a}$ y $\log_a(x)=\frac{\log x}{\log a}$
+\end{proof}
+
+\begin{theorem}[f'=f entonces f = ce x]
+	Sea $f$ una función derivable tal que $f'=f$ entonces $\exists c \in \mathbb{R}$ tal que 
+	$f(x)= c e^x$
+\end{theorem}
+\begin{proof}
+	Sea $g(x) = \frac{f(x)}{e^x}$, como $e^x > 0 \quad \forall x \in \mathbb{R}$
+	\[g'(x) = \frac{f'(x)e^x - f(x)e^x}{e^{2x}} = \frac{e^x(f(x) - f(x)}{e^{2x}} = 0 \]
+
+	Entonces $g(x) = c$ entonces $ce^x =f(x)$
+\end{proof}
+
+\begin{proposition}[Lim ex / en]
+	\[ \lim_{x \rightarrow \infty }\frac{e^x}{x^n}= \infty \]
+\end{proposition}
+\begin{proof}
+	Sabemos que $\lim_{x \rightarrow \infty }e^x=\infty \quad
+	 \text{y}\quad \lim_{x \rightarrow \infty }x^m=\infty$
+
+	 Entonces aplicamos sucesivamente l'hopital
+	 \[ \lim_{x \rightarrow \infty }\frac{e^x}{x^n}=\lim_{x \rightarrow 
+	 \infty }\frac{e^x}{nx^{n-1}}  = \ldots = \lim_{x \rightarrow \infty }\frac{e^x}{n!} = \infty\]
+\end{proof}
+
+\begin{theorem}[Sustitución en integrales]
+	 Sea $f$ contínua y $g$ derivable entonces:
+	 \[
+		\int_{a}^{b} f(g(x))g'(x)dx = \int_{g(a)}^{g(b)} f(u)du
+	 \]
+\end{theorem}
+\begin{proof}
+	Sea $F$ una primitiva de $f$ ($F'=f$). Entonces por regla de la cadena tenemos $f(g(x))g'(x) = (F\circ g(x))'$.
+
+	Por lo tanto \[
+	\int_{a}^{b} f(g(x))g'(x)dx = \int_{a}^{b} (F\circ g(x))'dx = F\circ g(b) - F\circ g(a) = F(g(b)) - F(g(a)) = \int_{g(a)}^{g(b)}f(u)du  
+	\]
+\end{proof}
+
+\begin{theorem}[Método partes]
+dummy
+\end{theorem}
+\begin{proof}
+dummy
+\end{proof}
+
+\section{Criterios convergencia integrales}
+\begin{theorem}[Criterio comparacion integrales impropias]
+Sean $f,g$ dos funciones definidas en $[a,b)$ tales que 
+\[ 0\leq f(x) \leq g(x)\quad \forall x \in \mathbb{R} \]
+
+\[f(x),g(x) \text{ son integrables en } [a,c] \quad \forall c \text{ tal que }  b > c > a\]
+
+Entonces \[ \int_{a}^{b} g(x)dx \text{ converge } \Longrightarrow \int_{a}^{b} f(x)dx \text{ converge }\]
+\end{theorem}
+\begin{proof}
+Sean \[ F(y) =\int_{a}^{y} f(x)dx \quad G(y) = \int_{a}^{y} g(x)dx \quad b>y>a\]
+
+Ambas $F,G$ son crecientes por que sus derivadas son $f,g$ respectivamente que son mayores que 0
+siempre. 
+
+Además como $f\leq g$ tenemos
+\[ \int_{a}^{y} f(x)dx \leq \int_{a}^{y} g(x)dx \quad \forall y \in [a,b]\]
+
+Luego \[ \lim_{y \rightarrow b^{-} } F(y) = \lim_{y \rightarrow b^{-}} \int_{a}^{y} f(x)dx \leq 
+\lim_{y \rightarrow b^{-}}\int_{a}^{y} g(x)dx = \ell \]
+
+El límite de la izquierda existe si no $F$ no sería creciente. 
+
+Y acabamos de ver que está acotado. Por lo tanto el límite es finito entonces $\int_{a}^{b}  f$ converge
+\end{proof}
+
+\begin{theorem}[Criterio del Radio para integrales impropias]
+	Sean $f,g$ dos funciones en $[a,b)$ tq $0 \leq f(x)\leq g(x) \quad \forall x\in [a,b)$ e 
+	integrables en $[a,c] \quad \forall c \leq b$
+
+	Miro \[ \lim_{x \rightarrow  b^- } \frac{f(x)}{g(x)} = \ell \geq 0\]
+
+	\begin{enumerate}
+		\item Si $\ell < \infty$ \[ \int_{a}^{b} g(x)\text{ converge } 
+		\Longrightarrow \int_{a}^{b} f \text{ converge } \]
+		\item Si $\ell > 0$ \[ \int_{a}^{b} g(x)\text{ diverge } 
+		\Longrightarrow \int_{a}^{b} f \text{ diverge } \]
+		\item Si $0 < \ell < \infty$. Comparten comportamiento
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	\begin{enumerate}
+		\item Dado $e>0 \quad \exists \delta \ / \ |x-b|<\delta \Rightarrow 
+		|\frac{f(x)}{g(x)}-\ell| < \epsilon$ 
+
+		Tomo $\epsilon = k - l > 0 (k>l)$
+		\[ \exists \delta \ / \ -\delta + b< x < b+\delta \Rightarrow 
+		\bigg|\frac{f(x)}{g(x)} - \ell\bigg| \leq k-l \]
+
+		Entonces \[ \frac{f(x)}{g(x)}\leq \epsilon \Rightarrow f(x) \leq g(x)\epsilon \]
+
+		En particular esto vale para $x<b$. Entonces dado $k\in \mathbb{R}$ tenemos que
+		\[\exists c \text{ con } b> c \geq a \text{ tal que } f(x)\leq k g(x) \quad \forall x \in [c,b)\]
+
+		Dicho $c<b$ existe por que la afirmaciòn vale para todo $\delta - b<x<\delta + b$ 
+		Y que $c\geq a$ también vale por que si $\delta -b < a $ directamente puedo tomar $c=a$
+		y si no $a < \delta -b$ entonces el $c$ que tome seguro es mayor que a
+
+		Si hubiera tomado $c=a$ quedaria provada la afirmación por comparación por que
+		\[ f \leq k g(x)\quad \forall x \in [a,b)\]
+
+		Si $c>a$ sabemos \[ \int_{c}^{b} f(x)\leq k\int_{c}^{b} g(x) \]
+
+		Por comparación $\int_{c}^{b} f(x)$ converge y $\int_{a}^{c} f(x)$ es finita asi que converge
+		mostrando que \[ \int_{a}^{b} f(x) \text{ converge} \]
+
+		\item Si $\ell > 0 $ es exactamente lo mismo pero tomando $\epsilon = \ell -k$, trabajando el c de la
+		misma forma y llegamos a 
+		\[k\in \mathbb{R} \quad \exists c\in \mathbb{R}\ / \ kg(x)\leq f(x) \quad \forall x\in[c,b)\] 
+
+		Como $k\int_{a}^{b} g(x)$ diverge entonces $\int_{c}^{b}g(x) $ diverge.
+
+		Si $\int_{c}^{b} g(x)$ convergiera entonces $\int_{a}^{b} g(x)$ convergeria por que
+		$\int_{a}^{c} g(x)$ es finita asi que converge
+
+		Entonces por comparación $\int_{c}^{b} f(x)$ diverge entonces $\int_{a}^{b} f(x)$ diverge
+		pues $\int_{a}^{b} f(x) = \int_{a}^{c} f(x) + \int_{c}^{b} f(x)$ 
+	
+		Entonces si convergiera	cada sumando tendría que converger
+		
+		Si $\ell = \infty$ entonces por definición de límite
+		$\exists c \in \mathbb{R} \ / \ \frac{f(x)}{g(x)} > k $
+	
+		Vale para todo $x\in \mathbb{R}$ en particular para $x\in[c,b)$
+		Y ahora hacemos el mismo proceso que para el otro caso
+		\item Si $0<\ell<\infty$ cumple hipótesis del item 1 y del 2. Entonces comparte comportamiento
+	\end{enumerate}
+\end{proof}
+
+\begin{theorem}[Pol de f es igual hasta orden n a f]
+	Sea $f$ una función tq $f(a),f'(a),\ldots,f^n(a)$ estan definidas. 
+	Sean $C_k = \frac{f^k(a)}{k!} \quad 0\leq k\leq n$	y sea 
+	\[P_{n,a}(x)= \sum_{i=1}^{n} C_i(x-a)^i\]
+	El pol de taylor de grado n de $f$ en a. Entonces 
+	\[ \lim_{x \rightarrow a }\frac{f(x)-P_{n,a}(x)}{(x-a)^n}=0 \]
+\end{theorem}
+\begin{proof}
+		\[ \lim_{x \rightarrow a }\frac{f(x)-P_{n,a}(x)}{(x-a)^n}= 
+		\lim_{x \rightarrow a }\frac{f(x)-P_{n-1,a}(x)}{(x-a)^n} -C_n = 
+		\lim_{x \rightarrow a }\frac{f'(x)-P'_{n-1,a}(x)}{n(x-a)^{n-1}} -C_n= \ldots\]
+		\[ =
+		 \lim_{x \rightarrow a }\frac{f^{(n-1)}(x)-P^{(n-1)}_{n-1,a}(x)}{n!(x-a)} -C_n\]
+
+		Y sabemos que $P_{n-1,a}^{(n-1)}(a) = f^{(n-1)}(a)$
+
+		Entonces \[ = \frac{1}{n!}\lim_{x \rightarrow a }\frac{f^{(n-1)}(x)-f^{(n-1)}(a)}{x-a} 
+		-C_n = \frac{f^n(a)}{n!} - C_n = 0\]
+\end{proof}
+
+\begin{theorem}[Dos pols que son iguales hasta orden n son el mismo pol]
+	Sean $P,Q$ pols en centrados en $a$ de grado menor o igual que $n$. Si $P,Q$ son iguales
+	hasta orden $n$ entonces $P=Q$
+\end{theorem}
+\begin{proof}
+	Sea $R = P - Q$.
+	\[ 0 = \lim_{x \rightarrow a }\frac{P(x)-Q(x)}{(x-a)^n} = \lim_{x \rightarrow a }\frac{R(x)}{(x-a)^n} \]
+
+	Ahora tenemos $R(x) = b_0 + b_1 (x-a) + \ldots b_n(x-a)^n$ , 
+	nos gustaria ver $b_j = 0 \quad j=1\ldots n$
+
+	\[ \frac{R(x)}{(x-a)^i} = \frac{R(x)(x-a)^{n-i}}{(x-a)^i(x-a)^{n-i}} 
+	= \frac{R(x)(x-a)^{n-i}}{(x-a)^n} \]
+
+	Entonces \[ \lim_{x \rightarrow a } \frac{R(x)}{(x-a)^i} = 
+	\lim_{x \rightarrow a }\frac{R(x)}{(x-a)^n}(x-a)^{n-i} = 0 \quad i=1\ldots n\]
+
+	Entonces si ponemos $i=0$ tenemos $\lim_{x \rightarrow a }R(x) = 0$
+
+ 	Como $R$ es contínua $R(a) = 0$. Pero sabemos que $R(a) = b_1$ entonces $b_1=0$
+
+	Además $b_1 = \frac{R(a)}{(x-a)}$ como $\lim_{x \rightarrow a }\frac{R(x)}{(x-a)} = 0$ entonces 
+	$b_1 = 0$
+
+	Asi sucesivamente vemos que $b_j = 0\quad j=1,\ldots n$
+
+	Entonces $R=0$ entonces $P=Q$
+
+
+\end{proof}
+
+\begin{theorem}[P es igual a f hasta orden n entonces P es pol de f]
+	Si $P_{n,a}(x)$ es el pol de $f$ centrado en $a$ de grado $n$. Y $Q$ es un pol centrado
+	en $a$ de grado $n$ igual a $f$ hasta orden $n$ entonces $P=Q$  
+\end{theorem}
+\begin{proof}
+	\[ \lim_{x \rightarrow a }\frac{Q(x)-P(x)}{(x-a)^n} = 
+	\lim_{x \rightarrow a }\frac{Q(x)-f(x)}{(x-a)^n}+ \frac{f(x)-P(x)}{(x-a)^n} = 0 \]
+
+	El primer sumando por que $Q$ es igual a $f$ hasta orden $n$, el segundo sumando por que
+	$P$ es el pol de $f$ de grado $n$ por el teorema anterior es igual hasta orden $n$ a $f$
+\end{proof}
+
+\begin{theorem}[Fórmulas del resto]
+	Sea $f$ una función derivable n+1 veces en $[a,b]$ y sea $R_{n,a}$ el resto del taylor de $f$
+	de grado $n$ en $a$.
+	\begin{enumerate}
+		\item $R_{n,a}(x) = \frac{f^{(n+1)}(t)}{n!}(x-t)^n(x-a)$ para algún $t\in(a,x)$
+		\item $R_{n,a}(x) = \frac{f^{(n+1)}(t)}{(n+1)!}(x-a)^{n+1}$ para algún $t\in(a,x)$
+		\item Si además $f^{n+1}$ es integrable en $[a,x]$
+		
+		$R_{n,a}(x) = \frac{\int_{a}^{x} f^{(n+1)}(t)}{n!}(x-t)^n dt$ para algún $t\in(a,x)$
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	\begin{enumerate}
+		\item 
+	Fijamos un $x$ tal que $b\geq x > a$. Ahora si $t\in[a,x]$ tenemos
+
+	$f(x) = P_{n,t}(x) + R_{n,t}(x) = f(t) + f'(t)+\ldots+\frac{f^n(t)}{n!}(x-t)^n + R_{n,t}(x)$. Estos existen por que las derivadas estan definidas en $[a,b]$,
+	en particular están definidas en $[a,x]$
+
+	Entonces \[0 = \frac{\partial f(x)}{dt} \]
+	\[= f'(t) + (f''(t)(x-t)-f'(t))\]
+	\[ +\frac{1}{2} (f^3(t)(x-t)^2-2f^2(t)(x-t))  \]
+	\[\vdots\]
+	\[ +\frac{1}{n!} \bigg[f^{(n+1)}(t)(x-t)^n-nf^n(t)(x-t)^{n-1}\bigg]  \]
+	\[ + \frac{\partial R_{n,t}(x)}{\partial t} \]
+	
+	Entonces $0 = \frac{1}{n!} f^{n+1}(t)(x-t)^n + \frac{\partial R_{n,t}(x)}{\partial t}$. 
+	Luego $R'(t) = - \frac{1}{n!}f^{(n+1)}(t)(x-t)^n$
+
+	Aplicamos teorema valor medio a $R_{n,t}(x)$ como función de t y en $[a,x]$ y tenemos
+	\[ \frac{R_{n,x}(x) - R_{n,a}(x)}{(x-a)} = R'(t_0)  \]
+
+	Pero $R_{n,x}(x)$ es el pol centrado en x evaluado en x es cero. Entonces 
+	\[ - \frac{1}{n!}f^{(n+1)}(t_0)(x-t_0)^n =  R'(t_0) = - \frac{R_{n,a}(x)}{(x-a)} \]
+
+	Finalmente \[ \frac{1}{n!}f^{(n+1)}(t_0)(x-t_0)^n(x-a) = R_{n,a}(x)\]
+
+	\item Estuvo mal dada en clase por lo tanto tengo que conseguir una demo correcta.
+	
+	\item $f^{n+1}(t)(x-t)^n$ integrable entonces 
+	\[ \int_{a}^{x} \frac{f^{n+1}(t)(x-t)^n}{n!} = \int_{a}^{x} - R'(t)dt = 
+	 -R(x) + R(a) = -R_{n,x}(x) +  R_{n,a}(x) = R_{n,a}(x)  \]
+	\end{enumerate}
+\end{proof}
+
+\begin{theorem}[Suma y escalares de sumatoria]
+	
+\end{theorem}
+\begin{proof}
+	dummy
+\end{proof}
+
+\begin{theorem}[Serie converge entonces sucesion converge]
+	Si $\sum_{n=1}^{\infty}a_n$ existe entonces $\lim_{n \rightarrow \infty a_n = 0 }$
+\end{theorem}
+\begin{proof}
+	Supongo $\ell = \sum_{n=1}^{\infty}a_n = \lim_{N \rightarrow \infty }S_n$.
+	Donde $S_N$ son las sumas parciales.
+
+	Sabemos entonces que $\lim_{N \rightarrow \infty S_{N-1} = \ell }$
+	Y por otro lado $S_N=S_{N-1} + a_N$ entonces $a_N = S_N - S_{N-1}$
+
+	Tomando limites llegamos a \[\lim_{N \rightarrow \infty} a_N = \lim_{N \rightarrow \infty} S_N  -
+	\lim_{N \rightarrow \infty} S_{N-1}  = \ell - \ell = 0 \]
+\end{proof}
+
+\begin{theorem}[Convergencia de serie Geometrica]
+	Sea $r\in \mathbb{R}$. Si $|r|\geq 1$ entonces la serie $\sum_{n=1}^{\infty}r^n$ no converge
+	Si $r<1$ entonces
+	\begin{enumerate}
+		\item $\sum_{n=0}^{\infty}r^n = \frac{1}{1-r}$
+		\item $\sum_{n=1}^{\infty}r^n = \frac{1}{1-r}$
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	Si $|r|> 1$ entonces $\lim_{ \rightarrow \infty }r^n$ no es finito   
+
+	Si $|r|= \pm 1$ entonces $\lim_{ \rightarrow \infty }r^n$ no existe (-1) o 1.
+	En todos estos casos el límite no da 0 asi que no converge la serie
+	
+	Si $|r| < 1$
+	Sabemos que \[ (1-r)(1+r+\ldots + r^n) = 1- r^{n+1} \]
+	Entonces como $r\neq 1$\[ S_n= 1+r+\ldots+r^{n+1} =  \frac{1-r^{n+1}}{1-r}\]
+
+	Por lo tanto \[ \sum_{n=0}^{\infty} r^n = \lim_{n \rightarrow \infty} S_n = 
+	\lim_{n \rightarrow \infty } \frac{1-r^{n+1}}{1-r} =\frac{1}{1-r} \]
+	Pues $\lim_{n \rightarrow \infty }r^n = 0$ cuando $|r|<1$. Para finalizar
+	\[ \sum_{n=1}^{\infty}r^n = \sum_{n=0}^{\infty}r^n - r^0 = \frac{1}{1-r}-1 = \frac{r}{1-r}\]
+\end{proof}
+
+\begin{theorem}[Comparacion Series]
+	Si $0\leq a_n \leq b_n \quad \forall n\in \mathbb{N}$ entonces
+	\begin{enumerate}
+		\item Si $\sum_{n=1}^{\infty} b_n$ converge $\Longrightarrow \sum_{n=1}^{\infty}a_n$ converge
+		\item Si $\sum_{n=1}^{\infty} a_n$ diverge $\Longrightarrow \sum_{n=1}^{\infty}a_n$ diverge
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	Sean $S_N, T_N$ sumas parciales de $a_n,b_n$ respectivamente. Sabemos $S_N \leq T_N$ y ambas 
+	son crecientes (pueden ser ctes pero creciente incluye lo constante por definición)
+
+	Ahora usando limite vemos
+	\[ 0 \leq \lim_{N \rightarrow \infty }S_N \leq \lim_{N \rightarrow \infty }T_N = 
+	\sum_{n=1}^{\infty}b_n = \ell \]
+
+	Pero entonces $S_N$ es creciente y acotada por lo tanto converge. 
+	Entonces $\sum_{n=1}^{\infty}a_n$ converge
+
+\end{proof}
+
+\begin{theorem}[Criterio división]
+	Sean $a_n,b_n$ sucesiones de términos positivos. tales que
+	 $\lim_{n \rightarrow \infty }\frac{a_n}{b_n} = c$ con $c$ finito y distinto de 0
+	
+	 Luego $\sum_{n=1}^{\infty} a_n$ converge $\iff \sum_{n=1}^{\infty}b_n$ converge
+\end{theorem}
+\begin{proof}
+	Supongo $\sum_{n=1}^{\infty}$ converge. Como 
+	\[\lim_{n \rightarrow \infty }\frac{a_n}{b_n}=c\]
+	\[ \exists n_0 \ / \ |\frac{a_n}{b_n}-c| < c \quad \forall n \geq n_0 \]
+
+	Eqivalentemente \[  \frac{a_n}{b_n} \leq 2c \quad \forall n\geq n_0 \]
+
+	Entonces \[ a_n \leq 2c b_n  \quad \forall n\geq n_0\]
+
+	Por lo tanto como serie $b_n$ es convergente $\sum_{n_0}^{\infty} a_n$ es convergente.
+
+	Y los anteriores términos hacen una suma finita por lo tanto no alteran la convergencia
+
+	Finalmente $\sum_{n=1}^{\infty}a_n$ converge. 
+
+	En caso de que tengamos $\sum_{n=1}^{\infty}a_n$ converge miramos 
+	\[ \lim_{n \rightarrow \infty }\frac{b_n}{a_n} = \frac{1}{\ell}  \] que es distinto de 0 y finito
+	y usamos la misma demostración
+\end{proof}
+
+\begin{theorem}[Criterio Cociente, Integral, Leibniz y Raiz]
+	dumm
+\end{theorem}
+\begin{proof}
+	dum
+\end{proof}
+
+\begin{theorem}[Convergencia absoluta implica convergencia]
+	Si $\sum_{n=1}^{\infty}|a_n|$ converge entonces $\sum_{n=1}^{\infty}a_n$ converge. 
+	Además la serie de términos positivos y la serie de términos negativos convergen también
+\end{theorem}
+\begin{proof}
+	Notemos que
+	\[   
+	  a_n + |a_n| =
+	  \begin{cases}
+									   2a_n & \text{si $ a_n\geq 0 $} \\
+									   0 & \text{si $ a_n <0 $} \\
+	  \end{cases}
+	\]
+	Entonces para todo $n$ se cumple \[ 0\leq a_n + |a_n| \leq 2|a_n| \]
+
+	Pero sabemos que $\sum_{n=1}^{\infty}2|a_n|$ converge entonces $\sum_{n=1}^{\infty} a_n + |a_n|$ también convergerá
+	por comparación.
+
+	Por lo tanto \[ \sum_{n=1}^{\infty} a_n = \sum_{n=1}^{\infty} an + |a_n| - \sum_{n=1}^{\infty}|a_n|\]
+	En esta última suma sabemos que cada uno de sus sumandos converge probando lo que queríamos
+\end{proof}
+
+\begin{theorem}[Convergencia de Series de potencias]
+Sea $\sum_{n=1}^{\infty}a_n(x-a)^n$ es convergente para algún $x_0\neq a$ 
+
+Entonces la serie es absolutamente convergente $\forall x \in \mathbb{R}$ tal que $|x-a|<|x_0-a|$
+
+Análogamente si no converge en $x_1\neq a$ $\forall x \in \mathbb{R}$ tal que $|x-a|> |x_1-a|$
+\end{theorem}
+\begin{proof}
+Sabemos que converge en $x_0$ entonces $|a_n(x_0-a)^n|$ tiende a 0. Por lo tanto 
+\[\exists n_0 \in \mathbb{N}\text{ tal que }  |a_n(x_0-a)^n| \leq M \quad \forall n \geq n_0\] 
+
+Sea $x$ tal que $ |x-a| < |x_0 -a|$ entonces $\frac{|x-a|}{|x_0-a|} < 1$
+
+\[ \sum_{n=1}^{\infty}|a_n(x-a)^n| =\sum_{n=1}^{\infty}|a_n||(x_0-a)|^n
+\bigg (\frac{|x-a|}{|x_0-a|}\bigg)^n \leq \sum_{n=1}^{\infty} M r^n = M \sum_{n=1}^{\infty}r^n\text{ con $r<1$}\]
+
+Por ser geométrica la última sumatoria converge entonces \[ \sum_{n=1}^{\infty}|a_n(x-a)^n| < M \sum_{n=1}^{\infty}r^n \]
+Que converge $\forall x$ tal que $|x-a|<|x_0-a|$
+
+Para la segunda parte supongamos que existe $\tilde{x}$ donde la serie converge que cumple $|\tilde{x}-a| > |x_1-a|$ 
+
+Por lo demostrado arriba la serie debería converger en $x_1$ lo cual es absurdo
+\end{proof}
+
+\begin{theorem}[Radio de Convergencia]
+	Sea $a\in \mathbb{R}$ y $\sum_{n=0}^{\infty} a_n(x-a)^n$ la serie de potencias 
+	centrada en $a$ y $R$ radio de convergencia. Si existe \[  \lim_{n \rightarrow \infty} \sqrt[n]{|a_n|} = L\]
+
+	Entonces \[ R = \frac{1}{\lim_{n \rightarrow \infty} \sqrt[n]{|a_n|}} = \frac{1}{L} \]
+	Donde si $L=0$ entonces $R=\infty$ y si $L=\infty$ entonces $R=0$
+
+\end{theorem}
+\begin{proof}
+
+	Supongamos \[  \lim_{n \rightarrow \infty} \sqrt[n]{|a_n|} = 0\] 
+	
+	Usamos por criterio de raiz en $\sum_{n=0}^{\infty} a_n(x-a)^n$ y tenemos 
+	\[ \lim_{n \rightarrow \infty}	\sqrt[n]{|a_n(x-a)^n|} = \lim_{n \rightarrow \infty} |x-a| \sqrt[n]{|a_n|} 
+	= |x-a|.0 = 0 < 1\]
+
+	Entonces la serie de potencias converge absolutamente $\forall x \in \mathbb{R}$.Luego $R=\infty$.
+
+	Ahorpora si $L=\infty$ haciendo lo mismo vemos que la serie de potencias no converge $\forall x \in \mathbb{R}$.
+	Luego $R=0$
+
+	Si $0<L<\infty$ entonces haciendo lo mismo llgamos a \[ |x-a|\sqrt[n]{|a_n|} = |x-a|L\]
+
+	Luego si \[ |x-a|L < 1 \iff |x-a| < \frac{1}{L} \quad \text{La serie de potencias converge}\] 
+	\[ |x-a|L > 1 \iff |x-a| > \frac{1}{L} \quad \text{La serie de potencias diverge}\] 
+	Entonces $R=\frac{1}{L}$
+
+\end{proof}
+
+\end{document}

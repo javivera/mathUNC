@@ -1,0 +1,21 @@
+{
+    "python.linting.enabled": true,
+    "jupyter.kernels.filter": [
+        {
+            "path": "/bin/python",
+            "type": "pythonEnvironment"
+        },
+        {
+            "path": "/sbin/python",
+            "type": "pythonEnvironment"
+        },
+        {
+            "path": "/usr/bin/python",
+            "type": "pythonEnvironment"
+        },
+        {
+            "path": "/usr/sbin/python",
+            "type": "pythonEnvironment"
+        }
+    ]
+}
